@@ -1,0 +1,70 @@
+---
+// src/components/ProjectCard.astro
+import { Image } from 'astro:assets';
+
+interface Props {
+  title: string;
+  category: 'Loja' | 'Site' | 'Blog' | 'Landing Page';
+  description?: string;
+  image: ImageMetadata;
+  url: string;
+}
+
+const { title, category, description, image, url } = Astro.props;
+
+// Cores personalizadas para cada tipo de Badge
+const badgeStyles = {
+  Loja: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
+  Site: 'bg-primary/20 text-purple-light border-primary/40',
+  Blog: 'bg-amber-500/10 text-amber-400 border-amber-500/30',
+  'Landing Page': 'bg-accent/20 text-accent border-accent/40',
+};
+---
+
+<div class="group relative bg-purple-dark/20 border border-purple-dark/50 hover:border-accent/60 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-primary/10 flex flex-col h-full">
+  
+  <!-- ÁREA DA IMAGEM COM ROLAGEM VERTICAL NO HOVER (Desktop) E TOUCH SCROLL (Mobile) -->
+  <div class="relative h-[320px] w-full overflow-hidden bg-bg-dark/80 group">
+    <!-- Removido o link direto da imagem para permitir o scroll por toque -->
+    <div class="w-full h-full cursor-pointer overflow-y-auto overscroll-contain scroller-thin">
+      <Image
+        src={image}
+        alt={`Preview do projeto ${title}`}
+        class="w-full h-auto object-top transition-transform duration-[4000ms] ease-in-out group-hover:-translate-y-[calc(100%-320px)] md:group-hover:-translate-y-[calc(100%-320px)]"
+        loading="lazy"
+      />
+    </div>
+
+    <!-- BADGE NO CANTO DA IMAGEM -->
+    <div class="absolute top-3 left-3 z-10">
+      <span class={`inline-flex items-center px-3 py-1 rounded-full text-xs font-heading font-semibold border backdrop-blur-md ${badgeStyles[category] || badgeStyles.Site}`}>
+        {category}
+      </span>
+    </div>
+  </div>
+
+  <!-- INFORMAÇÕES DO PROJETO -->
+  <div class="p-6 flex flex-col justify-between flex-grow bg-gradient-to-b from-transparent to-bg-dark/40">
+    <h3 class="font-heading font-bold text-xl text-white group-hover:text-accent transition-colors mb-4 line-clamp-1">
+      {title}
+    </h3>
+    {description && (
+      <p class="font-body text-gray-light text-sm mb-4 line-clamp-2 leading-relaxed">
+        {description}
+      </p>
+    )}
+
+    <!-- BOTÃO VER ONLINE -->
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center justify-center gap-2 w-full bg-purple-dark/40 hover:bg-primary text-purple-light hover:text-white font-heading font-semibold text-sm py-3 px-4 rounded-xl border border-primary/30 hover:border-transparent transition-all duration-300"
+    >
+      Ver Online
+      <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+      </svg>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+---
+// src/components/Faq.astro
+
+const faqs = [
+  {
+    question: "O que preciso enviar para iniciar o projeto?",
+    answer: "Para começar, o ideal é enviar seu logotipo (se houver), paleta de cores e os textos/imagens do site. Se você ainda não tiver esses materiais, posso ajudar utilizando imagens profissionais de banco e auxiliando na criação da identidade visual, mediante um pequeno valor adicional."
+  },
+  {
+    question: "Domínio e hospedagem estão inclusos?",
+    answer: "Não. O domínio e a hospedagem são contratados diretamente pelo cliente. No entanto, auxilio em todo o processo de contratação e configuração, indicando provedores confiáveis — atualmente recomendo a Hostinger, pelo custo-benefício e desempenho."
+  },
+  {
+    question: "Em quanto tempo o site fica pronto?",
+    answer: "O prazo varia conforme o tipo de projeto: Landing Pages levam entre 3 a 10 dias; Sites institucionais levam de 5 a 15 dias; E-commerces variam entre 15 a 30 dias. Os prazos podem oscilar conforme a complexidade e a agilidade no envio dos materiais."
+  },
+  {
+    question: "Você oferece manutenção após a entrega?",
+    answer: "Sim. Ofereço planos de manutenção mensal, ideais para quem deseja manter o site sempre atualizado, seguro e funcionando corretamente. O valor é definido de acordo com as necessidades específicas do site."
+  },
+  {
+    question: "Quais são as formas de pagamento disponíveis?",
+    answer: "O pagamento pode ser realizado via Pix ou cartão de crédito. Ofereço a opção de parcelamento em até 10x no cartão ou pagamento à vista no Pix com desconto. Todos os detalhes são definidos antes do início do desenvolvimento."
+  },
+  {
+    question: "O serviço é formalizado com contrato?",
+    answer: "Sim. Todos os projetos são formalizados por meio de contrato digital, onde ficam definidos prazos, escopo do serviço, forma de pagamento e responsabilidades de ambas as partes. Isso garante total segurança e transparência durante o processo."
+  },
+  {
+    question: "Você emite nota fiscal?",
+    answer: "Sim. A nota fiscal é emitida após a confirmação do pagamento, garantindo a formalização total e a segurança jurídica do serviço prestado."
+  }
+];
+---
+
+<section id="faq" class="py-20 bg-bg-dark relative">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- CABEÇALHO -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent/40 bg-purple-dark/30 text-purple-light text-xs font-heading font-semibold uppercase tracking-wider mb-4">
+        <svg class="w-3.5 h-3.5 text-accent" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+        </svg>
+        Dúvidas Frequentes
+      </div>
+
+      <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white">
+        Perguntas que recebo com frequência
+      </h2>
+    </div>
+
+    <!-- LISTA ACCORDION DO FAQ -->
+    <div class="space-y-4">
+      {faqs.map((faq) => (
+        <details class="group bg-[#0a0a0a] border border-purple-dark/40 rounded-2xl transition-all duration-300 [&[open]]:border-accent/60 [&[open]]:bg-purple-dark/10">
+          <summary class="flex items-center justify-between cursor-pointer p-6 list-none font-heading font-bold text-base sm:text-lg text-white select-none">
+            <span>{faq.question}</span>
+            <span class="ml-4 shrink-0 p-1.5 rounded-lg bg-purple-dark/40 text-accent group-open:rotate-180 transition-transform duration-300">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-6 pb-6 font-body text-gray-light text-sm sm:text-base leading-relaxed border-t border-purple-dark/20 pt-4">
+            {faq.answer}
+          </div>
+        </details>
+      ))}
+    </div>
+
+  </div>
+</section>

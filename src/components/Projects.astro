@@ -1,0 +1,157 @@
+---
+// src/components/Projects.astro
+import ProjectCard from './ProjectCard.astro';
+
+// Importes dos prints dos seus sites
+import printProjeto1 from '../assets/projetos/dentista.webp';
+import printProjeto2 from '../assets/projetos/universeTrade.webp';
+import printProjeto3 from '../assets/projetos/rheoshelmet.webp';
+import printProjeto4 from '../assets/projetos/curioverso.webp';
+import printProjeto7 from '../assets/projetos/ebook.webp';
+
+const projects = [
+  {
+    
+    title: 'Odonto Vita',
+    category: 'Site',
+    description:'',
+    image: printProjeto1,
+    url: 'https://sites.jakdigitaldesign.com/clinica-odontovita/',
+  
+  },
+   {
+    title: 'Ebook',
+    category: 'Landing Page',
+    description:'',
+    image: printProjeto7,
+    url: 'https://sites.jakdigitaldesign.com/ebook-lp/',
+  },
+  {
+    title: 'Universe Trade',
+    category: 'Site',
+    description:'',
+    image: printProjeto2,
+    url: 'https://universetrade.com.br/',
+  },
+  {
+    title: 'Rheos Helmet',
+    category: 'Loja',
+    description:'',
+    image: printProjeto3,
+    url: 'https://rheoshelmet.com/',
+  },
+  {
+    title: 'Curioverso',
+    category: 'Blog',
+    description:'',
+    image: printProjeto4,
+    url: 'https://blog.jakdigitaldesign.com/',
+  },
+];
+---
+
+<section id="projetos" class="py-20 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- CABEÇALHO DA SEÇÃO -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="font-heading font-extrabold text-3xl sm:text-5xl text-white mb-4">
+        Projetos em <span class="text-accent">Destaque</span>
+      </h2>
+      <p class="font-body text-gray-light text-lg">
+        Confira alguns dos trabalhos mais recentes desenvolvidos com foco em alta performance, design moderno e conversão.
+      </p>
+    </div>
+
+    <!-- CONTÊINER RELATIVO PARA POSICIONAR AS SETAS NAS LATERAIS -->
+    <div class="relative group">
+      
+      <!-- SETA ESQUERDA -->
+      <button
+        id="prev-project"
+        type="button"
+        aria-label="Projeto anterior"
+        class="absolute -left-4 sm:-left-6 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full border border-purple-dark/80 bg-bg-dark/90 text-white hover:bg-primary hover:border-transparent transition-all duration-300 shadow-xl backdrop-blur-md focus:outline-none"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
+
+      <!-- CARROSSEL RESPONSIVO (SCROLL SNAP) -->
+      <div
+        id="projects-carousel"
+        class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar pb-6 pt-2"
+      >
+        {projects.map((project) => (
+          <div class="snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
+            <ProjectCard
+              title={project.title}
+              category={project.category}
+              description={project.description}
+              image={project.image}
+              url={project.url}
+            />
+          </div>
+        ))}
+      </div>
+
+      <!-- SETA DIREITA -->
+      <button
+        id="next-project"
+        type="button"
+        aria-label="Próximo projeto"
+        class="absolute -right-4 sm:-right-6 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full border border-purple-dark/80 bg-bg-dark/90 text-white hover:bg-primary hover:border-transparent transition-all duration-300 shadow-xl backdrop-blur-md focus:outline-none"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+
+    </div>
+<div class="mt-12 text-center">
+  <a
+    href="/projetos"
+    class="inline-flex items-center gap-2 border border-accent bg-purple-dark/30 hover:bg-accent text-white font-heading font-semibold text-base px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-accent/30"
+  >
+    Ver Todos os Projetos
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+    </svg>
+  </a>
+</div>
+  </div>
+</section>
+
+<!-- ESTILO PARA OCULTAR A BARRA DE ROLAGEM PADRÃO DO CARROSSEL -->
+<style>
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+
+<!-- SCRIPT DE NAVEGAÇÃO -->
+<script>
+  const carousel = document.getElementById('projects-carousel');
+  const prevBtn = document.getElementById('prev-project');
+  const nextBtn = document.getElementById('next-project');
+
+  if (carousel && prevBtn && nextBtn) {
+    const scrollAmount = () => {
+      const firstCard = carousel.querySelector('div');
+      return firstCard ? firstCard.clientWidth + 24 : 350;
+    };
+
+    prevBtn.addEventListener('click', () => {
+      carousel.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      carousel.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+    });
+  }
+</script>

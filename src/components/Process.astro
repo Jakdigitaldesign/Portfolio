@@ -1,0 +1,97 @@
+---
+// src/components/Process.astro
+
+const steps = [
+  {
+    number: "01",
+    title: "Pagamento & Início",
+    description: "Após a confirmação do pagamento, enviamos um formulário estratégico para entender seus objetivos, público e expectativas. Assim, o projeto já começa direcionado para gerar resultado."
+  },
+  {
+    number: "02",
+    title: "Coleta de Materiais",
+    description: "Solicitamos os materiais necessários (logo, textos, imagens e referências) para iniciar a construção com agilidade e alinhamento total com sua marca."
+  },
+  {
+    number: "03",
+    title: "Construção & Prévia",
+    description: "Desenvolvemos o site e enviamos uma versão prévia para você acompanhar o andamento. Aqui ajustamos detalhes até que tudo esteja exatamente como você deseja."
+  },
+  {
+    number: "04",
+    title: "Ajustes Finais & Publicação",
+    description: "Com a aprovação final, realizamos os últimos ajustes técnicos e publico o site. Seu novo canal digital estará pronto para atrair e converter clientes."
+  }
+];
+---
+
+<section id="processo" class="py-20 relative bg-bg-dark overflow-hidden">
+  <!-- Efeito de iluminação suave de fundo -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-dark/20 blur-[150px] rounded-full -z-10 pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- CABEÇALHO DA SEÇÃO -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent/40 bg-purple-dark/30 text-purple-light text-xs font-heading font-semibold uppercase tracking-wider mb-4">
+        <svg class="w-3.5 h-3.5 text-accent" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+        </svg>
+        Metodologia
+      </div>
+
+      <h2 class="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
+        Como é o processo?
+      </h2>
+
+      <p class="font-body text-gray-light text-base sm:text-lg">
+        Criamos soluções sob medida para cada negócio
+      </p>
+    </div>
+
+    <!-- GRID DAS ETAPAS (TIMELINE) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+      {steps.map((step) => (
+        <div class="bg-[#0a0a0a] border border-purple-dark/40 rounded-2xl p-6 sm:p-8 flex flex-col justify-between hover:border-accent/60 transition-all duration-300 hover:-translate-y-1 group relative">
+          <div>
+            <!-- NÚMERO DA ETAPA -->
+            <div class="flex items-center justify-between mb-6">
+              <span class="font-heading font-extrabold text-4xl text-transparent bg-clip-text bg-gradient-to-r from-accent to-primary">
+                {step.number}
+              </span>
+              <div class="w-8 h-8 rounded-full bg-purple-dark/40 border border-purple-dark flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- TÍTULO DA ETAPA -->
+            <h3 class="font-heading font-bold text-xl text-white mb-3 group-hover:text-purple-light transition-colors">
+              {step.title}
+            </h3>
+
+            <!-- DESCRIÇÃO -->
+            <p class="font-body text-gray-light text-sm leading-relaxed">
+              {step.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- BOTÃO CTA AO FINAL DO PROCESSO -->
+    <div class="mt-16 text-center">
+      <a
+        href="#contato"
+        class="inline-flex items-center gap-3 bg-gradient-to-r from-primary to-accent hover:opacity-90 text-white font-heading font-bold text-base px-8 py-4 rounded-xl shadow-lg shadow-primary/25 hover:shadow-accent/40 transition-all duration-300"
+      >
+        Iniciar Meu Projeto Agora
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</section>

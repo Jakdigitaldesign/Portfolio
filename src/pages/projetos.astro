@@ -1,0 +1,180 @@
+---
+// src/pages/projetos.astro
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import ProjectCard from '../components/ProjectCard.astro'; 
+import Footer from '../components/Footer.astro';
+
+// Importação das imagens
+import printProjeto1 from '../assets/projetos/dentista.webp';
+import printProjeto2 from '../assets/projetos/universeTrade.webp';
+import printProjeto3 from '../assets/projetos/rheoshelmet.webp';
+import printProjeto4 from '../assets/projetos/fitessence.webp';
+import printProjeto5 from '../assets/projetos/barbearia.jpg';
+import printProjeto6 from '../assets/projetos/curioverso.webp';
+import printProjeto7 from '../assets/projetos/ebook.webp';
+import printProjeto8 from '../assets/projetos/lawyers.webp';
+import printProjeto9 from '../assets/projetos/lumierestudio.webp';
+import printProjeto10 from '../assets/projetos/lumina.webp';
+
+// Lista completa de projetos
+const allProjects = [
+  {
+    title: 'Odonto Vita',
+    category: 'Site',
+    description:'',
+    image: printProjeto1,
+    url: 'https://sites.jakdigitaldesign.com/clinica-odontovita/',
+  },
+  {
+    title: 'Universe Trade',
+    category: 'Site',
+    description:'',
+    image: printProjeto2,
+    url: 'https://universetrade.com.br/',
+  },
+  {
+    title: 'Rheos Helmet',
+    category: 'Loja',
+    description:'',
+    image: printProjeto3,
+    url: 'https://rheoshelmet.com/',
+  },
+  {
+    title: 'Fit Essence',
+    category: 'Landing Page',
+    description:'',
+    image: printProjeto4,
+    url: 'https://sites.jakdigitaldesign.com/fitessence-landing-page/',
+  },
+  {
+    title: 'Golden Razor',
+    category: 'Site',
+    description:'',
+    image: printProjeto5,
+    url: 'https://sites.jakdigitaldesign.com/barbearia-navalhete-dourado/',
+  },
+  {
+    title: 'Curioverso',
+    category: 'Blog',
+    description:'',
+    image: printProjeto6,
+    url: 'https://blog.jakdigitaldesign.com/',
+  },
+  {
+    title: 'Ebook',
+    category: 'Landing Page',
+    description:'',
+    image: printProjeto7,
+    url: 'https://sites.jakdigitaldesign.com/ebook-lp/',
+  },
+  {
+    title: 'Advogados',
+    category: 'Site',
+    description:'',
+    image: printProjeto8,
+    url: 'https://sites.jakdigitaldesign.com/lawyer/',
+  },
+  {
+    title: 'Lumiere Studio',
+    category: 'Site',
+    description:'',
+    image: printProjeto9,
+    url: 'https://sites.jakdigitaldesign.com/salao-de-beleza/',
+  },
+  {
+    title: 'Lumina',
+    category: 'Landing Page',
+    description:'',
+    image: printProjeto10,
+    url: 'https://sites.jakdigitaldesign.com/lumina-marketing-advisory/',
+  },
+];
+
+const categories = ['Todos', 'Landing Page', 'Site', 'Loja' , 'Blog'];
+---
+
+<Layout title="Portfólio & Projetos | Seus Serviços Digitais">
+  <Header />
+
+  <main class="pt-32 pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- CABEÇALHO DA PÁGINA -->
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <h1 class="font-heading font-extrabold text-4xl sm:text-6xl text-white mb-4">
+          Nosso <span class="text-accent">Portfólio</span>
+        </h1>
+        <p class="font-body text-gray-light text-lg">
+          Explore nossos projetos desenvolvidos com foco em design moderno, performance e conversão de vendas.
+        </p>
+      </div>
+
+      <!-- BOTÕES DE FILTRO -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12">
+        {categories.map((cat, index) => (
+          <button
+            type="button"
+            data-filter={cat}
+            class={`filter-btn font-heading font-semibold text-sm px-5 py-2.5 rounded-xl border transition-all duration-300 ${
+              index === 0
+                ? 'bg-accent border-accent text-white shadow-lg shadow-accent/25'
+                : 'bg-purple-dark/20 border-purple-dark/60 text-gray-light hover:border-accent hover:text-white'
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <!-- GRID DE PROJETOS -->
+      <div id="projects-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {allProjects.map((project) => (
+          <div class="project-item" data-category={project.category}>
+            <ProjectCard
+              title={project.title}
+              category={project.category as any}
+              description={project.description}
+              image={project.image}
+              url={project.url}
+            />
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </main>
+  <Footer/>
+</Layout>
+
+<!-- SCRIPT DE FILTRAGEM -->
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectItems = document.querySelectorAll('.project-item');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const selectedFilter = btn.getAttribute('data-filter');
+
+      // Atualiza o estilo visual dos botões
+      filterBtns.forEach((b) => {
+        b.classList.remove('bg-accent', 'border-accent', 'text-white', 'shadow-lg', 'shadow-accent/25');
+        b.classList.add('bg-purple-dark/20', 'border-purple-dark/60', 'text-gray-light');
+      });
+
+      btn.classList.remove('bg-purple-dark/20', 'border-purple-dark/60', 'text-gray-light');
+      btn.classList.add('bg-accent', 'border-accent', 'text-white', 'shadow-lg', 'shadow-accent/25');
+
+      // Oculta/Exibe os cards
+      projectItems.forEach((item) => {
+        const itemCategory = item.getAttribute('data-category');
+
+        if (selectedFilter === 'Todos' || itemCategory === selectedFilter) {
+          (item as HTMLElement).style.display = 'block';
+        } else {
+          (item as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,65 @@
+---
+// src/components/CTA.astro
+
+const guarantees = [
+  "Resposta rápida no WhatsApp",
+  "Sem compromisso",
+  "Atendimento personalizado"
+];
+---
+
+<section class="py-16 md:py-24 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- CARD PRINCIPAL COM BORDA E GLOW -->
+    <div class="relative rounded-3xl bg-gradient-to-b from-purple-dark/80 via-bg-dark to-purple-dark/40 border border-accent/40 p-8 sm:p-12 lg:p-16 text-center overflow-hidden shadow-2xl shadow-primary/10">
+      
+      <!-- Efeito de luz ao fundo do card -->
+      <div class="absolute -top-24 -left-24 w-96 h-96 bg-accent/20 blur-[120px] rounded-full pointer-events-none"></div>
+      <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-primary/20 blur-[120px] rounded-full pointer-events-none"></div>
+
+      <div class="relative z-10 max-w-3xl mx-auto">
+        
+        <!-- TÍTULO -->
+        <h2 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-6">
+          Design que encanta, <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent via-purple-light to-primary">estratégia que converte</span>
+        </h2>
+
+        <!-- DESCRIÇÃO -->
+        <p class="font-body text-gray-light text-base sm:text-lg mb-8 leading-relaxed">
+          Cada projeto é pensado de acordo com seus objetivos, público e estratégia. Você recebe uma solução sob medida, focada em gerar resultados reais.
+        </p>
+
+        <!-- BOTÃO DE AÇÃO -->
+        <div class="mb-10">
+          <a
+            href="https://wa.me/55SEUNUMERO?text=Olá!%20Gostaria%20de%20fazer%20um%20orçamento%20para%20meu%20projeto."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-primary to-accent hover:opacity-95 text-white font-heading font-bold text-base sm:text-lg px-8 py-4 rounded-xl shadow-lg shadow-accent/25 hover:shadow-accent/40 transition-all duration-300 transform hover:-translate-y-0.5"
+          >
+            <!-- Ícone do WhatsApp -->
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.705 1.754zm6.097-4.437l.432.257c1.52.903 3.267 1.38 5.048 1.381 5.283 0 9.581-4.298 9.584-9.581.002-2.56-.992-4.966-2.802-6.777-1.81-1.81-4.215-2.806-6.776-2.808-5.285 0-9.582 4.299-9.584 9.582-.001 1.867.538 3.69 1.558 5.275l.282.438-1.031 3.766 3.85-1.009z"/>
+            </svg>
+            Solicitar Orçamento no WhatsApp
+          </a>
+        </div>
+
+        <!-- LISTA DE GARANTIAS / DIFERENCIAIS -->
+        <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-8 pt-6 border-t border-purple-dark/60">
+          {guarantees.map((item) => (
+            <div class="flex items-center gap-2 text-purple-light font-body text-xs sm:text-sm font-medium">
+              <svg class="w-4 h-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,115 @@
+---
+// src/components/Header.astro
+const navLinks = [
+  { name: 'Início', href: '#inicio' },
+  { name: 'Sobre mim', href: '#sobre' },
+  { name: 'Serviços', href: '#servicos' },
+  { name: 'Projetos', href: '#projetos' },
+  { name: 'Contato', href: '#contato' },
+];
+---
+
+<header class="fixed top-0 left-0 w-full z-50 bg-bg-dark/80 backdrop-blur-md border-b border-purple-dark/50 transition-all">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      
+      <!-- LOGO -->
+      <a href="#inicio" class="flex items-center gap-2 group">
+  <img src="/logo.png" alt="Logo" class="h-8 w-auto" />
+  <span class="font-heading font-bold text-xl text-white tracking-wide">
+    Jak<span class="text-accent">DD</span>
+  </span>
+</a>
+
+      <!-- MENU DESKTOP -->
+      <nav class="hidden md:flex items-center gap-8">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="font-body text-gray-light hover:text-accent font-medium transition-colors text-sm tracking-wide py-1 relative group"
+          >
+            {link.name}
+            <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        ))}
+      </nav>
+
+      <!-- BOTÃO CTA DESKTOP -->
+      <div class="hidden md:block">
+        <a
+          href="#contato"
+          class="bg-primary hover:bg-accent text-white font-heading font-semibold text-sm px-5 py-2.5 rounded-lg shadow-md hover:shadow-accent/20 transition-all duration-300"
+        >
+          Falar Comigo
+        </a>
+      </div>
+
+      <!-- BOTÃO HAMBÚRGUER (MOBILE / TABLET) -->
+      <button
+        id="menu-toggle"
+        type="button"
+        class="md:hidden text-gray-light hover:text-white p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
+        aria-label="Abrir menu de navegação"
+      >
+        <!-- Ícone Hambúrguer (Aberto) -->
+        <svg id="icon-hamburger" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        
+        <!-- Ícone Fechar (X) - Oculto por padrão -->
+        <svg id="icon-close" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- MENU MOBILE / TABLET (GAVETA DROPDOWN) -->
+  <div id="mobile-menu" class="hidden md:hidden bg-bg-dark/95 border-b border-purple-dark/60 backdrop-blur-xl transition-all">
+    <div class="px-4 pt-4 pb-6 space-y-3">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="mobile-link block text-gray-light hover:text-white hover:bg-purple-dark/40 px-3 py-2.5 rounded-lg font-body font-medium text-base transition-colors"
+        >
+          {link.name}
+        </a>
+      ))}
+      <div class="pt-2">
+        <a
+          href="#contato"
+          class="mobile-link block w-full text-center bg-primary hover:bg-accent text-white font-heading font-semibold py-3 rounded-lg shadow-md transition-all"
+        >
+          Falar Comigo
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- SCRIPT PARA INTERAÇÃO DO MENU MOBILE -->
+<script>
+  const toggleBtn = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const iconHamburger = document.getElementById('icon-hamburger');
+  const iconClose = document.getElementById('icon-close');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+
+  function toggleMenu() {
+    mobileMenu?.classList.toggle('hidden');
+    iconHamburger?.classList.toggle('hidden');
+    iconClose?.classList.toggle('hidden');
+  }
+
+  toggleBtn?.addEventListener('click', toggleMenu);
+
+  // Fecha o menu mobile automaticamente ao clicar em qualquer link
+  mobileLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      if (!mobileMenu?.classList.contains('hidden')) {
+        toggleMenu();
+      }
+    });
+  });
+</script>

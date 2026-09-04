@@ -1,1 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 @import "tailwindcss";
+
+@theme {
+  /* Fontes Personalizadas */
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Nunito Sans', sans-serif;
+
+  /* Cores da Sua Marca */
+  --color-bg-dark: #000000;
+  --color-primary: #8343c3;
+  --color-accent: #9a46f2;
+  --color-purple-dark: #3a0170;
+  --color-gray-light: #f2f4f8;
+  --color-purple-light: #f2e9ff;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-dark);
+  color: #ffffff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+.scroller-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroller-thin::-webkit-scrollbar-track {
+  background: rgba(58, 1, 112, 0.1); /* roxo escuro bem suave */
+  border-radius: 3px;
+}
+
+.scroller-thin::-webkit-scrollbar-thumb {
+  background: rgba(131, 67, 195, 0.4); /* primary suave */
+  border-radius: 3px;
+}
+
+.scroller-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(154, 70, 242, 0.7); /* accent */
+}

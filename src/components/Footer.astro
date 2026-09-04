@@ -1,0 +1,94 @@
+---
+// src/components/Footer.astro
+const currentYear = new Date().getFullYear();
+
+// Substitua com seus dados reais
+const cnpj = "00.000.000/0001-00"; 
+---
+
+<footer class="bg-bg-dark border-t border-purple-dark/50 pt-16 pb-8 relative overflow-hidden">
+  <!-- Brilho decorativo no rodapé -->
+  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[150px] bg-primary/10 blur-[100px] rounded-full pointer-events-none -z-10"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-purple-dark/40">
+      
+      <!-- COLUNA 1: LOGO E DESCRIÇÃO -->
+      <div class="lg:col-span-5 space-y-4">
+        <a href="#inicio" class="flex items-center gap-2 group w-fit">
+           <a href="#inicio" class="flex items-center gap-2 group">
+  <img src="/logo.png" alt="Logo" class="h-8 w-auto" />
+  
+</a>
+          <span class="font-heading font-bold text-xl text-white tracking-wide">
+            Jak<span class="text-accent"> Digital Design</span>
+          </span>
+        </a>
+        <p class="font-body text-gray-light text-sm max-w-sm leading-relaxed">
+          Soluções digitais estratégicas para pequenos negócios que querem crescer no digital.
+        </p>
+      </div>
+
+      <!-- COLUNA 2: CONTATO & LOCALIZAÇÃO -->
+      <div class="lg:col-span-4 space-y-3">
+        <h3 class="font-heading font-bold text-base text-white tracking-wider uppercase mb-4 text-accent">
+          Contato
+        </h3>
+        <ul class="space-y-2.5 font-body text-sm text-gray-light">
+          <li>
+            <a href="mailto:contato@jakdigital.com.br" class="hover:text-white transition-colors flex items-center gap-2">
+              <span class="text-accent">E-mail:</span> contato@jakdigital.com.br
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/55SEUNUMERO" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2">
+              <span class="text-accent">WhatsApp:</span> conversa direta
+            </a>
+          </li>
+          <li class="pt-1 flex gap-4">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-gray-light hover:text-accent transition-colors">Instagram</a>
+            <span>•</span>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-gray-light hover:text-accent transition-colors">LinkedIn</a>
+          </li>
+          <li class="pt-2 text-xs text-gray-light/80 flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            São José dos Pinhais, PR
+          </li>
+        </ul>
+      </div>
+
+      <!-- COLUNA 3: LINKS INSTITUCIONAIS -->
+      <div class="lg:col-span-3 space-y-3">
+        <h3 class="font-heading font-bold text-base text-white tracking-wider uppercase mb-4 text-accent">
+          Links
+        </h3>
+        <ul class="space-y-2 font-body text-sm text-gray-light">
+          <li>
+            <a href="/termos" class="hover:text-accent transition-colors">Termos de uso</a>
+          </li>
+          <li>
+            <a href="/privacidade" class="hover:text-accent transition-colors">Política de Privacidade</a>
+          </li>
+        </ul>
+
+        <!-- SELETOR DE IDIOMA -->
+        <div class="pt-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg border border-purple-dark/60 bg-purple-dark/20 text-xs font-body text-gray-light">
+            <span class="w-2 h-2 rounded-full bg-accent"></span>
+            <span>PT-BR</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RODAPÉ INFERIOR: COPYRIGHT E CNPJ -->
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-body text-gray-light/70 text-center sm:text-left">
+      <p>Jak Digital Design © {currentYear} Todos os direitos reservados.</p>
+      <p>CNPJ: {cnpj}</p>
+    </div>
+  </div>
+</footer>
