@@ -1,7 +1,7 @@
 ---
 // src/components/About.astro
 import { Image } from 'astro:assets';
-import profileImg from '../assets/jake.webp'; // Altere se o nome ou extensão da imagem for diferente
+import profileImg from '../assets/jake.webp';
 
 const skills = [
   'WordPress',
@@ -13,34 +13,41 @@ const skills = [
   'Design Responsivo',
   'SEO Básico'
 ];
+
+const stats = [
+  { value: 'ADS', label: 'Formação Superior' },
+  { value: '100%', label: 'Foco em Conversão' },
+  { value: 'Rápido', label: 'Carregamento & SEO' },
+];
 ---
 
-<section id="sobre" class="py-20 md:py-28 relative overflow-hidden">
+<section id="sobre" class="py-20 md:py-28 relative overflow-hidden bg-bg-dark/60">
   <!-- Brilho de fundo sutil -->
   <div class="absolute bottom-0 left-0 w-[350px] h-[350px] bg-accent/10 blur-[120px] rounded-full -z-10 pointer-events-none"></div>
+  <div class="absolute top-1/2 right-0 w-[250px] h-[250px] bg-primary/10 blur-[100px] rounded-full -z-10 pointer-events-none"></div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
       
       <!-- COLUNA DA ESQUERDA: FOTO DE PERFIL -->
       <div class="lg:col-span-5 relative flex justify-center">
-        <div class="relative w-full max-w-sm sm:max-w-md">
+        <div class="relative w-full max-w-sm sm:max-w-md group">
           
-          <!-- Moldura decorativa de fundo com as cores da marca -->
-          <div class="absolute -inset-3 bg-gradient-to-tr from-primary via-accent to-purple-dark rounded-3xl blur-md opacity-70 group-hover:opacity-100 transition duration-1000"></div>
+          <!-- Moldura decorativa de fundo com gradiente -->
+          <div class="absolute -inset-3 bg-gradient-to-tr from-primary via-accent to-purple-dark rounded-3xl blur-md opacity-70 group-hover:opacity-100 transition duration-700"></div>
           
           <!-- Container da foto -->
           <div class="relative rounded-2xl overflow-hidden border-2 border-purple-dark/80 bg-bg-dark shadow-2xl">
             <Image
               src={profileImg}
               alt="Jaqueline Souza - Web Designer e Desenvolvedora"
-              class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+              class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
             />
           </div>
 
           <!-- Card Flutuante de formação/experiência -->
-          <div class="absolute -bottom-6 -right-2 sm:-right-6 bg-purple-dark/90 backdrop-blur-md border border-accent/40 text-white p-4 rounded-xl shadow-xl hidden sm:flex items-center gap-3">
-            <div class="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center text-accent">
+          <div class="absolute -bottom-6 -right-2 sm:-right-6 bg-bg-dark/95 backdrop-blur-md border border-accent/40 text-white p-4 rounded-xl shadow-2xl hidden sm:flex items-center gap-3.5 z-10">
+            <div class="w-11 h-11 rounded-lg bg-accent/20 border border-accent/30 flex items-center justify-center text-accent shrink-0">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
@@ -59,12 +66,12 @@ const skills = [
       <div class="lg:col-span-7">
         
         <!-- TAG SUPERIOR -->
-        <span class="font-heading text-xs font-semibold uppercase tracking-widest text-accent bg-purple-dark/40 px-4 py-1.5 rounded-full border border-purple-dark/60">
+        <span class="inline-block font-heading text-xs font-semibold uppercase tracking-widest text-accent bg-purple-dark/40 px-4 py-1.5 rounded-full border border-purple-dark/60 mb-4">
           Sobre mim
         </span>
 
         <!-- TÍTULO -->
-        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
+        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight">
           Quem está por trás do seu site
         </h2>
 
@@ -77,16 +84,32 @@ const skills = [
             Meu trabalho vai além do visual: desenvolvo landing pages e sites pensados para gerar credibilidade, conversões e presença online consistente, sempre com design responsivo e boa experiência do usuário.
           </p>
           <p>
-            Utilizo ferramentas como <span class="text-purple-light font-medium">WordPress, Elementor, Figma, HTML, CSS e JavaScript</span> para transformar ideias em soluções digitais funcionais, alinhadas aos objetivos de cada projeto.
+            Utilizo ferramentas como <span class="text-accent font-medium">WordPress, Elementor, Figma, HTML, CSS, JavaScript e Astro</span> para transformar ideias em soluções digitais funcionais, alinhadas aos objetivos de cada projeto.
           </p>
+        </div>
+
+        <!-- CARDS DE ESTATÍSTICAS / DIFERENCIAIS -->
+        <div class="grid grid-cols-3 gap-3 sm:gap-4 mb-8">
+          {stats.map((stat) => (
+            <div class="bg-purple-dark/20 border border-purple-dark/50 rounded-xl p-3 sm:p-4 text-center">
+              <span class="block font-heading font-extrabold text-lg sm:text-2xl text-accent mb-0.5">
+                {stat.value}
+              </span>
+              <span class="font-body text-xs text-gray-light leading-snug block">
+                {stat.label}
+              </span>
+            </div>
+          ))}
         </div>
 
         <!-- TAGS DE TECNOLOGIAS E HABILIDADES -->
         <div class="mb-8">
-          <p class="font-heading text-xs uppercase tracking-wider text-purple-light mb-3 font-semibold">Tecnologias & Ferramentas:</p>
+          <p class="font-heading text-xs uppercase tracking-wider text-purple-light mb-3 font-semibold">
+            Tecnologias & Ferramentas:
+          </p>
           <div class="flex flex-wrap gap-2">
             {skills.map((skill) => (
-              <span class="bg-purple-dark/30 border border-purple-dark text-gray-light font-body text-xs px-3 py-1.5 rounded-lg">
+              <span class="bg-purple-dark/30 border border-purple-dark/60 text-gray-light hover:text-white hover:border-accent/60 font-body text-xs px-3 py-1.5 rounded-lg transition-colors">
                 {skill}
               </span>
             ))}
@@ -96,10 +119,10 @@ const skills = [
         <!-- BOTÃO PORTFÓLIO -->
         <div class="pt-2">
           <a
-            href="#projetos"
-            class="inline-flex items-center gap-3 bg-primary hover:bg-accent text-white font-heading font-bold text-sm px-8 py-4 rounded-xl shadow-lg shadow-primary/20 hover:shadow-accent/30 transition-all duration-300"
+            href="/projetos"
+            class="inline-flex items-center gap-3 bg-primary hover:bg-accent text-white font-heading font-bold text-sm px-8 py-4 rounded-xl shadow-lg shadow-primary/20 hover:shadow-accent/30 hover:-translate-y-0.5 transition-all duration-300"
           >
-            Ver Meu Portfólio
+            Ver Portfólio Completo
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>

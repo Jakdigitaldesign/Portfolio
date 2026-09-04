@@ -22,5 +22,16 @@ const { title, description = "Meu novo site em Astro" } = Astro.props;
   </head>
   <body class="bg-bg-dark text-white font-body antialiased selection:bg-accent selection:text-white">
     <slot />
+    <a
+  href="https://wa.me/55SEUNUMERO"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Falar no WhatsApp"
+  class="fixed bottom-6 right-6 z-50 p-4 rounded-full bg-[#25D366] text-white shadow-lg shadow-[#25D366]/30 hover:scale-110 transition-transform duration-300 flex items-center justify-center"
+>
+  <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.705 1.754zm6.097-4.437l.432.257c1.52.903 3.267 1.38 5.048 1.381 5.283 0 9.581-4.298 9.584-9.581.002-2.56-.992-4.966-2.802-6.777-1.81-1.81-4.215-2.806-6.776-2.808-5.285 0-9.582 4.299-9.584 9.582-.001 1.867.538 3.69 1.558 5.275l.282.438-1.031 3.766 3.85-1.009z"/>
+  </svg>
+</a>
   </body>
 </html>
