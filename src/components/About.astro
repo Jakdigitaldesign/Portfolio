@@ -4,20 +4,20 @@ import { Image } from 'astro:assets';
 import profileImg from '../assets/jake.webp';
 
 const skills = [
-  'WordPress',
-  'Elementor',
-  'Figma',
   'Astro',
+  'WordPress & WooCommerce',
+  'SaaS & Multitenant',
+  'Figma (UI/UX)',
+  'Automação & Webhooks',
+  'JavaScript & Node.js',
   'HTML5 & CSS3',
-  'JavaScript',
-  'Design Responsivo',
-  'SEO Básico'
+  'SEO & Performance'
 ];
 
 const stats = [
   { value: 'ADS', label: 'Formação Superior' },
-  { value: '100%', label: 'Foco em Conversão' },
-  { value: 'Rápido', label: 'Carregamento & SEO' },
+  { value: 'SaaS + Web', label: 'Projetos Próprios' },
+  { value: '100%', label: 'Foco em Vendas' },
 ];
 ---
 
@@ -40,7 +40,7 @@ const stats = [
           <div class="relative rounded-2xl overflow-hidden border-2 border-purple-dark/80 bg-bg-dark shadow-2xl">
             <Image
               src={profileImg}
-              alt="Jaqueline Souza - Web Designer e Desenvolvedora"
+              alt="Jaqueline Souza - Desenvolvedora e Criadora de Soluções Digitais"
               class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
             />
           </div>
@@ -72,19 +72,16 @@ const stats = [
 
         <!-- TÍTULO -->
         <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-6 leading-tight">
-          Quem está por trás do seu site
+          Quem está por trás do seu projeto
         </h2>
 
-        <!-- TEXTOS DE APRESENTAÇÃO -->
+        <!-- TEXTOS DE APRESENTAÇÃO (DIRETOS E RELEVANTES) -->
         <div class="space-y-4 font-body text-gray-light text-base sm:text-lg leading-relaxed mb-8">
           <p>
-            Meu nome é <strong class="text-white font-semibold">Jaqueline Souza</strong>, sou web designer e desenvolvedora WordPress, formada em <strong class="text-white font-semibold">Análise e Desenvolvimento de Sistemas</strong>, com foco em criar sites profissionais, modernos e estratégicos para pequenos negócios e profissionais que desejam se destacar no digital.
+            Prazer, sou <strong class="text-white font-semibold">Jaqueline Souza</strong>! Graduada em <strong class="text-white font-semibold">Análise e Desenvolvimento de Sistemas</strong>, unindo design estratégico e tecnologia para criar soluções digitais que convertem visitantes em clientes.
           </p>
           <p>
-            Meu trabalho vai além do visual: desenvolvo landing pages e sites pensados para gerar credibilidade, conversões e presença online consistente, sempre com design responsivo e boa experiência do usuário.
-          </p>
-          <p>
-            Utilizo ferramentas como <span class="text-accent font-medium">WordPress, Elementor, Figma, HTML, CSS, JavaScript e Astro</span> para transformar ideias em soluções digitais funcionais, alinhadas aos objetivos de cada projeto.
+            Além de projetar <strong class="text-white font-semibold">Sites, Landing Pages e Lojas Virtuais</strong> de alta performance, sou idealizadora do <strong class="text-accent font-semibold">Foxped</strong> (SaaS de cardápio digital automatizado) e de projetos acessíveis como os <strong class="text-white font-semibold">Minisites e Links na Bio</strong>. Meu compromisso é entregar ferramentas prontas para gerar resultados reais e acelerar o seu negócio.
           </p>
         </div>
 
@@ -92,7 +89,7 @@ const stats = [
         <div class="grid grid-cols-3 gap-3 sm:gap-4 mb-8">
           {stats.map((stat) => (
             <div class="bg-purple-dark/20 border border-purple-dark/50 rounded-xl p-3 sm:p-4 text-center">
-              <span class="block font-heading font-extrabold text-lg sm:text-2xl text-accent mb-0.5">
+              <span class="block font-heading font-extrabold text-base sm:text-xl text-accent mb-0.5">
                 {stat.value}
               </span>
               <span class="font-body text-xs text-gray-light leading-snug block">
@@ -105,7 +102,7 @@ const stats = [
         <!-- TAGS DE TECNOLOGIAS E HABILIDADES -->
         <div class="mb-8">
           <p class="font-heading text-xs uppercase tracking-wider text-purple-light mb-3 font-semibold">
-            Tecnologias & Ferramentas:
+            Tecnologias & Especialidades:
           </p>
           <div class="flex flex-wrap gap-2">
             {skills.map((skill) => (

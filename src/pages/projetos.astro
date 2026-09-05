@@ -6,6 +6,8 @@ import ProjectCard from '../components/ProjectCard.astro';
 import Footer from '../components/Footer.astro';
 
 // Importação das imagens
+import printFoxped from '../assets/projetos/foxped.webp'; // Crie ou adicione a imagem do Foxped
+import printMinisite from '../assets/projetos/minisite.webp'; // Crie ou adicione a imagem do Minisite
 import printProjeto1 from '../assets/projetos/dentista.webp';
 import printProjeto2 from '../assets/projetos/universeTrade.webp';
 import printProjeto3 from '../assets/projetos/rheoshelmet.webp';
@@ -19,6 +21,20 @@ import printProjeto10 from '../assets/projetos/lumina.webp';
 
 // Lista completa de projetos
 const allProjects = [
+  {
+    title: 'Sistema Foxped',
+    category: 'SaaS / Plataforma',
+    description: 'Cardápio digital e automação de pedidos para restaurantes via WhatsApp.',
+    image: printFoxped,
+    url: 'https://foxped.com.br', // Substitua pelo link correto do Foxped
+  },
+  {
+    title: 'Minisite Bio',
+    category: 'Link na Bio',
+    description: 'Cartão de visitas digital moderno e estratégico para redes sociais.',
+    image: printMinisite,
+    url: 'https://sites-bio.pages.dev/', // Substitua pelo link correto do Minisite
+  },
   {
     title: 'Odonto Vita',
     category: 'Site',

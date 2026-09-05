@@ -1,9 +1,9 @@
 ---
 // src/components/Header.astro
 const navLinks = [
-  { name: 'Início', href: '/' },
-  { name: 'Sobre mim', href: '#sobre' },
-  { name: 'Serviços', href: '#servicos' },
+  { name: 'Início', href: '/#inicio' },
+  { name: 'Sobre mim', href: '/#sobre' },
+  { name: 'Serviços', href: '/#servicos' },
   { name: 'Projetos', href: '/projetos' },
   { name: 'Contato', href: '/contato' },
 ];
@@ -37,7 +37,8 @@ const navLinks = [
       <!-- BOTÃO CTA DESKTOP -->
       <div class="hidden md:block">
         <a
-          href="#contato"
+          href="https://wa.me/5541984940848" 
+          target="_blank"
           class="bg-primary hover:bg-accent text-white font-heading font-semibold text-sm px-5 py-2.5 rounded-lg shadow-md hover:shadow-accent/20 transition-all duration-300"
         >
           Falar Comigo

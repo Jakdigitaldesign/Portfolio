@@ -2,7 +2,9 @@
 // src/components/Projects.astro
 import ProjectCard from './ProjectCard.astro';
 
-// Importes dos prints dos seus sites
+// Importes dos prints dos seus sites e plataformas
+import printFoxped from '../assets/projetos/foxped.webp'; // Crie ou adicione a imagem do Foxped
+import printMinisite from '../assets/projetos/minisite.webp'; // Crie ou adicione a imagem do Minisite
 import printProjeto1 from '../assets/projetos/dentista.webp';
 import printProjeto2 from '../assets/projetos/universeTrade.webp';
 import printProjeto3 from '../assets/projetos/rheoshelmet.webp';
@@ -11,39 +13,51 @@ import printProjeto7 from '../assets/projetos/ebook.webp';
 
 const projects = [
   {
-    
+    title: 'Sistema Foxped',
+    category: 'SaaS / Plataforma',
+    description: 'Cardápio digital e automação de pedidos para restaurantes via WhatsApp.',
+    image: printFoxped,
+    url: 'https://foxped.com.br', // Substitua pelo link correto do Foxped
+  },
+  {
+    title: 'Minisite Bio',
+    category: 'Link na Bio',
+    description: 'Cartão de visitas digital moderno e estratégico para redes sociais.',
+    image: printMinisite,
+    url: 'https://sites-bio.pages.dev/', // Substitua pelo link correto do Minisite
+  },
+  {
     title: 'Odonto Vita',
-    category: 'Site',
-    description:'',
+    category: 'Site Institutional',
+    description: 'Site para clínica odontológica focado na conversão de agendamentos.',
     image: printProjeto1,
     url: 'https://sites.jakdigitaldesign.com/clinica-odontovita/',
-  
   },
-   {
+  {
     title: 'Ebook',
     category: 'Landing Page',
-    description:'',
+    description: 'Página de alta conversão para captura de leads e venda de infoproduto.',
     image: printProjeto7,
     url: 'https://sites.jakdigitaldesign.com/ebook-lp/',
   },
   {
     title: 'Universe Trade',
-    category: 'Site',
-    description:'',
+    category: 'Site Institutional',
+    description: 'Presença digital corporativa para empresa de investimentos.',
     image: printProjeto2,
     url: 'https://universetrade.com.br/',
   },
   {
     title: 'Rheos Helmet',
-    category: 'Loja',
-    description:'',
+    category: 'Loja Virtual',
+    description: 'E-commerce completo com catálogo de produtos e checkout fluido.',
     image: printProjeto3,
     url: 'https://rheoshelmet.com.br/',
   },
   {
     title: 'Curioverso',
-    category: 'Blog',
-    description:'',
+    category: 'Blog & Conteúdo',
+    description: 'Portal de notícias e artigos com estrutura otimizada para SEO.',
     image: printProjeto4,
     url: 'https://blog.jakdigitaldesign.com/',
   },
@@ -55,11 +69,14 @@ const projects = [
     
     <!-- CABEÇALHO DA SEÇÃO -->
     <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="inline-block font-heading text-xs font-semibold uppercase tracking-widest text-accent bg-purple-dark/40 px-4 py-1.5 rounded-full border border-purple-dark/60 mb-4">
+        Portfólio
+      </span>
       <h2 class="font-heading font-extrabold text-3xl sm:text-5xl text-white mb-4">
         Projetos em <span class="text-accent">Destaque</span>
       </h2>
-      <p class="font-body text-gray-light text-lg">
-        Confira alguns dos trabalhos mais recentes desenvolvidos com foco em alta performance, design moderno e conversão.
+      <p class="font-body text-gray-light text-base sm:text-lg">
+        Confira alguns dos trabalhos desenvolvidos: de plataformas SaaS e minisites a landing pages e e-commerces.
       </p>
     </div>
 
@@ -109,17 +126,20 @@ const projects = [
       </button>
 
     </div>
-<div class="mt-12 text-center">
-  <a
-    href="/projetos"
-    class="inline-flex items-center gap-2 border border-accent bg-purple-dark/30 hover:bg-accent text-white font-heading font-semibold text-base px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-accent/30"
-  >
-    Ver Todos os Projetos
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-    </svg>
-  </a>
-</div>
+
+    <!-- BOTÃO VER TODOS -->
+    <div class="mt-12 text-center">
+      <a
+        href="/projetos"
+        class="inline-flex items-center gap-2 border border-accent bg-purple-dark/30 hover:bg-accent text-white font-heading font-semibold text-base px-8 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-accent/30"
+      >
+        Ver Todos os Projetos
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+        </svg>
+      </a>
+    </div>
+
   </div>
 </section>
 
