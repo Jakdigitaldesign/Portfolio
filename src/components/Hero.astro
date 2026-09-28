@@ -6,10 +6,10 @@ import mockupImg from '../assets/hero.webp';
 
 <section id="inicio" class="relative overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24">
   <!-- Padrão de Grid / Fundo Texturizado Sutil -->
-  <div class="absolute inset-0 bg-[radial-gradient(#3a0170_1px,transparent_1px)] [background-size:24px_24px] opacity-20 -z-20 pointer-events-none"></div>
+  <div class="absolute inset-0 bg-[radial-linear(#3a0170_1px,transparent_1px)] [bg-size:24px_24px] opacity-20 -z-20 pointer-events-none"></div>
 
   <!-- Efeito de brilho de fundo (Glow Effect) -->
-  <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/20 blur-[150px] rounded-full -z-10 pointer-events-none"></div>
+  <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-accent/20 blur-[150px] rounded-full -z-10 pointer-events-none"></div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -20,111 +20,107 @@ import mockupImg from '../assets/hero.webp';
         <!-- BADGE SUPERIOR -->
         <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/40 bg-purple-dark/30 backdrop-blur-md text-purple-light text-xs font-heading font-semibold uppercase tracking-wider mb-6 shadow-sm">
           <span class="flex h-2 w-2 rounded-full bg-accent animate-pulse"></span>
-          Desenvolvimento Web & Sistemas SaaS
+          Soluções Digitais & SaaS
         </div>
 
         <!-- TÍTULO PRINCIPAL -->
-        <h1 class="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.15] mb-6">
-          Acelere as vendas do seu negócio com <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent via-primary to-purple-light">soluções digitais completas</span>
+        <h1 class="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.12] mb-6">
+          Transformamos sua marca em uma <span class="text-transparent bg-clip-text bg-linear-to-r from-accent via-primary to-purple-light">máquina de vendas digital</span>
         </h1>
 
         <!-- SUBTÍTULO / DESCRIÇÃO -->
         <p class="font-body text-gray-light text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed">
-          De <strong class="text-white font-semibold">Sites e Lojas Virtuais de Alta Conversão</strong> ao <strong class="text-white font-semibold">Foxped</strong> (Cardápio Digital) e <strong class="text-white font-semibold">Links na Bio Personalizados</strong>.
+          Desenvolvemos <strong class="text-white font-semibold">Sites de Alta Conversão</strong>, estruturas para tráfego pago, <strong class="text-white font-semibold">Mini Sites para Bio</strong> e ecossistemas completos com nosso SaaS <strong class="text-white font-semibold">Foxped</strong>.
         </p>
 
-        <!-- TAGS DE RECURSOS CHAVE (PILLS) -->
-        <div class="flex flex-wrap justify-center lg:justify-start gap-2.5 mb-8 text-xs font-body text-gray-light">
-          <span class="px-3 py-1.5 rounded-lg bg-purple-dark/20 border border-purple-dark/50 flex items-center gap-1.5">
-            <svg class="w-3.5 h-3.5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-            Sites & Lojas Sob Medida
-          </span>
-          <span class="px-3 py-1.5 rounded-lg bg-purple-dark/20 border border-purple-dark/50 flex items-center gap-1.5">
-            <svg class="w-3.5 h-3.5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-            SaaS Foxped
-          </span>
-          <span class="px-3 py-1.5 rounded-lg bg-purple-dark/20 border border-purple-dark/50 flex items-center gap-1.5">
-            <svg class="w-3.5 h-3.5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
-            Link na Bio Personalizado
-          </span>
-        </div>
-
         <!-- BOTÕES DE AÇÃO -->
-        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
           <a
             href="https://wa.me/5541984940848" 
             target="_blank"
             rel="noopener noreferrer"
-            class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-primary to-accent hover:opacity-95 text-white font-heading font-bold text-base px-8 py-4 rounded-xl shadow-lg shadow-primary/25 hover:shadow-accent/40 transition-all duration-300 transform hover:-translate-y-0.5"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-linear-to-r from-primary to-accent hover:opacity-95 text-white font-heading font-bold text-base px-8 py-4 rounded-xl shadow-lg shadow-primary/25 hover:shadow-accent/40 transition-all duration-300 transform hover:-translate-y-0.5"
           >
             <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
               <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.705 1.754zm6.097-4.437l.432.257c1.52.903 3.267 1.38 5.048 1.381 5.283 0 9.581-4.298 9.584-9.581.002-2.56-.992-4.966-2.802-6.777-1.81-1.81-4.215-2.806-6.776-2.808-5.285 0-9.582 4.299-9.584 9.582-.001 1.867.538 3.69 1.558 5.275l.282.438-1.031 3.766 3.85-1.009z"/>
             </svg>
-            Solicitar Orçamento
+            Iniciar Projeto
           </a>
 
           <a
             href="#servicos"
             class="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-purple-dark bg-purple-dark/20 hover:bg-purple-dark/50 text-white font-heading font-semibold text-base px-6 py-4 rounded-xl transition-all"
           >
-            Conhecer Soluções
+            Ver Ecossistema
           </a>
+        </div>
+
+        <!-- INDICADORES DE CONFIANÇA -->
+        <div class="flex items-center justify-center lg:justify-start gap-6 pt-6 border-t border-purple-dark/30">
+          <div class="flex -space-x-2">
+            <span class=" h-8 w-8 rounded-full ring-2 ring-background bg-accent/30 flex items-center justify-center text-xs font-bold text-white">⚡</span>
+            <span class=" h-8 w-8 rounded-full ring-2 ring-background bg-primary/30 flex items-center justify-center text-xs font-bold text-white">🎨</span>
+            <span class=" h-8 w-8 rounded-full ring-2 ring-background bg-purple-light/30 flex items-center justify-center text-xs font-bold text-white">🚀</span>
+          </div>
+          <p class="text-xs text-gray-light font-body text-left">
+            Projetos focados em <span class="text-white font-semibold">velocidade, conversão</span> e <span class="text-white font-semibold">escalabilidade</span>.
+          </p>
         </div>
 
       </div>
 
-      <!-- COLUNA DA DIREITA: MOCKUP E MÉTRICAS LOGO ABAIXO -->
+      <!-- COLUNA DA DIREITA: MOCKUP E PILARES LOGO ABAIXO -->
       <div class="lg:col-span-6 flex flex-col items-center lg:items-end mt-8 lg:mt-0">
         <div class="relative w-full max-w-lg lg:max-w-none">
           
           <!-- Brilho exclusivo atrás do mockup -->
-          <div class="absolute inset-0 bg-gradient-to-tr from-primary/40 to-accent/40 rounded-3xl blur-3xl -z-10 transform scale-105"></div>
+          <div class="absolute inset-0 bg-linear-to-tr from-primary/40 to-accent/40 rounded-3xl blur-3xl -z-10 transform scale-105"></div>
           
           <!-- MOCKUP PRINCIPAL -->
           <Image 
             src={mockupImg} 
-            alt="Mockup do site em notebook e smartphone" 
+            alt="Projetos de alta performance da agência" 
             class="w-full h-auto object-contain drop-shadow-[0_20px_35px_rgba(58,1,112,0.5)] transform hover:scale-[1.02] transition-transform duration-500 lg:scale-115 origin-right"
             loading="eager"
           />
 
-          <!-- FLOATING BADGE 1 (Topo Superior Esquerdo) -->
+          <!-- FLOATING BADGE 1 (SaaS Foxped) -->
           <div class="hidden sm:flex absolute -top-4 -left-4 items-center gap-3 p-3 rounded-2xl bg-[#0a0a0a]/90 border border-purple-dark/80 backdrop-blur-md shadow-xl animate-bounce-slow z-10">
             <div class="p-2 rounded-xl bg-accent/20 text-accent">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </div>
             <div>
-              <p class="font-heading font-bold text-xs text-white">SaaS Foxped</p>
-              <p class="font-body text-[10px] text-gray-light">Cardápio Digital</p>
+              <p class="font-heading font-bold text-xs text-white">Foxped SaaS</p>
+              <p class="font-body text-[10px] text-gray-light">Cardápio & Pedidos Online</p>
             </div>
           </div>
 
-          <!-- FLOATING BADGE 2 (Inferior Direito) -->
+          <!-- FLOATING BADGE 2 (Bio e Landing Pages) -->
           <div class="hidden sm:flex absolute -bottom-4 -right-4 items-center gap-3 p-3 rounded-2xl bg-[#0a0a0a]/90 border border-purple-dark/80 backdrop-blur-md shadow-xl z-10">
             <div class="p-2 rounded-xl bg-primary/20 text-purple-light">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
             <div>
-              <p class="font-heading font-bold text-xs text-white">Mini Sites / Bio</p>
-              <p class="font-body text-[10px] text-gray-light">100% Personalizados</p>
+              <p class="font-heading font-bold text-xs text-white">Mini Sites & Bio</p>
+              <p class="font-body text-[10px] text-gray-light">Otimizados para Anúncios</p>
             </div>
           </div>
 
         </div>
 
-        <!-- MÉTRICAS DEBAIXO DA IMAGEM -->
+        <!-- DADOS E PILARES DE NEGÓCIO -->
         <div class="w-full pt-8 mt-6 border-t border-purple-dark/40 grid grid-cols-3 gap-4 text-center">
           <div>
             <p class="font-heading font-extrabold text-xl sm:text-2xl text-white">100%</p>
-            <p class="font-body text-xs text-gray-light">Exclusivo & Sob Medida</p>
+            <p class="font-body text-xs text-gray-light">Otimizado para Mobile</p>
           </div>
           <div>
             <p class="font-heading font-extrabold text-xl sm:text-2xl text-accent">SaaS + Web</p>
-            <p class="font-body text-xs text-gray-light">Projetos Otimizados</p>
+            <p class="font-body text-xs text-gray-light">Tecnologia Própria</p>
           </div>
           <div>
-            <p class="font-heading font-extrabold text-xl sm:text-2xl text-white">Suporte</p>
-            <p class="font-body text-xs text-gray-light">Atendimento Direto</p>
+            <p class="font-heading font-extrabold text-xl sm:text-2xl text-white">Ultra Fast</p>
+            <p class="font-body text-xs text-gray-light">Carregamento Rápido</p>
           </div>
         </div>
 

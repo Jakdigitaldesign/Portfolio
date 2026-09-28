@@ -1,10 +1,10 @@
 ---
 // src/components/Projects.astro
-import ProjectCard from './ProjectCard.astro';
+import { Image } from 'astro:assets';
 
 // Importes dos prints dos seus sites e plataformas
-import printFoxped from '../assets/projetos/foxped.webp'; // Crie ou adicione a imagem do Foxped
-import printMinisite from '../assets/projetos/minisite.webp'; // Crie ou adicione a imagem do Minisite
+import printFoxped from '../assets/projetos/foxped.webp';
+import printMinisite from '../assets/projetos/minisite.webp';
 import printProjeto1 from '../assets/projetos/odontovita.webp';
 import printProjeto2 from '../assets/projetos/universeTrade.webp';
 import printProjeto3 from '../assets/projetos/rheoshelmet.webp';
@@ -15,60 +15,60 @@ const projects = [
   {
     title: 'Sistema Foxped',
     category: 'Site',
-    description: 'Cardápio digital e automação de pedidos para restaurantes via WhatsApp.',
     image: printFoxped,
-    url: 'https://foxped.com.br', // Substitua pelo link correto do Foxped
+    url: 'https://foxped.com.br',
   },
   {
     title: 'Minisite Bio',
     category: 'Site',
-    description: 'Cartão de visitas digital moderno e estratégico para redes sociais.',
     image: printMinisite,
-    url: 'https://sites-bio.pages.dev/', // Substitua pelo link correto do Minisite
+    url: 'https://sites-bio.pages.dev/',
   },
   {
     title: 'Odonto Vita',
     category: 'Site',
-    description: 'Site para clínica odontológica focado na conversão de agendamentos.',
     image: printProjeto1,
     url: 'https://odontovita.pages.dev/',
   },
   {
     title: 'Nexora Consultoria',
     category: 'Landing Page',
-    description: 'Página de alta conversão para captura de leads e venda de infoproduto.',
     image: printProjeto7,
     url: 'https://nexora-lp.pages.dev/',
   },
   {
     title: 'Universe Trade',
     category: 'Site',
-    description: 'Presença digital corporativa para empresa de investimentos.',
     image: printProjeto2,
     url: 'https://universetrade.com.br/',
   },
   {
     title: 'Rheos Helmet',
     category: 'Loja',
-    description: 'E-commerce completo com catálogo de produtos e checkout fluido.',
     image: printProjeto3,
     url: 'https://rheoshelmet.com.br/',
   },
   {
     title: 'Curioverso',
     category: 'Blog',
-    description: 'Portal de notícias e artigos com estrutura otimizada para SEO.',
     image: printProjeto4,
     url: 'https://blog.jakdigitaldesign.com/',
   },
 ] as const;
+
+// Divide os projetos ao meio para criar 2 linhas contínuas
+const metade = Math.ceil(projects.length / 2);
+const linha1 = projects.slice(0, metade);
+const linha2 = projects.slice(metade);
+
+const speedSeconds = 35;
 ---
 
 <section id="projetos" class="py-20 relative overflow-hidden">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- CABEÇALHO DA SEÇÃO -->
-    <div class="text-center max-w-3xl mx-auto mb-16">
+    <div class="text-center max-w-3xl mx-auto mb-14">
       <span class="inline-block font-heading text-xs font-semibold uppercase tracking-widest text-accent bg-purple-dark/40 px-4 py-1.5 rounded-full border border-purple-dark/60 mb-4">
         Portfólio
       </span>
@@ -76,54 +76,142 @@ const projects = [
         Projetos em <span class="text-accent">Destaque</span>
       </h2>
       <p class="font-body text-gray-light text-base sm:text-lg">
-        Confira alguns dos trabalhos desenvolvidos: de plataformas SaaS e minisites a landing pages e e-commerces.
+        Confira alguns dos trabalhos desenvolvidos: clique na foto para ampliar ou acesse o site diretamente.
       </p>
     </div>
 
-    <!-- CONTÊINER RELATIVO PARA POSICIONAR AS SETAS NAS LATERAIS -->
-    <div class="relative group">
+    <!-- WRAPPER DO CARROSSEL DE 2 LINHAS (MARQUEE) -->
+    <div class="marquee-wrapper flex flex-col gap-6 w-full overflow-hidden group py-2">
       
-      <!-- SETA ESQUERDA -->
-      <button
-        id="prev-project"
-        type="button"
-        aria-label="Projeto anterior"
-        class="absolute -left-4 sm:-left-6 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full border border-purple-dark/80 bg-bg-dark/90 text-white hover:bg-primary hover:border-transparent transition-all duration-300 shadow-xl backdrop-blur-md focus:outline-none"
-      >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-        </svg>
-      </button>
+      <!-- LINHA 1: Desliza para a Esquerda -->
+      {linha1.length > 0 && (
+        <div 
+          class="marquee-track track-1 flex gap-6 w-max"
+          style={`--speed: ${speedSeconds}s;`}
+        >
+          {linha1.concat(linha1).map((project) => (
+            <div class="project-card relative w-80 sm:w-96 bg-[#0a0a0a]/80 border border-purple-dark/60 rounded-2xl overflow-hidden shadow-lg backdrop-blur-md shrink-0 flex flex-col group/card transition-all duration-300 hover:border-accent/80">
+              <!-- Área da Imagem Clicável (Abre Lightbox) -->
+              <div 
+                class="photo-clickable relative h-48 sm:h-52 w-full overflow-hidden cursor-pointer"
+                data-fullsrc={project.image.src}
+                data-title={project.title}
+              >
+                <Image 
+                  src={project.image} 
+                  alt={project.title}
+                  width={600}
+                  height={350}
+                  format="webp"
+                  fit="cover"
+                  position="top"
+                  loading="lazy"
+                  class="w-full h-full object-cover object-top! transition-transform duration-500 group-hover/card:scale-105"
+                />
+                <div class="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80"></div>
+                
+                <!-- Badge de Categoria -->
+                <span class="absolute top-3 left-3 bg-purple-dark/80 backdrop-blur-md text-accent text-[11px] font-semibold px-3 py-1 rounded-full border border-purple-dark">
+                  {project.category}
+                </span>
 
-      <!-- CARROSSEL RESPONSIVO (SCROLL SNAP) -->
-      <div
-        id="projects-carousel"
-        class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar pb-6 pt-2"
-      >
-        {projects.map((project) => (
-          <div class="snap-start shrink-0 w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]">
-            <ProjectCard
-              title={project.title}
-              category={project.category}
-              description={project.description}
-              image={project.image}
-              url={project.url}
-            />
-          </div>
-        ))}
-      </div>
+                <!-- Overlay para Dica de Clique -->
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <span class="text-white text-xs font-semibold bg-black/70 px-3 py-1.5 rounded-lg border border-white/20 backdrop-blur-sm flex items-center gap-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+                    Clique para ampliar
+                  </span>
+                </div>
+              </div>
 
-      <!-- SETA DIREITA -->
-      <button
-        id="next-project"
-        type="button"
-        aria-label="Próximo projeto"
-        class="absolute -right-4 sm:-right-6 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full border border-purple-dark/80 bg-bg-dark/90 text-white hover:bg-primary hover:border-transparent transition-all duration-300 shadow-xl backdrop-blur-md focus:outline-none"
-      >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-        </svg>
-      </button>
+              <!-- Info do Projeto & Botão Ver Online -->
+              <div class="p-5 flex flex-col justify-between flex-1">
+                <div>
+                  <h3 class="font-heading text-center font-bold text-lg text-white mb-1 group-hover/card:text-accent transition-colors">
+                    {project.title}
+                  </h3>
+                  
+                </div>
+
+                <a 
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-purple-dark/40 hover:bg-accent border border-purple-dark/80 hover:border-accent text-white font-heading font-semibold text-xs transition-all duration-300 group/btn"
+                >
+                  Ver Online
+                  <svg class="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <!-- LINHA 2: Desliza para a Direita -->
+      {linha2.length > 0 && (
+        <div 
+          class="marquee-track track-2 flex gap-6 w-max"
+          style={`--speed: ${speedSeconds}s;`}
+        >
+          {linha2.concat(linha2).map((project) => (
+            <div class="project-card relative w-80 sm:w-96 bg-[#0a0a0a]/80 border border-purple-dark/60 rounded-2xl overflow-hidden shadow-lg backdrop-blur-md shrink-0 flex flex-col group/card transition-all duration-300 hover:border-accent/80">
+              <!-- Área da Imagem Clicável (Abre Lightbox) -->
+              <div 
+                class="photo-clickable relative h-48 sm:h-52 w-full overflow-hidden cursor-pointer"
+                data-fullsrc={project.image.src}
+                data-title={project.title}
+              >
+                <Image 
+                  src={project.image} 
+                  alt={project.title}
+                  width={600}
+                  height={350}
+                  format="webp"
+                  loading="lazy"
+                  fit="cover"
+                  position="top"
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105"
+                />
+                <div class="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80"></div>
+                
+                <!-- Badge de Categoria -->
+                <span class="absolute top-3 left-3 bg-purple-dark/80 backdrop-blur-md text-accent text-[11px] font-semibold px-3 py-1 rounded-full border border-purple-dark">
+                  {project.category}
+                </span>
+
+                <!-- Overlay para Dica de Clique -->
+                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <span class="text-white text-xs font-semibold bg-black/70 px-3 py-1.5 rounded-lg border border-white/20 backdrop-blur-sm flex items-center gap-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+                    Clique para ampliar
+                  </span>
+                </div>
+              </div>
+
+              <!-- Info do Projeto & Botão Ver Online -->
+              <div class="p-5 flex flex-col justify-between flex-1">
+                <div>
+                  <h3 class="font-heading font-bold text-lg text-white mb-1 group-hover/card:text-accent transition-colors">
+                    {project.title}
+                  </h3>
+                  
+                </div>
+
+                <a 
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-purple-dark/40 hover:bg-accent border border-purple-dark/80 hover:border-accent text-white font-heading font-semibold text-xs transition-all duration-300 group/btn"
+                >
+                  Ver Online
+                  <svg class="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
     </div>
 
@@ -141,37 +229,83 @@ const projects = [
     </div>
 
   </div>
+
+  <!-- LIGHTBOX MODAL AMPLIAÇÃO -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4 sm:p-8 transition-opacity">
+    <button type="button" class="lightbox-close absolute top-5 right-6 text-white/70 hover:text-white text-4xl font-light cursor-pointer z-50 leading-none">&times;</button>
+    <div class="relative max-w-5xl max-h-[90vh] flex flex-col items-center">
+      <img class="max-w-full max-h-[80vh] rounded-xl object-contain shadow-2xl border border-purple-dark/50" id="lightbox-img" alt="Projeto ampliado" />
+      <p id="lightbox-caption" class="text-white font-heading font-semibold text-lg mt-4 text-center"></p>
+    </div>
+  </div>
 </section>
 
-<!-- ESTILO PARA OCULTAR A BARRA DE ROLAGEM PADRÃO DO CARROSSEL -->
-<style>
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-</style>
-
-<!-- SCRIPT DE NAVEGAÇÃO -->
+<!-- SCRIPT DO LIGHTBOX -->
 <script>
-  const carousel = document.getElementById('projects-carousel');
-  const prevBtn = document.getElementById('prev-project');
-  const nextBtn = document.getElementById('next-project');
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('lightbox-modal');
+    const modalImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const modalCaption = document.getElementById('lightbox-caption');
+    const closeBtn = document.querySelector('.lightbox-close');
+    const clickablePhotos = document.querySelectorAll('.photo-clickable');
 
-  if (carousel && prevBtn && nextBtn) {
-    const scrollAmount = () => {
-      const firstCard = carousel.querySelector('div');
-      return firstCard ? firstCard.clientWidth + 24 : 350;
+    if (!modal || !modalImg) return;
+
+    clickablePhotos.forEach((card) => {
+      card.addEventListener('click', () => {
+        const fullSrc = card.getAttribute('data-fullsrc');
+        const title = card.getAttribute('data-title');
+        if (fullSrc) {
+          modalImg.src = fullSrc;
+          if (modalCaption && title) modalCaption.textContent = title;
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+        }
+      });
+    });
+
+    const closeModal = () => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
     };
 
-    prevBtn.addEventListener('click', () => {
-      carousel.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+    closeBtn?.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
     });
 
-    nextBtn.addEventListener('click', () => {
-      carousel.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeModal();
+      }
     });
-  }
+  });
 </script>
+
+<style>
+  /* Animações continuas CSS */
+  .track-1 {
+    animation: scrollLeft var(--speed, 35s) linear infinite;
+  }
+
+  .track-2 {
+    animation: scrollRight var(--speed, 35s) linear infinite;
+  }
+
+  /* Pausa a animação ao passar o mouse */
+  .marquee-wrapper:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes scrollLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes scrollRight {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+</style>
