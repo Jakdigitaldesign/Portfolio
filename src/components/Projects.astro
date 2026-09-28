@@ -14,21 +14,21 @@ import printProjeto7 from '../assets/projetos/nexora-consultoria.webp';
 const projects = [
   {
     title: 'Sistema Foxped',
-    category: 'SaaS / Plataforma',
+    category: 'Site',
     description: 'Cardápio digital e automação de pedidos para restaurantes via WhatsApp.',
     image: printFoxped,
     url: 'https://foxped.com.br', // Substitua pelo link correto do Foxped
   },
   {
     title: 'Minisite Bio',
-    category: 'Link na Bio',
+    category: 'Site',
     description: 'Cartão de visitas digital moderno e estratégico para redes sociais.',
     image: printMinisite,
     url: 'https://sites-bio.pages.dev/', // Substitua pelo link correto do Minisite
   },
   {
     title: 'Odonto Vita',
-    category: 'Site Institutional',
+    category: 'Site',
     description: 'Site para clínica odontológica focado na conversão de agendamentos.',
     image: printProjeto1,
     url: 'https://odontovita.pages.dev/',
@@ -42,26 +42,26 @@ const projects = [
   },
   {
     title: 'Universe Trade',
-    category: 'Site Institutional',
+    category: 'Site',
     description: 'Presença digital corporativa para empresa de investimentos.',
     image: printProjeto2,
     url: 'https://universetrade.com.br/',
   },
   {
     title: 'Rheos Helmet',
-    category: 'Loja Virtual',
+    category: 'Loja',
     description: 'E-commerce completo com catálogo de produtos e checkout fluido.',
     image: printProjeto3,
     url: 'https://rheoshelmet.com.br/',
   },
   {
     title: 'Curioverso',
-    category: 'Blog & Conteúdo',
+    category: 'Blog',
     description: 'Portal de notícias e artigos com estrutura otimizada para SEO.',
     image: printProjeto4,
     url: 'https://blog.jakdigitaldesign.com/',
   },
-];
+] as const;
 ---
 
 <section id="projetos" class="py-20 relative overflow-hidden">
