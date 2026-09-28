@@ -1,0 +1,28 @@
+---
+export interface StatItem {
+  value: string;
+  label: string;
+  isHighlight?: boolean;
+}
+
+export interface Props {
+  stats?: StatItem[];
+}
+
+const { stats = [] } = Astro.props;
+---
+
+<div class="px-6 my-5">
+  <div class="grid grid-cols-3 gap-2 py-3 border-y border-purple-dark/30 text-center">
+    {stats.map((stat, index) => (
+      <div class={index === 1 ? "border-x border-purple-dark/30" : ""}>
+        <p class={`font-heading font-bold text-lg ${stat.isHighlight ? 'text-accent' : 'text-white'}`}>
+          {stat.value}
+        </p>
+        <p class="text-[10px] uppercase tracking-wider text-purple-light/70">
+          {stat.label}
+        </p>
+      </div>
+    ))}
+  </div>
+</div>

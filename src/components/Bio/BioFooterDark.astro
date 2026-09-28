@@ -1,0 +1,107 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+export interface LegalLink {
+  label: string;
+  url: string;
+}
+
+export interface Props {
+  logoImg?: ImageMetadata | string;
+  logoAlt?: string;
+  brandName?: string;
+  year?: number;
+  legalLinks?: LegalLink[];
+  developerName?: string;
+  developerUrl?: string;
+  showBackToTop?: boolean;
+}
+
+const {
+  logoImg,
+  logoAlt = "Jak Digital Design Logo",
+  brandName = "Jak Digital Design",
+  year = new Date().getFullYear(),
+  legalLinks = [],
+  developerName = "Jak Digital Design",
+  developerUrl,
+  showBackToTop = true
+} = Astro.props;
+---
+
+<footer class="w-full max-w-md mx-auto px-4 pt-4 pb-8 text-gray-light/70 text-xs font-light">
+  <div class="bg-[#120a1c]/60 backdrop-blur-md border border-purple-dark/40 rounded-2xl p-5 shadow-lg flex flex-col items-center text-center relative overflow-hidden">
+    
+    <!-- Botão Voltar ao Topo -->
+    {showBackToTop && (
+      <button 
+        onclick="window.scrollTo({ top: 0, behavior: 'smooth' });"
+        aria-label="Voltar ao topo"
+        class="mb-4 w-8 h-8 rounded-full bg-purple-dark/50 border border-purple-dark/80 flex items-center justify-center text-accent hover:bg-accent hover:text-white hover:border-accent transition-all cursor-pointer group shadow-sm"
+      >
+        <i class="fa-solid fa-arrow-up text-xs group-hover:-translate-y-0.5 transition-transform"></i>
+      </button>
+    )}
+
+    <!-- Logo no Footer -->
+    {logoImg && (
+      <div class="mb-4 max-w-30 max-h-12 flex items-center justify-center">
+        {typeof logoImg === 'string' ? (
+          <img 
+            src={logoImg} 
+            alt={logoAlt} 
+            class="h-auto w-full object-contain filter drop-shadow-md"
+          />
+        ) : (
+          <Image 
+            src={logoImg} 
+            alt={logoAlt} 
+            width={240} 
+            format="webp" 
+            class="h-auto w-full object-contain filter drop-shadow-md" 
+          />
+        )}
+      </div>
+    )}
+
+    <!-- Links Legais / Auxiliares (Ex: Termos, Privacidade) -->
+    {legalLinks.length > 0 && (
+      <nav class="flex items-center gap-3 mb-3 flex-wrap justify-center text-[11px] text-gray-light/70">
+        {legalLinks.map((link, index) => (
+          <>
+            <a href={link.url} class="hover:text-accent transition-colors hover:underline">
+              {link.label}
+            </a>
+            {index < legalLinks.length - 1 && <span class="text-accent/50">•</span>}
+          </>
+        ))}
+      </nav>
+    )}
+
+    <!-- Direitos Autorais -->
+    <p class="text-[11px] text-gray-light/80 font-medium">
+      © {year} {brandName && <span>{brandName}. </span>}Todos os direitos reservados.
+    </p>
+
+    <!-- Crédito do Desenvolvedor -->
+    {developerName && (
+      <p class="text-[10px] text-purple-light/50 mt-2">
+        Desenvolvido por{" "}
+        {developerUrl ? (
+          <a 
+            href={developerUrl} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="font-medium text-accent hover:text-purple-light transition-colors underline decoration-accent/40"
+          >
+            {developerName}
+          </a>
+        ) : (
+          <span class="font-medium text-purple-light/70">{developerName}</span>
+        )}
+      </p>
+    )}
+
+  </div>
+</footer>
