@@ -21,7 +21,6 @@ export interface Props {
 const {
   name,
   category,
-  badgeText = "Web Design",
   manifestoText,
   avatarImg,
   logoImg,
@@ -57,9 +56,7 @@ if (websiteUrl && !finalSocialLinks.some((l) => l.platform === 'website')) {
 
     <!-- Topo: Badges Flutuantes + Logo -->
     <div class="relative z-10 flex justify-between items-center">
-      <span class="px-3 py-1 text-[10px] font-heading font-semibold uppercase tracking-widest text-purple-light bg-black/40 backdrop-blur-md rounded-full border border-accent/40">
-        {badgeText}
-      </span>
+      
 
       <!-- Renderização da Logo no Canto Superior Direito -->
      {logoSrc && (
@@ -88,7 +85,7 @@ if (websiteUrl && !finalSocialLinks.some((l) => l.platform === 'website')) {
   <div class="px-6 pt-4 space-y-5">
     {manifestoText && (
       <div class="p-4 rounded-xl bg-purple-dark/15 border-l-2 border-accent backdrop-blur-sm">
-        <p class="font-heading italic text-sm text-purple-light/90 leading-relaxed">
+        <p class="font-heading italic text-sm text-purple-light/70 leading-relaxed">
           "{manifestoText}"
         </p>
       </div>
