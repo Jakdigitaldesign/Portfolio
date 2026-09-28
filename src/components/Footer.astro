@@ -1,5 +1,7 @@
 ---
-import logoImg from '/public/logo1.png?url';
+
+import { Image } from 'astro:assets';
+import logoImg from '../assets/Logo.png';
 // src/components/Footer.astro
 const currentYear = new Date().getFullYear();
 const cnpj = "65.724.340/0001-00"; 
@@ -14,8 +16,8 @@ const cnpj = "65.724.340/0001-00";
       
       <!-- COLUNA 1: LOGO, SOBRE E REDES SOCIAIS -->
       <div class="lg:col-span-5 space-y-4">
-        <a href="#inicio" class="flex items-center gap-2 group">
-  <img src={logoImg} alt="Logo" class="h-10 w-auto object-contain" />
+       <a href="#inicio" class="flex items-center gap-2 group">
+  <Image src={logoImg} alt="Logo Jak Digital Design" class="h-8 w-auto object-contain" />
 </a>
         <p class="font-body text-gray-light text-sm max-w-sm leading-relaxed">
           Soluções digitais estratégicas, desenvolvimento web de alta performance e SaaS para acelerar pequenos negócios.
