@@ -79,7 +79,7 @@ const sizeClasses = {
         >
           {linha1.concat(linha1).map((imgObj, index) => (
            <div 
-  class={`photo-card ${sizeClasses} shrink-0 rounded-xl overflow-hidden shadow-md border border-purple-dark/60 bg-[#09050d] cursor-pointer transition-all duration-300 hover:scale-105 hover:border-accent hover:shadow-accent/20 relative flex`} 
+  class={`photo-card ${sizeClasses} shrink-0  overflow-hidden shadow-md border border-purple-dark/60 bg-[#09050d] cursor-pointer transition-all duration-300 hover:scale-105 hover:border-accent hover:shadow-accent/20 relative flex`} 
   data-fullsrc={imgObj.src}
 >
   <Image 
@@ -91,7 +91,7 @@ const sizeClasses = {
   position="top"
   format="webp"
   loading="lazy"
-  class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity"
+  class="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity"
 />
 </div>
           ))}
@@ -106,7 +106,7 @@ const sizeClasses = {
         >
           {linha2.concat(linha2).map((imgObj, index) => (
             <div 
-              class={`photo-card ${sizeClasses} shrink-0 rounded-xl overflow-hidden shadow-md border border-purple-dark/60 bg-[#09050d] cursor-pointer transition-all duration-300 hover:scale-105 hover:border-accent hover:shadow-accent/20`} 
+              class={`photo-card ${sizeClasses} shrink-0  overflow-hidden shadow-md border border-purple-dark/60 bg-[#09050d] cursor-pointer transition-all duration-300 hover:scale-105 hover:border-accent hover:shadow-accent/20`} 
               data-fullsrc={imgObj.src}
             >
               <Image 
@@ -118,7 +118,7 @@ const sizeClasses = {
   position="top"
   format="webp"
   loading="lazy"
-  class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity"
+  class="w-full h-full object-contain opacity-90 hover:opacity-100 transition-opacity"
 />
             </div>
           ))}
