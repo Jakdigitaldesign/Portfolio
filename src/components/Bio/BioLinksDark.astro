@@ -28,6 +28,12 @@ const variantClasses: Record<string, string> = {
   outline: 
     'bg-transparent hover:bg-purple-dark/30 text-purple-light hover:text-white border-purple-dark/60 hover:border-accent',
 };
+const iconBoxClasses: Record<string, string> = {
+  primary: 'bg-white/10 text-white group-hover:bg-white group-hover:text-primary',
+  secondary: 'bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white',
+  accent: 'bg-white/20 text-white group-hover:bg-white group-hover:text-accent',
+  outline: 'bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white',
+};
 ---
 
 <div class="px-6 space-y-3 mb-6">
@@ -63,9 +69,9 @@ const variantClasses: Record<string, string> = {
           )}
 
           {/* Container do Ícone (Esquerda) */}
-          <div class="w-9 h-9 rounded-xl bg-purple-dark/40 border border-purple-dark/60 group-hover:bg-accent group-hover:border-accent group-hover:text-white transition-all duration-300 flex items-center justify-center shrink-0 mr-3 text-accent">
-            <i class={`${iconClass} text-sm`} />
-          </div>
+          <div class={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mr-3 transition-colors duration-300 ${iconBoxClasses[variant]}`}>
+      <i class={`${iconClass} text-lg leading-none`}></i>
+    </div>
 
           {/* Conteúdo (Label e Subtítulo) */}
           <div class="flex-1 text-left min-w-0 pr-2">
