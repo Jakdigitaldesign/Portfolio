@@ -11,7 +11,15 @@ import printProjeto3 from '../assets/projetos/rheoshelmet.webp';
 import printProjeto4 from '../assets/projetos/curioverso.webp';
 import printProjeto7 from '../assets/projetos/nexora-consultoria.webp';
 
-const projects = [
+interface Project {
+  title: string;
+  category: 'Loja' | 'Site' | 'Blog' | 'Landing Page';
+  description?: string;
+  image: ImageMetadata;
+  url?: string; // O '?' indica que é opcional
+}
+
+const projects: Project[] = [
   {
     title: 'Sistema Foxped',
     category: 'Site',
@@ -52,7 +60,7 @@ const projects = [
     title: 'Curioverso',
     category: 'Blog',
     image: printProjeto4,
-    url: 'https://blog.jakdigitaldesign.com/',
+   
   },
 ] as const;
 
@@ -198,15 +206,36 @@ const speedSeconds = 35;
                   
                 </div>
 
-                <a 
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-purple-dark/40 hover:bg-accent border border-purple-dark/80 hover:border-accent text-white font-heading font-semibold text-xs transition-all duration-300 group/btn"
-                >
-                  Ver Online
-                  <svg class="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                </a>
+               <!-- Info do Projeto & Botão Ver Online / Ver Imagem -->
+<div class="p-5 flex flex-col justify-between flex-1">
+  <div>
+    <h3 class="font-heading font-bold text-lg text-white mb-1 group-hover/card:text-accent transition-colors">
+      {project.title}
+    </h3>
+  </div>
+
+  <a 
+    href={project.url || project.image.src}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-purple-dark/40 hover:bg-accent border border-purple-dark/80 hover:border-accent text-white font-heading font-semibold text-xs transition-all duration-300 group/btn"
+  >
+    {project.url ? 'Ver Online' : 'Ver Imagem'}
+    
+    {project.url ? (
+      
+      <svg class="w-4 h-4 transition-transform group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+      </svg>
+    ) : (
+    
+      <svg class="w-4 h-4 transition-transform group-hover/btn:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+      </svg>
+    )}
+  </a>
+</div>
               </div>
             </div>
           ))}

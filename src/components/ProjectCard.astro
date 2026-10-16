@@ -7,7 +7,7 @@ interface Props {
   category: 'Loja' | 'Site' | 'Blog' | 'Landing Page';
   description?: string;
   image: ImageMetadata;
-  url: string;
+  url?: string; // Agora é opcional (?)
 }
 
 const { title, category, description, image, url } = Astro.props;
@@ -25,12 +25,11 @@ const badgeStyles = {
   
   <!-- ÁREA DA IMAGEM COM ROLAGEM VERTICAL NO HOVER (Desktop) E TOUCH SCROLL (Mobile) -->
   <div class="relative h-80 w-full overflow-hidden bg-bg-dark/80 group">
-    <!-- Removido o link direto da imagem para permitir o scroll por toque -->
     <div class="w-full h-full cursor-pointer overflow-y-auto overscroll-contain scroller-thin">
       <Image
         src={image}
         alt={`Preview do projeto ${title}`}
-        class="w-full h-auto object-top transition-transform duration-4000ms] ease-in-out group-hover:-translate-y-[calc(100%-320px)] md:group-hover:-translate-y-[calc(100%-320px)]"
+        class="w-full h-auto object-top transition-transform duration-4000ms ease-in-out group-hover:-translate-y-[calc(100%-320px)] md:group-hover:-translate-y-[calc(100%-320px)]"
         loading="lazy"
       />
     </div>
@@ -54,17 +53,32 @@ const badgeStyles = {
       </p>
     )}
 
-    <!-- BOTÃO VER ONLINE -->
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="inline-flex items-center justify-center gap-2 w-full bg-purple-dark/40 hover:bg-primary text-purple-light hover:text-white font-heading font-semibold text-sm py-3 px-4 rounded-xl border border-primary/30 hover:border-transparent transition-all duration-300"
-    >
-      Ver Online
-      <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-      </svg>
-    </a>
+    <!-- BOTÃO DINÂMICO (Ver Online ou Ver Imagem) -->
+    {url ? (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center gap-2 w-full bg-purple-dark/40 hover:bg-primary text-purple-light hover:text-white font-heading font-semibold text-sm py-3 px-4 rounded-xl border border-primary/30 hover:border-transparent transition-all duration-300"
+      >
+        Ver Online
+        <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+        </svg>
+      </a>
+    ) : (
+      <a
+        href={image.src}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center gap-2 w-full bg-purple-dark/40 hover:bg-primary text-purple-light hover:text-white font-heading font-semibold text-sm py-3 px-4 rounded-xl border border-primary/30 hover:border-transparent transition-all duration-300"
+      >
+        Ver Imagem
+        <svg class="w-4 h-4 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+        </svg>
+      </a>
+    )}
   </div>
 </div>
