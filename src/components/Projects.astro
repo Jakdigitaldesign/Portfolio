@@ -10,6 +10,7 @@ import printProjeto2 from '../assets/projetos/universeTrade.webp';
 import printProjeto3 from '../assets/projetos/rheoshelmet.webp';
 import printProjeto4 from '../assets/projetos/curioverso.webp';
 import printProjeto7 from '../assets/projetos/nexora-consultoria.webp';
+import printProjeto8 from '../assets/projetos/imobiliaria.webp';
 
 interface Project {
   title: string;
@@ -24,7 +25,14 @@ const projects: Project[] = [
     title: 'Sistema Foxped',
     category: 'Site',
     image: printFoxped,
-    url: 'https://foxped.com.br',
+    url: 'https://foxfood.foxped.com.br/',
+  },
+   {
+    title: 'Valois Imobiliaria',
+    category: 'Site',
+    description: '',
+    image: printProjeto8,
+    url: 'https://lp-imobiliaria.pages.dev/'
   },
   {
     title: 'Minisite Bio',
@@ -119,7 +127,7 @@ const speedSeconds = 35;
                 <div class="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80"></div>
                 
                 <!-- Badge de Categoria -->
-                <span class="absolute top-3 left-3 bg-purple-dark/80 backdrop-blur-md text-accent text-[11px] font-semibold px-3 py-1 rounded-full border border-purple-dark">
+                <span class="absolute top-3 left-3 bg-purple-dark/80 backdrop-blur-md text-gray-light text-[11px] font-semibold px-3 py-1 rounded-full border border-purple-dark">
                   {project.category}
                 </span>
 
@@ -184,7 +192,7 @@ const speedSeconds = 35;
                 <div class="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80"></div>
                 
                 <!-- Badge de Categoria -->
-                <span class="absolute top-3 left-3 bg-purple-dark/80 backdrop-blur-md text-accent text-[11px] font-semibold px-3 py-1 rounded-full border border-purple-dark">
+                <span class="absolute top-3 left-3 bg-purple-dark/80 backdrop-blur-md text-gray-light text-[11px] font-semibold px-3 py-1 rounded-full border border-purple-dark">
                   {project.category}
                 </span>
 
