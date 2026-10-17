@@ -11,10 +11,13 @@ import printProjeto3 from '../assets/projetos/rheoshelmet.webp';
 import printProjeto4 from '../assets/projetos/curioverso.webp';
 import printProjeto7 from '../assets/projetos/nexora-consultoria.webp';
 import printProjeto8 from '../assets/projetos/imobiliaria.webp';
+import printProjeto9 from '../assets/projetos/makeup.webp';
+
+import printProjeto11 from '../assets/projetos/BioBeauty.webp';
 
 interface Project {
   title: string;
-  category: 'Loja' | 'Site' | 'Blog' | 'Landing Page';
+  category: 'Loja' | 'Site' | 'Blog' | 'Landing Page' | 'Bio Link';
   description?: string;
   image: ImageMetadata;
   url?: string; // O '?' indica que é opcional
@@ -35,12 +38,6 @@ const projects: Project[] = [
     url: 'https://lp-imobiliaria.pages.dev/'
   },
   {
-    title: 'Minisite Bio',
-    category: 'Site',
-    image: printMinisite,
-    url: 'https://bio-modelos.pages.dev/Modelos/bio/criativo',
-  },
-  {
     title: 'Odonto Vita',
     category: 'Site',
     image: printProjeto1,
@@ -59,17 +56,36 @@ const projects: Project[] = [
     url: 'https://universetrade.com.br/',
   },
   {
+    title: 'Helena Duarte Makeup',
+    category: 'Site',
+    image: printProjeto9,
+  },
+  {
     title: 'Rheos Helmet',
     category: 'Loja',
     image: printProjeto3,
     url: 'https://rheoshelmet.com.br/',
   },
   {
+    title: 'Minisite Bio',
+    category: 'Site',
+    image: printMinisite,
+    url: 'https://bio-modelos.pages.dev/Modelos/bio/criativo',
+  },
+  {
+    title: 'Bruna Studio Beauty',
+    category: 'Bio Link',
+    image: printProjeto11,
+    url: 'https://bio-links-personalizados.pages.dev/beauty/',
+  },
+  
+  {
     title: 'Curioverso',
     category: 'Blog',
     image: printProjeto4,
    
   },
+  
 ] as const;
 
 // Divide os projetos ao meio para criar 2 linhas contínuas
@@ -207,12 +223,7 @@ const speedSeconds = 35;
 
               <!-- Info do Projeto & Botão Ver Online -->
               <div class="p-5 flex flex-col justify-between flex-1">
-                <div>
-                  <h3 class="font-heading font-bold text-lg text-white mb-1 group-hover/card:text-accent transition-colors">
-                    {project.title}
-                  </h3>
-                  
-                </div>
+               
 
                <!-- Info do Projeto & Botão Ver Online / Ver Imagem -->
 <div class="p-5 flex flex-col justify-between flex-1">
