@@ -6,20 +6,25 @@ import ProjectCard from '../components/ProjectCard.astro';
 import Footer from '../components/Footer.astro';
 
 // Importação das imagens
-import printFoxped from '../assets/projetos/foxped.webp'; // Crie ou adicione a imagem do Foxped
-import printMinisite from '../assets/projetos/minisite.webp'; // Crie ou adicione a imagem do Minisite
-import printloja from '../assets/projetos/loja.webp';
-import printProjeto1 from '../assets/projetos/odontovita.webp';
-import printProjeto2 from '../assets/projetos/universeTrade.webp';
-import printProjeto3 from '../assets/projetos/rheoshelmet.webp';
-import printProjeto4 from '../assets/projetos/fitessence.webp';
-import printProjeto5 from '../assets/projetos/barbearia.jpg';
-import printProjeto7 from '../assets/projetos/nexora-consultoria.webp';
-import printProjeto8 from '../assets/projetos/lawyers.webp';
-import printProjeto9 from '../assets/projetos/lumierestudio.webp';
-import printProjeto10 from '../assets/projetos/lumina.webp';
-import printProjeto11 from '../assets/projetos/imobiliaria.webp';
-import printProjeto12 from '../assets/projetos/BioAdvogado.webp';
+import printFoxped from '../assets/projetos/desktop/foxped.webp'; // Crie ou adicione a imagem do Foxped
+import printloja from '../assets/projetos/desktop/loja.webp';
+import printProjeto1 from '../assets/projetos/desktop/odontovita.webp';
+import printProjeto2 from '../assets/projetos/desktop/universeTrade.webp';
+import printProjeto3 from '../assets/projetos/desktop/rheoshelmet.webp';
+import printProjeto4 from '../assets/projetos/desktop/fitessence.webp';
+import printProjeto5 from '../assets/projetos/desktop/barbearia.jpg';
+import printProjeto7 from '../assets/projetos/desktop/nexora-consultoria.webp';
+import printProjeto8 from '../assets/projetos/desktop/lawyers.webp';
+import printProjeto9 from '../assets/projetos/desktop/lumierestudio.webp';
+import printProjeto10 from '../assets/projetos/desktop/lumina.webp';
+import printProjeto11 from '../assets/projetos/desktop/imobiliaria.webp';
+import printProjeto12 from '../assets/projetos/mobile/salao.png';
+import printProjeto13 from '../assets/projetos/mobile/editorial.png';
+import printProjeto14 from '../assets/projetos/mobile/botanical.png';
+import printProjeto15 from '../assets/projetos/mobile/saude.png';
+import printProjeto16 from '../assets/projetos/mobile/adv.png';
+import printProjeto17 from '../assets/projetos/mobile/confeitaria.png';
+import printProjeto18 from '../assets/projetos/desktop/makeup.webp';
 
 // Lista completa de projetos
 const allProjects = [
@@ -37,27 +42,7 @@ const allProjects = [
     image: printProjeto11,
     url: 'https://lp-imobiliaria.pages.dev/'
   },
-  {
-    title: 'Minisite Bio',
-    category: 'Sites',
-    description: '',
-    image: printMinisite,
-    url: 'https://bio-modelos.pages.dev/Modelos/bio/criativo'
-  },
-  {
-    title: 'Aura Studio',
-    category: 'SaaS / Lojas',
-    image: printloja,
-    url: 'https://bio-modelos.pages.dev/Modelos/catalogo/roupas',
-  },
-  {
-    title: 'Dr. Henrique Vasconcelos',
-    category: 'Sites',
-    image: printProjeto12,
-    url: 'https://bio-links-personalizados.pages.dev/advogado/',
-  },
-  
-  {
+   {
     title: 'Nexora Consultoria',
     category: 'Sites',
     description:'',
@@ -71,6 +56,66 @@ const allProjects = [
     image: printProjeto1,
     url: 'https://odontovita.pages.dev/',
   },
+ 
+  {
+    title: 'Helena Duarte',
+    category: 'Sites',
+    description:'',
+    image: printProjeto18,
+  },
+
+   {
+    title: 'Lumiere Studio',
+    category: 'Sites',
+    description:'',
+    image: printProjeto9,
+  },
+ 
+  {
+    title: 'Aura Studio',
+    category: 'SaaS / Lojas',
+    image: printloja,
+    url: 'https://bio-modelos.pages.dev/Modelos/catalogo/roupas',
+  },
+  {
+    title: 'Bruna Studio Beauty',
+    category: 'Sites',
+    image: printProjeto12,
+    url: 'https://minisites-bio.pages.dev/beauty/',
+  },
+  {
+    title: 'Camila Vasconcelos',
+    category: 'Sites',
+    image: printProjeto13,
+    url: 'https://minisites-bio.pages.dev/editorial/',
+  },
+  {
+    title: 'Sofia Martins',
+    category: 'Sites',
+    image: printProjeto14,
+    url: 'https://minisites-bio.pages.dev/botanical/',
+  },
+  {
+    title: 'Dra. Helena Brandão',
+    category: 'Sites',
+    image: printProjeto15,
+    url: 'https://minisites-bio.pages.dev/saude/',
+  },
+  {
+    title: 'Dr. Henrique Vasconcelos',
+    category: 'Sites',
+    image: printProjeto16,
+    url: 'https://minisites-bio.pages.dev/advogado/',
+  },
+   {
+    title: 'Ateliê Dulce Mimo',
+    category: 'Sites',
+    image: printProjeto17,
+    url: 'https://minisites-bio.pages.dev/confeitaria/',
+  },
+  
+  
+ 
   {
     title: 'Universe Trade',
     category: 'Sites',
@@ -103,12 +148,7 @@ const allProjects = [
     description:'',
     image: printProjeto8,
   },
-  {
-    title: 'Lumiere Studio',
-    category: 'Sites',
-    description:'',
-    image: printProjeto9,
-  },
+ 
   {
     title: 'Lumina',
     category: 'Sites',

@@ -5,11 +5,14 @@ import BioStatsDark from '../components/Bio/BioStatsDark.astro';
 import BioLinksDark from '../components/Bio/BioLinksDark.astro';
 import BioFooterDark from '../components/Bio/BioFooterDark.astro';
 
-//imagens
+// 1. IMPORTAÇÃO DO NOVO COMPONENTE DE GALERIA
+import BioTabbedGallery from '../components/Bio/BioProjectsGalleryDark.astro'; 
+// (Ajuste o caminho '../components/Bio/...' para onde você salvou o arquivo da galeria)
+
+// Imagens Gerais
 import logo from '../assets/Logo.png';
 import avatarImg from '../assets/jak.png';
 import simboloImg from '../assets/simbolo.png';
-
 
 // Dados da Sua Bio
 const estatisticas = [
@@ -22,7 +25,7 @@ const minhasSolucoes = [
   {
     label: "Meu Site Principal",
     subtitle: "Conheça meu portfólio completo e todos os serviços",
-    url: "https://jakdigitaldesign.com", // Ajuste para a URL oficial do seu site
+    url: "https://jakdigitaldesign.com",
     iconClass: "fa-solid fa-globe",
     variant: "primary" as const,
     highlight: true,
@@ -49,7 +52,6 @@ const minhasSolucoes = [
     iconClass: "fa-solid fa-utensils",
     variant: "accent" as const,
   },
-  
   {
     label: "Hospedagem Hostinger (Com Desconto)",
     subtitle: "Garanta a melhor hospedagem para seu site com desconto exclusivo",
@@ -59,6 +61,7 @@ const minhasSolucoes = [
     variant: "outline" as const,
   }
 ];
+
 const socialLinks = [
   { platform: 'website' as const, url: 'https://jakdigitaldesign.com' },
   { platform: 'whatsapp' as const, url: 'https://wa.me/5541984940848' },
@@ -96,8 +99,16 @@ const socialLinks = [
           sectionTitle="// Soluções & Soluções Digitais"
           links={minhasSolucoes} 
         />
-        </div>
-        
+
+        <!-- Componente 4: Galeria Dupla (Sites & Minisites) -->
+        <BioTabbedGallery 
+          title="Projetos em Destaque"
+          subtitle="// Portfólio & Cases"
+          
+          cardSize="sm"
+          speedSeconds={30}
+        />
+      </div>
 
       <!-- Footer -->
       <BioFooterDark 
