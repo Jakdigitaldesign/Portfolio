@@ -1,0 +1,331 @@
+---
+import type { ImageMetadata } from 'astro';
+
+// Carregamento automático das imagens por pastas
+const globMinisites = import.meta.glob<{ default: ImageMetadata }>('../assets/projetos/mobile/*.{jpeg,jpg,png,webp}', { eager: true });
+const globSites = import.meta.glob<{ default: ImageMetadata }>('../assets/projetos/desktop/*.{jpeg,jpg,png,webp}', { eager: true });
+const globCatalogos = import.meta.glob<{ default: ImageMetadata }>('../assets/projetos/catalogos/*.{jpeg,jpg,png,webp}', { eager: true });
+const globLojas = import.meta.glob<{ default: ImageMetadata }>('../assets/projetos/lojas/*.{jpeg,jpg,png,webp}', { eager: true });
+
+// Garante que haja itens suficientes para a rolagem infinita não quebrar em telas largas
+const duplicateForLoop = (images: ImageMetadata[]) => {
+  if (!images.length) return [];
+  let list = [...images];
+  while (list.length < 8) {
+    list = [...list, ...images];
+  }
+  return [...list, ...list]; // Duplica para criar a ilusão de loop contínuo
+};
+
+const tabs = [
+  { 
+    id: 'minisites', 
+    name: 'Minisites', 
+    type: 'mobile',
+    images: duplicateForLoop(Object.values(globMinisites).map(m => m.default)),
+    hasOriginal: Object.values(globMinisites).length > 0
+  },
+  { 
+    id: 'sites', 
+    name: 'Sites  Landing Pages', 
+    type: 'desktop', 
+    images: duplicateForLoop(Object.values(globSites).map(m => m.default)),
+    hasOriginal: Object.values(globSites).length > 0
+  },
+  { 
+    id: 'lojas', 
+    name: 'Lojas & Saas', 
+    type: 'desktop', 
+    images: duplicateForLoop(Object.values(globLojas).map(m => m.default)),
+    hasOriginal: Object.values(globLojas).length > 0
+  }
+];
+---
+
+<div id="projetos" class="bg-bg-dark  text-gray-light font-body min-h-screen relative overflow-x-hidden">
+  
+  <!-- Fundo com Glows da Marca -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/20 rounded-full blur-[120px]"></div>
+    <div class="absolute top-1/2 -left-20 w-80 h-80 bg-purple-dark/25 rounded-full blur-[100px]"></div>
+    <div class="absolute bottom-10 -right-20 w-80 h-80 bg-accent/15 rounded-full blur-[100px]"></div>
+  </div>
+
+ <!-- CABEÇALHO DA GALERIA -->
+<div class="text-center mb-8 sm:mb-12 relative z-10 px-4">
+  
+  <!-- Badge redondo com ícone de Portfólio/Galeria -->
+  <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent/40 bg-purple-dark/30 text-purple-light text-xs font-heading font-semibold uppercase tracking-wider mb-4 shadow-sm shadow-accent/10">
+    <svg class="w-3.5 h-3.5 text-accent" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M4 5a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V7a2 2 0 00-2-2H4zm16 12H4V7h16v10zm-14-3l3-4 2 2.5 3-3.75L18 15H6zm0-6a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/>
+    </svg>
+    Galeria de Trabalhos
+  </div>
+
+  <!-- Título padronizado com as outras seções -->
+  <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white tracking-tight">
+    Projetos em Destaque
+  </h2>
+
+  <!-- Descrição -->
+  <p class="text-xs sm:text-sm text-gray-light/70 max-w-md mx-auto mt-3 font-light leading-relaxed">
+    Passe o mouse para congelar a rolagem. Clique sobre qualquer projeto para visualizá-lo em tamanho real.
+  </p>
+
+</div>
+
+  <!-- Navegação de Abas -->
+  <div class="w-full overflow-x-auto pb-3 mb-6 scrollbar-none flex justify-start sm:justify-center relative z-10 px-4">
+    <div class="flex items-center gap-2 p-1 bg-[#09050d]/80 backdrop-blur-md rounded-full border border-purple-dark/60 shrink-0">
+      {tabs.map((tab, idx) => (
+        <button 
+          type="button"
+          data-tab-target={tab.id}
+          class={`tab-trigger whitespace-nowrap flex items-center gap-1.5 py-1.5 px-3.5 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer ${
+            idx === 0 
+              ? 'active-tab text-white bg-accent shadow-md shadow-accent/25 border border-purple-light/20' 
+              : 'text-gray-light/60 hover:text-white hover:bg-white/5 border border-transparent'
+          }`}
+        >
+          <span>{tab.name}</span>
+          
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Painéis dos Carrosséis -->
+  <div class="w-full relative z-10">
+    {tabs.map((tab, idx) => (
+      <section 
+        id={`tab-panel-${tab.id}`} 
+        class={`tab-panel ${idx === 0 ? 'block' : 'hidden'} transition-all duration-500`}
+      >
+        {tab.hasOriginal ? (
+          <div class="carousel-container relative w-full overflow-hidden py-4 group">
+            
+            <!-- Sombras/Fade laterais (degradê suave) -->
+            <div class="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-28 bg-linear-to-r from-bg-dark to-transparent z-20"></div>
+            <div class="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-28 bg-linear-to-l from-bg-dark to-transparent z-20"></div>
+
+            <!-- Faixa animada que se move para a esquerda -->
+            <div class="carousel-track flex items-center gap-4 sm:gap-6 w-max">
+              {tab.images.map((imgObj, itemIdx) => (
+                <div 
+                  class={`portfolio-card group/card relative bg-[#09050d] rounded-2xl border border-purple-dark/60 hover:border-accent hover:shadow-lg hover:shadow-accent/20 cursor-pointer overflow-hidden transition-all duration-300 flex flex-col p-1 sm:p-1.5 shrink-0 ${
+                    tab.type === 'mobile' ? 'carousel-card-mobile' : 'carousel-card-desktop'
+                  }`}
+                  data-src={imgObj.src}
+                  data-type={tab.type}
+                >
+                  <!-- Ilha / Notch nos cards mobile -->
+                  {tab.type === 'mobile' && (
+                    <div class="absolute top-2 left-1/2 -translate-x-1/2 w-7 h-1 bg-purple-dark/80 rounded-full z-20 pointer-events-none group-hover/card:bg-accent transition-colors"></div>
+                  )}
+
+                  <!-- Container da Imagem -->
+                  <div class="w-full h-full rounded-xl overflow-hidden bg-black/50 relative flex items-start justify-center">
+                    <img 
+                      src={imgObj.src} 
+                      alt={`${tab.name} - Projeto ${itemIdx + 1}`} 
+                      loading="lazy"
+                      class="w-full h-auto min-h-full block object-cover object-top opacity-90 group-hover/card:opacity-100 group-hover/card:scale-102 transition-all duration-500 select-none pointer-events-none"
+                    />
+
+                    <!-- Overlay hover discreto -->
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover/card:opacity-100 transition-opacity flex items-center justify-center p-2 backdrop-blur-[1px]">
+                      <span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-accent text-white shadow-md shadow-accent/40">
+                        Abrir Projeto
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div class="text-center py-12 px-4 bg-white/2 border border-purple-dark/40 rounded-2xl max-w-xs mx-auto">
+            <h3 class="text-sm font-heading font-semibold text-white">Novos Projetos em Breve</h3>
+            <p class="text-xs text-gray-light/60 mt-1">Estamos finalizando novos cases para esta categoria.</p>
+          </div>
+        )}
+      </section>
+    ))}
+  </div>
+
+  <!-- Modal Lightbox com Scroll Vertical -->
+  <div id="project-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-3 sm:p-5">
+    <button 
+      type="button" 
+      id="modal-close" 
+      class="absolute top-4 right-4 sm:top-6 sm:right-6 text-gray-light hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full z-50 cursor-pointer transition-all border border-white/10"
+      aria-label="Fechar"
+    >
+      <svg class="w-6 h-6" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-[11px] font-semibold uppercase tracking-wider text-purple-light bg-purple-dark/90 px-3.5 py-1.5 rounded-full border border-accent/40 shadow-lg pointer-events-none z-50 flex items-center gap-1.5 whitespace-nowrap">
+      ↕ Role para ver o site completo
+    </div>
+
+    <div 
+      id="modal-wrapper" 
+      class="w-full max-w-sm h-[84vh] max-h-215 bg-[#07030a] rounded-3xl border-2 border-purple-dark/80 shadow-2xl overflow-y-auto scrollbar-thin relative flex flex-col transition-all duration-300"
+    >
+      <img id="modal-image" src="" alt="Projeto ampliado" class="w-full h-auto block select-none" />
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. Alternador de Abas
+    const triggers = document.querySelectorAll<HTMLButtonElement>('.tab-trigger');
+    const panels = document.querySelectorAll<HTMLElement>('.tab-panel');
+
+    triggers.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-tab-target');
+
+        triggers.forEach(btn => {
+          btn.classList.remove('active-tab', 'text-white', 'bg-accent', 'shadow-md', 'shadow-accent/25', 'border-purple-light/20');
+          btn.classList.add('text-gray-light/60', 'border-transparent');
+        });
+
+        button.classList.add('active-tab', 'text-white', 'bg-accent', 'shadow-md', 'shadow-accent/25', 'border-purple-light/20');
+        button.classList.remove('text-gray-light/60', 'border-transparent');
+
+        panels.forEach(panel => {
+          if (panel.id === `tab-panel-${targetId}`) {
+            panel.classList.remove('hidden');
+            panel.classList.add('block');
+          } else {
+            panel.classList.remove('block');
+            panel.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // 2. Lightbox
+    const modal = document.getElementById('project-modal');
+    const modalWrapper = document.getElementById('modal-wrapper');
+    const modalImg = document.getElementById('modal-image') as HTMLImageElement;
+    const modalClose = document.getElementById('modal-close');
+    const cards = document.querySelectorAll<HTMLElement>('.portfolio-card');
+
+    if (!modal || !modalWrapper || !modalImg) return;
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const src = card.getAttribute('data-src');
+        const type = card.getAttribute('data-type');
+
+        if (src) {
+          modalImg.src = src;
+
+          if (type === 'desktop') {
+            modalWrapper.classList.remove('max-w-sm', 'rounded-3xl');
+            modalWrapper.classList.add('max-w-3xl', 'rounded-xl');
+          } else {
+            modalWrapper.classList.remove('max-w-3xl', 'rounded-xl');
+            modalWrapper.classList.add('max-w-sm', 'rounded-3xl');
+          }
+
+          modalWrapper.scrollTop = 0;
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+
+    const closeModal = () => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    };
+
+    modalClose?.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+    });
+  });
+</script>
+
+<style>
+  /* ANIMAÇÃO DE DESLIZE INFINITO */
+  @keyframes smoothScroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .carousel-track {
+    display: flex;
+    width: max-content;
+    animation: smoothScroll 35s linear infinite; /* Altere para 45s ou 50s para ficar ainda mais lento */
+    will-change: transform;
+  }
+
+  /* Pausa automática quando o usuário passa o mouse por cima de qualquer parte do carrossel */
+  .carousel-container:hover .carousel-track {
+    animation-play-state: paused;
+  }
+
+  /* DIMENSÕES FIXAS DOS CARDS (Necessárias para não colapsar em flex-row) */
+  .carousel-card-mobile {
+    width: 170px;
+    height: 280px;
+  }
+  @media (min-width: 640px) {
+    .carousel-card-mobile {
+      width: 200px;
+      height: 330px;
+    }
+  }
+
+  .carousel-card-desktop {
+    width: 290px;
+    aspect-ratio: 16 / 10;
+    height: auto;
+  }
+  @media (min-width: 640px) {
+    .carousel-card-desktop {
+      width: 420px;
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  /* SCROLLBARS */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: #000000;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #3a0170;
+    border-radius: 9999px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #9a46f2;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
