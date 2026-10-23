@@ -67,7 +67,7 @@ if (websiteUrl && !finalSocialLinks.some((l) => l.platform === 'website')) {
     <!-- Imagem de Fundo (Avatar / Foto) -->
     <div class="absolute inset-0 z-0 flex items-center justify-center">
       {typeof avatarSrc === 'string' ? (
-        <img src={avatarSrc} alt={name} class="w-full h-full object-contain object-top scale-105" />
+        <img src={avatarSrc} alt={name} class="w-full h-full object-contain object-top  scale-105" />
       ) : (
         <Image src={avatarSrc} alt={name} class="w-full h-full object-contain object-top scale-105" />
       )}
