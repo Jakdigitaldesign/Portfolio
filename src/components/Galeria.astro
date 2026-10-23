@@ -42,7 +42,7 @@ const tabs = [
 ];
 ---
 
-<div id="projetos" class="bg-bg-dark  text-gray-light font-body min-h-screen relative overflow-x-hidden">
+<div id="projetos" class="bg-bg-dark text-gray-light font-body py-8 sm:py-16 relative overflow-x-hidden">
   
   <!-- Fundo com Glows da Marca -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
@@ -296,16 +296,16 @@ const tabs = [
   }
 
   .carousel-card-desktop {
-    width: 290px;
-    aspect-ratio: 16 / 10;
-    height: auto;
+  width: 320px;
+  height: 300px; /* Aumente para 260px ou 280px se quiser ainda mais alto no mobile */
+}
+
+@media (min-width: 640px) {
+  .carousel-card-desktop {
+    width: 440px;
+    height: 320px; /* Altura para computador */
   }
-  @media (min-width: 640px) {
-    .carousel-card-desktop {
-      width: 420px;
-      aspect-ratio: 16 / 10;
-    }
-  }
+}
 
   /* SCROLLBARS */
   .scrollbar-thin::-webkit-scrollbar {
