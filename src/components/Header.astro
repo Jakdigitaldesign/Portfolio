@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logoImg from '../assets/Logo.png';
+
 // src/components/Header.astro
 const navLinks = [
   { name: 'Início', href: '/#inicio' },
@@ -11,24 +12,24 @@ const navLinks = [
 ];
 ---
 
-<header class="fixed top-0 left-0 w-full z-50 bg-bg-dark/80 backdrop-blur-md border-b border-purple-dark/50 transition-all">
+<header class="fixed top-0 left-0 w-full z-50 bg-[#07030c]/80 backdrop-blur-xl border-b border-primary/25 transition-all font-body">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
       
       <!-- LOGO -->
-     <a href="#inicio" class="flex items-center gap-2 group">
-  <Image src={logoImg} alt="Logo Jak Digital Design" class="h-8 w-auto object-contain" />
-</a>
+      <a href="/#inicio" class="flex items-center gap-2 group">
+        <Image src={logoImg} alt="Logo Jak Digital Design" class="h-8 w-auto object-contain opacity-95 group-hover:opacity-100 transition-opacity" />
+      </a>
 
       <!-- MENU DESKTOP -->
       <nav class="hidden md:flex items-center gap-8">
         {navLinks.map((link) => (
           <a
             href={link.href}
-            class="font-body text-gray-light hover:text-accent font-medium transition-colors text-sm tracking-wide py-1 relative group"
+            class="font-body text-purple-light/80 hover:text-white font-medium transition-colors text-[13px] tracking-wide py-1.5 relative group"
           >
             {link.name}
-            <span class="absolute bottom-0 left-0 w-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+            <span class="absolute bottom-0 left-0 h-[1.5px] w-0 bg-linear-to-r from-accent to-primary rounded-full transition-all duration-300 group-hover:w-full"></span>
           </a>
         ))}
       </nav>
@@ -36,9 +37,10 @@ const navLinks = [
       <!-- BOTÃO CTA DESKTOP -->
       <div class="hidden md:block">
         <a
-          href="https://wa.me/5541984940848" 
+          href="https://wa.me/5541984940848"
           target="_blank"
-          class="bg-primary hover:bg-accent text-white font-heading font-semibold text-sm px-5 py-2.5 rounded-lg shadow-md hover:shadow-accent/20 transition-all duration-300"
+          rel="noopener noreferrer"
+          class="font-body inline-flex items-center justify-center bg-linear-to-r from-primary to-accent hover:brightness-110 text-white font-semibold text-xs uppercase tracking-[0.14em] px-5 py-2.5 rounded-xl shadow-[0_6px_20px_rgba(131,67,195,0.3)] hover:shadow-[0_8px_24px_rgba(154,70,242,0.45)] hover:-translate-y-0.5 transition-all duration-300"
         >
           Falar Comigo
         </a>
@@ -48,16 +50,13 @@ const navLinks = [
       <button
         id="menu-toggle"
         type="button"
-        class="md:hidden text-gray-light hover:text-white p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
+        class="md:hidden text-purple-light/85 hover:text-white p-2 rounded-xl border border-primary/25 bg-white/3 focus:outline-none focus:ring-2 focus:ring-accent/60 transition-colors"
         aria-label="Abrir menu de navegação"
       >
-        <!-- Ícone Hambúrguer (Aberto) -->
-        <svg id="icon-hamburger" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg id="icon-hamburger" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
-        
-        <!-- Ícone Fechar (X) - Oculto por padrão -->
-        <svg id="icon-close" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
@@ -66,20 +65,22 @@ const navLinks = [
   </div>
 
   <!-- MENU MOBILE / TABLET (GAVETA DROPDOWN) -->
-  <div id="mobile-menu" class="hidden md:hidden bg-bg-dark/95 border-b border-purple-dark/60 backdrop-blur-xl transition-all">
-    <div class="px-4 pt-4 pb-6 space-y-3">
+  <div id="mobile-menu" class="hidden md:hidden bg-[#0b0412]/95 border-b border-primary/30 backdrop-blur-xl transition-all">
+    <div class="px-4 pt-4 pb-6 space-y-2">
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class="mobile-link block text-gray-light hover:text-white hover:bg-purple-dark/40 px-3 py-2.5 rounded-lg font-body font-medium text-base transition-colors"
+          class="mobile-link block text-purple-light/85 hover:text-white hover:bg-primary/15 px-3.5 py-2.5 rounded-xl font-body font-medium text-sm tracking-wide transition-colors"
         >
           {link.name}
         </a>
       ))}
-      <div class="pt-2">
+      <div class="pt-3">
         <a
-          href="#contato"
-          class="mobile-link block w-full text-center bg-primary hover:bg-accent text-white font-heading font-semibold py-3 rounded-lg shadow-md transition-all"
+          href="https://wa.me/5541984940848"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mobile-link font-body block w-full text-center bg-linear-to-r from-primary to-accent hover:brightness-110 text-white font-semibold text-xs uppercase tracking-[0.16em] py-3.5 rounded-xl shadow-[0_6px_20px_rgba(131,67,195,0.35)] transition-all"
         >
           Falar Comigo
         </a>
@@ -88,7 +89,6 @@ const navLinks = [
   </div>
 </header>
 
-<!-- SCRIPT PARA INTERAÇÃO DO MENU MOBILE -->
 <script>
   const toggleBtn = document.getElementById('menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
@@ -104,7 +104,6 @@ const navLinks = [
 
   toggleBtn?.addEventListener('click', toggleMenu);
 
-  // Fecha o menu mobile automaticamente ao clicar em qualquer link
   mobileLinks.forEach((link) => {
     link.addEventListener('click', () => {
       if (!mobileMenu?.classList.contains('hidden')) {

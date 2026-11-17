@@ -15,67 +15,79 @@ const skills = [
 ];
 
 const stats = [
-  { value: 'ADS', label: 'Graduação Superior' },
-  { value: 'SaaS + Web', label: 'Sistemas Próprios' },
-  { value: 'Direto', label: 'Sem Intermediários' },
+  { value: 'ADS', label: 'Graduação Superior', isHighlight: false },
+  { value: 'SaaS + Web', label: 'Sistemas Próprios', isHighlight: true },
+  { value: 'Direto', label: 'Sem Intermediários', isHighlight: false },
 ];
 ---
 
-<section id="sobre" class="py-16 md:py-24 relative overflow-hidden bg-bg-dark/60">
+<section id="sobre" class="py-16 md:py-24 relative overflow-hidden bg-bg-dark/60 font-body">
   <!-- Brilho de fundo sutil -->
-  <div class="absolute bottom-0 left-0 w-87.5 h-87.5 bg-accent/10 blur-[120px] rounded-full -z-10 pointer-events-none"></div>
-  <div class="absolute top-1/2 right-0 w-62.5 h-62.5 bg-primary/10 blur-[100px] rounded-full -z-10 pointer-events-none"></div>
+  <div class="absolute bottom-0 left-0 w-87.5 h-87.5 bg-purple-dark/35 blur-[130px] rounded-full -z-10 pointer-events-none"></div>
+  <div class="absolute top-1/2 right-0 w-62.5 h-62.5 bg-primary/15 blur-[110px] rounded-full -z-10 pointer-events-none"></div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
       
-     <!-- COLUNA DA ESQUERDA: FOTO DE PERFIL -->
-<div class="lg:col-span-5 relative flex justify-center">
-  <div class="relative w-full max-w-sm sm:max-w-md group">
-    
-    <!-- EFEITO DE BRILHO / GLOW ROXO ATRÁS DA FOTO -->
-    <div class="absolute inset-0 bg-linear-to-tr from-primary/40 via-accent/30 to-purple-dark/50 rounded-2xl blur-2xl transform group-hover:scale-105 transition-all duration-500 -z-10"></div>
-    
-    <!-- Container da foto (Sem borda) -->
-    <div class="relative rounded-2xl overflow-hidden bg-transparent shadow-2xl">
-      <Image
-        src={profileImg}
-        alt="Jaqueline Souza - Desenvolvedora e Criadora de Soluções Digitais"
-        class="w-full object-cover object-center rounded-2xl group-hover:scale-105 transition-transform duration-500"
-      />
-    </div>
+      <!-- COLUNA DA ESQUERDA: FOTO DE PERFIL -->
+      <div class="lg:col-span-5 relative flex justify-center">
+        <div class="relative w-full max-w-sm sm:max-w-md group">
+          
+          <!-- Glow roxo atrás da foto -->
+          <div class="absolute inset-0 bg-linear-to-tr from-primary/35 via-accent/25 to-purple-dark/50 rounded-3xl blur-2xl transform group-hover:scale-105 transition-all duration-500 -z-10"></div>
+          
+          <!-- Moldura em Degradê Sutil + Vinheta -->
+          <div class="rounded-3xl p-[1.5px] bg-linear-to-b from-accent/65 via-primary/30 to-primary/10 shadow-2xl shadow-purple-dark/40">
+            <div class="relative rounded-[22px] overflow-hidden bg-bg-dark">
+              <Image
+                src={profileImg}
+                alt="Jaqueline Souza - Desenvolvedora e Criadora de Soluções Digitais"
+                class="w-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
+              />
+              <div class="absolute inset-x-0 bottom-0 h-1/4 bg-linear-to-t from-bg-dark/70 via-bg-dark/20 to-transparent pointer-events-none"></div>
+            </div>
+          </div>
 
-    <!-- Card Flutuante de formação/experiência -->
-    <div class="absolute -bottom-5 -right-2 sm:-right-4 bg-bg-dark/95 backdrop-blur-md border border-accent/40 text-white p-3.5 rounded-xl shadow-2xl hidden sm:flex items-center gap-3 z-10">
-      <div class="w-10 h-10 rounded-lg bg-accent/20 border border-accent/30 flex items-center justify-center text-accent shrink-0">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-        </svg>
-      </div>
-      <div>
-        <p class="font-heading font-bold text-xs text-white">Análise e Dev. de Sistemas</p>
-        <p class="font-body text-[11px] text-gray-light">Desenvolvedora Web & SaaS</p>
-      </div>
-    </div>
+          <!-- Card Flutuante de formação/experiência (em Plus Jakarta Sans) -->
+          <div class="absolute -bottom-5 -right-2 sm:-right-4 bg-[#0b0412]/90 backdrop-blur-xl border border-primary/35 text-white p-3.5 rounded-2xl shadow-2xl shadow-purple-dark/40 hidden sm:flex items-center gap-3 z-10">
+            <div class="w-10 h-10 rounded-xl bg-accent/15 border border-accent/30 flex items-center justify-center text-accent shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="font-body font-semibold text-xs text-white tracking-wide">Análise e Dev. de Sistemas</p>
+              <p class="font-body text-[11px] text-purple-light/70">Desenvolvedora Web & SaaS</p>
+            </div>
+          </div>
 
-  </div>
-</div>
+        </div>
+      </div>
+
       <!-- COLUNA DA DIREITA: CONTEÚDO E TEXTOS -->
       <div class="lg:col-span-7">
         
-        <!-- TAG SUPERIOR -->
-        <span class="inline-block font-heading text-xs font-semibold uppercase tracking-widest text-accent bg-purple-dark/40 px-4 py-1.5 rounded-full border border-purple-dark/60 mb-3">
+        <!-- TAG SUPERIOR (mesma pílula do Hero e Serviços) -->
+        <div class="font-body inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/35 bg-primary/15 backdrop-blur-md text-purple-light text-[11px] font-medium uppercase tracking-[0.2em] mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
           Sobre Mim
-        </span>
+        </div>
 
-        <!-- TÍTULO -->
-        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-5 leading-tight">
-          A engenharia técnica por trás do seu projeto
+        <!-- TÍTULO (Cormorant Garamond Editorial) -->
+        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-4 leading-[1.08] tracking-tight">
+          A{" "}
+          <span class="italic text-transparent bg-clip-text bg-linear-to-r from-purple-light via-accent to-primary pr-1">
+            engenharia técnica
+          </span>{" "}
+          por trás do seu projeto
         </h2>
 
+        <!-- Divisória Sutil Alinhada à Esquerda -->
+        <div class="h-px w-32 bg-linear-to-r from-accent/60 to-transparent mb-6"></div>
+
         <!-- TEXTO DE APRESENTAÇÃO -->
-        <div class="space-y-3 font-body text-gray-light text-sm sm:text-base leading-relaxed mb-6">
+        <div class="space-y-3.5 font-body text-purple-light/75 text-sm sm:text-base leading-relaxed mb-7">
           <p>
             Prazer, sou <strong class="text-white font-semibold">Jaqueline Souza</strong>. Sou graduada em <strong class="text-white font-semibold">Análise e Desenvolvimento de Sistemas</strong> e atuo unindo código de alta performance, design e foco em conversão.
           </p>
@@ -84,28 +96,42 @@ const stats = [
           </p>
         </div>
 
-        <!-- CARDS DE ESTATÍSTICAS / DIFERENCIAIS -->
-        <div class="grid grid-cols-3 gap-3 mb-6">
-          {stats.map((stat) => (
-            <div class="bg-purple-dark/20 border border-purple-dark/50 rounded-xl p-3 text-center">
-              <span class="block font-heading font-extrabold text-sm sm:text-lg text-accent mb-0.5">
-                {stat.value}
-              </span>
-              <span class="font-body text-[11px] text-gray-light leading-snug block">
-                {stat.label}
-              </span>
-            </div>
-          ))}
+        <!-- CARDS DE ESTATÍSTICAS / DIFERENCIAIS (Mesmo padrão do Stats) -->
+        <div class="bg-[#0b0412]/80 backdrop-blur-xl border border-primary/25 rounded-2xl py-4 px-2 mb-7 shadow-lg shadow-purple-dark/15">
+          <div class="grid grid-cols-3 items-center text-center">
+            {stats.map((stat, index) => (
+              <div class="relative px-2">
+                {index > 0 && (
+                  <div class="absolute left-0 top-1/2 -translate-y-1/2 h-8 w-px bg-linear-to-b from-transparent via-primary/35 to-transparent"></div>
+                )}
+                <span
+                  class={`block font-heading lining-nums font-semibold text-xl sm:text-2xl leading-none tracking-wide ${
+                    stat.isHighlight
+                      ? 'text-accent drop-shadow-[0_0_12px_rgba(154,70,242,0.35)]'
+                      : 'text-white'
+                  }`}
+                >
+                  {stat.value}
+                </span>
+                <span class="font-body text-[10px] sm:text-[11px] uppercase tracking-[0.14em] text-purple-light/70 leading-snug block mt-2">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
 
         <!-- TAGS DE TECNOLOGIAS E HABILIDADES -->
         <div class="mb-8">
-          <p class="font-heading text-xs uppercase tracking-wider text-purple-light mb-2.5 font-semibold">
-            Especialidades & Tecnologias:
-          </p>
+          <div class="flex items-center gap-2.5 mb-3">
+            <span class="w-4 h-[1.5px] bg-accent rounded-full shrink-0"></span>
+            <p class="font-body text-[11px] uppercase tracking-[0.2em] text-purple-light/85 font-medium">
+              Especialidades & Tecnologias
+            </p>
+          </div>
           <div class="flex flex-wrap gap-2">
             {skills.map((skill) => (
-              <span class="bg-purple-dark/30 border border-purple-dark/60 text-gray-light hover:text-white hover:border-accent/60 font-body text-xs px-3 py-1 rounded-lg transition-colors">
+              <span class="bg-white/3 hover:bg-primary/20 border border-primary/25 hover:border-accent/60 text-purple-light/85 hover:text-white font-body text-xs font-medium px-3 py-1.5 rounded-xl transition-all duration-200">
                 {skill}
               </span>
             ))}
@@ -116,10 +142,10 @@ const stats = [
         <div>
           <a
             href="#projetos"
-            class="inline-flex items-center gap-2.5 bg-primary hover:bg-accent text-white font-heading font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-lg shadow-primary/20 hover:shadow-accent/30 hover:-translate-y-0.5 transition-all duration-300"
+            class="font-body inline-flex items-center gap-2.5 bg-linear-to-r from-primary to-accent hover:brightness-110 text-white font-semibold text-xs uppercase tracking-[0.16em] px-7 py-4 rounded-2xl shadow-[0_8px_24px_rgba(131,67,195,0.35)] hover:shadow-[0_10px_28px_rgba(154,70,242,0.5)] hover:-translate-y-0.5 transition-all duration-300 group"
           >
-            Ver Projetos Desenvolvidos
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <span>Ver Projetos Desenvolvidos</span>
+            <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>
           </a>

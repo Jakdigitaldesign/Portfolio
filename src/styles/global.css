@@ -16,18 +16,19 @@
 }
 
 body {
-  font-family: var(--font-body);
-  background-color: var(--color-bg-dark);
-  color: #ffffff;
-}
+    font-family: var(--font-body);
+    background-color: var(--color-bg-dark);
+    color: #ffffff;
+  }
 
-h1, h2 {
-  font-family: var(--font-heading);
-}
+  h1, h2 {
+    font-family: var(--font-heading);
+  }
 
-h3, h4, h5, h6 {
-  font-family: var(--font-body);
-}
+  h3, h4, h5, h6 {
+    font-family: var(--font-body);
+  }
+
 .scroller-thin::-webkit-scrollbar {
   width: 6px;
 }

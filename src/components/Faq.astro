@@ -29,37 +29,46 @@ const faqs = [
 ];
 ---
 
-<section id="faq" class="py-20 bg-bg-dark relative">
+<section id="faq" class="py-20 bg-bg-dark relative overflow-hidden font-body">
+  <!-- Brilho ambiente sutil -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-120 h-80 bg-purple-dark/25 blur-[140px] rounded-full -z-10 pointer-events-none"></div>
+
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- CABEÇALHO -->
-    <div class="text-center mb-16">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent/40 bg-purple-dark/30 text-purple-light text-xs font-heading font-semibold uppercase tracking-wider mb-4">
-        <svg class="w-3.5 h-3.5 text-accent" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-        </svg>
+    <div class="text-center mb-14 sm:mb-16">
+      <div class="font-body inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/35 bg-primary/15 backdrop-blur-md text-purple-light text-[11px] font-medium uppercase tracking-[0.2em]">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
         Dúvidas Frequentes
       </div>
 
-      <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white">
-        Perguntas que recebo com frequência
+      <h2 class="font-heading font-semibold text-3xl sm:text-4xl lg:text-5xl text-white mt-5 mb-4 leading-[1.08] tracking-tight">
+        Perguntas que recebo{" "}
+        <span class="italic text-transparent bg-clip-text bg-linear-to-r from-purple-light via-accent to-primary pr-1">
+          com frequência
+        </span>
       </h2>
+
+      <!-- Divisória Gradiente Minimalista -->
+      <div class="h-px w-36 bg-linear-to-r from-transparent via-accent/55 to-transparent mx-auto mt-4"></div>
     </div>
 
     <!-- LISTA ACCORDION DO FAQ -->
-    <div class="space-y-4">
+    <div class="space-y-3.5">
       {faqs.map((faq) => (
-        <details class="group bg-[#0a0a0a] border border-purple-dark/40 rounded-2xl transition-all duration-300 [[open]]:border-accent/60 [[open]]:bg-purple-dark/10">
-          <summary class="flex items-center justify-between cursor-pointer p-6 list-none font-heading font-bold text-base sm:text-lg text-white select-none">
-            <span>{faq.question}</span>
-            <span class="ml-4 shrink-0 p-1.5 rounded-lg bg-purple-dark/40 text-accent group-open:rotate-180 transition-transform duration-300">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <details class="group bg-[#0b0412]/85 backdrop-blur-xl border border-primary/25 hover:border-primary/50 rounded-2xl transition-all duration-300 open:border-accent/60 open:bg-[#120720]/90 open:shadow-[0_12px_36px_rgba(131,67,195,0.16)]">
+          <summary class="flex items-center justify-between cursor-pointer p-5 sm:p-6 list-none [&::-webkit-details-marker]:hidden font-body font-semibold text-sm sm:text-base tracking-wide text-white/95 group-open:text-white select-none transition-colors">
+            <span class="pr-4 leading-snug">{faq.question}</span>
+            <span class="ml-2 shrink-0 w-8 h-8 rounded-xl bg-white/4 border border-primary/25 text-accent flex items-center justify-center group-open:bg-accent/15 group-open:border-accent/50 group-open:rotate-180 transition-all duration-300">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </span>
           </summary>
-          <div class="px-6 pb-6 font-body text-gray-light text-sm sm:text-base leading-relaxed border-t border-purple-dark/20 pt-4">
-            {faq.answer}
+
+          <div class="px-5 sm:px-6 pb-6 font-body text-purple-light/80 text-sm leading-relaxed">
+            <div class="h-px w-full bg-linear-to-r from-accent/40 via-primary/20 to-transparent mb-4"></div>
+            <p>{faq.answer}</p>
           </div>
         </details>
       ))}

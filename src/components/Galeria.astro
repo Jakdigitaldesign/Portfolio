@@ -4,7 +4,6 @@ import type { ImageMetadata } from 'astro';
 // Carregamento automático das imagens por pastas
 const globMinisites = import.meta.glob<{ default: ImageMetadata }>('../assets/projetos/mobile/*.{jpeg,jpg,png,webp}', { eager: true });
 const globSites = import.meta.glob<{ default: ImageMetadata }>('../assets/projetos/desktop/*.{jpeg,jpg,png,webp}', { eager: true });
-const globCatalogos = import.meta.glob<{ default: ImageMetadata }>('../assets/projetos/catalogos/*.{jpeg,jpg,png,webp}', { eager: true });
 const globLojas = import.meta.glob<{ default: ImageMetadata }>('../assets/projetos/lojas/*.{jpeg,jpg,png,webp}', { eager: true });
 
 // Garante que haja itens suficientes para a rolagem infinita não quebrar em telas largas
@@ -18,77 +17,72 @@ const duplicateForLoop = (images: ImageMetadata[]) => {
 };
 
 const tabs = [
-  { 
-    id: 'minisites', 
-    name: 'Minisites', 
+  {
+    id: 'minisites',
+    name: 'Minisites',
     type: 'mobile',
-    images: duplicateForLoop(Object.values(globMinisites).map(m => m.default)),
+    images: duplicateForLoop(Object.values(globMinisites).map((m) => m.default)),
     hasOriginal: Object.values(globMinisites).length > 0
   },
-  { 
-    id: 'sites', 
-    name: 'Sites  Landing Pages', 
-    type: 'desktop', 
-    images: duplicateForLoop(Object.values(globSites).map(m => m.default)),
+  {
+    id: 'sites',
+    name: 'Sites & Landing Pages',
+    type: 'desktop',
+    images: duplicateForLoop(Object.values(globSites).map((m) => m.default)),
     hasOriginal: Object.values(globSites).length > 0
   },
-  { 
-    id: 'lojas', 
-    name: 'Lojas & Saas', 
-    type: 'desktop', 
-    images: duplicateForLoop(Object.values(globLojas).map(m => m.default)),
+  {
+    id: 'lojas',
+    name: 'Lojas & SaaS',
+    type: 'desktop',
+    images: duplicateForLoop(Object.values(globLojas).map((m) => m.default)),
     hasOriginal: Object.values(globLojas).length > 0
   }
 ];
 ---
 
-<div id="projetos" class="bg-bg-dark text-gray-light font-body py-8 sm:py-16 relative overflow-x-hidden">
+<section id="projetos" class="bg-bg-dark text-gray-light font-body py-16 md:py-24 relative overflow-hidden">
   
-  <!-- Fundo com Glows da Marca -->
-  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/20 rounded-full blur-[120px]"></div>
-    <div class="absolute top-1/2 -left-20 w-80 h-80 bg-purple-dark/25 rounded-full blur-[100px]"></div>
-    <div class="absolute bottom-10 -right-20 w-80 h-80 bg-accent/15 rounded-full blur-[100px]"></div>
+  <!-- Fundo com Glows contidos dentro da seção (corrigido de fixed para absolute) -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden -z-10">
+    <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-dark/45 rounded-full blur-[130px]"></div>
+    <div class="absolute top-1/2 -left-20 w-80 h-80 bg-primary/15 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-10 -right-20 w-80 h-80 bg-accent/15 rounded-full blur-[120px]"></div>
   </div>
 
- <!-- CABEÇALHO DA GALERIA -->
-<div class="text-center mb-8 sm:mb-12 relative z-10 px-4">
-  
-  <!-- Badge redondo com ícone de Portfólio/Galeria -->
-  <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent/40 bg-purple-dark/30 text-purple-light text-xs font-heading font-semibold uppercase tracking-wider mb-4 shadow-sm shadow-accent/10">
-    <svg class="w-3.5 h-3.5 text-accent" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M4 5a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V7a2 2 0 00-2-2H4zm16 12H4V7h16v10zm-14-3l3-4 2 2.5 3-3.75L18 15H6zm0-6a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/>
-    </svg>
-    Galeria de Trabalhos
+  <!-- CABEÇALHO DA GALERIA -->
+  <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12 relative z-10 px-4">
+    <div class="font-body inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/35 bg-primary/15 backdrop-blur-md text-purple-light text-[11px] font-medium uppercase tracking-[0.2em] mb-4">
+      <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+      Galeria de Trabalhos
+    </div>
+
+    <h2 class="font-heading font-semibold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-[1.08]">
+      Projetos em{" "}
+      <span class="italic text-transparent bg-clip-text bg-linear-to-r from-purple-light via-accent to-primary pr-1">
+        Destaque
+      </span>
+    </h2>
+
+    <!-- Divisória Gradiente Minimalista -->
+    <div class="h-px w-36 bg-linear-to-r from-transparent via-accent/55 to-transparent mx-auto my-4"></div>
+
+    <p class="font-body text-xs sm:text-sm text-purple-light/75 max-w-md mx-auto font-normal leading-relaxed">
+      Passe o mouse para pausar a rolagem. Clique sobre qualquer projeto para visualizá-lo em tamanho real.
+    </p>
   </div>
-
-  <!-- Título padronizado com as outras seções -->
-  <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-white tracking-tight">
-    Projetos em Destaque
-  </h2>
-
-  <!-- Descrição -->
-  <p class="text-xs sm:text-sm text-gray-light/70 max-w-md mx-auto mt-3 font-light leading-relaxed">
-    Passe o mouse para congelar a rolagem. Clique sobre qualquer projeto para visualizá-lo em tamanho real.
-  </p>
-
-</div>
 
   <!-- Navegação de Abas -->
-  <div class="w-full overflow-x-auto pb-3 mb-6 scrollbar-none flex justify-start sm:justify-center relative z-10 px-4">
-    <div class="flex items-center gap-2 p-1 bg-[#09050d]/80 backdrop-blur-md rounded-full border border-purple-dark/60 shrink-0">
+  <div class="w-full overflow-x-auto pb-3 mb-6 scrollbar-none flex justify-center relative z-10 px-4">
+    <div class="inline-flex items-center gap-1.5 p-1.5 bg-[#0b0412]/85 backdrop-blur-xl rounded-full border border-primary/30 shadow-lg shadow-purple-dark/20 shrink-0">
       {tabs.map((tab, idx) => (
-        <button 
+        <button
           type="button"
           data-tab-target={tab.id}
-          class={`tab-trigger whitespace-nowrap flex items-center gap-1.5 py-1.5 px-3.5 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer ${
-            idx === 0 
-              ? 'active-tab text-white bg-accent shadow-md shadow-accent/25 border border-purple-light/20' 
-              : 'text-gray-light/60 hover:text-white hover:bg-white/5 border border-transparent'
-          }`}
+          data-active={idx === 0 ? 'true' : 'false'}
+          class="tab-trigger font-body whitespace-nowrap py-1.5 px-4 rounded-full text-xs font-medium tracking-wide transition-all duration-300 cursor-pointer text-purple-light/65 hover:text-white hover:bg-white/5 data-[active=true]:bg-linear-to-r data-[active=true]:from-primary data-[active=true]:to-accent data-[active=true]:text-white data-[active=true]:shadow-[0_4px_16px_rgba(131,67,195,0.4)]"
         >
           <span>{tab.name}</span>
-          
         </button>
       ))}
     </div>
@@ -97,44 +91,60 @@ const tabs = [
   <!-- Painéis dos Carrosséis -->
   <div class="w-full relative z-10">
     {tabs.map((tab, idx) => (
-      <section 
-        id={`tab-panel-${tab.id}`} 
+      <div
+        id={`tab-panel-${tab.id}`}
         class={`tab-panel ${idx === 0 ? 'block' : 'hidden'} transition-all duration-500`}
       >
         {tab.hasOriginal ? (
           <div class="carousel-container relative w-full overflow-hidden py-4 group">
             
-            <!-- Sombras/Fade laterais (degradê suave) -->
+            <!-- Sombras/Fade laterais -->
             <div class="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-28 bg-linear-to-r from-bg-dark to-transparent z-20"></div>
             <div class="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-28 bg-linear-to-l from-bg-dark to-transparent z-20"></div>
 
-            <!-- Faixa animada que se move para a esquerda -->
+            <!-- Faixa animada -->
             <div class="carousel-track flex items-center gap-4 sm:gap-6 w-max">
               {tab.images.map((imgObj, itemIdx) => (
-                <div 
-                  class={`portfolio-card group/card relative bg-[#09050d] rounded-2xl border border-purple-dark/60 hover:border-accent hover:shadow-lg hover:shadow-accent/20 cursor-pointer overflow-hidden transition-all duration-300 flex flex-col p-1 sm:p-1.5 shrink-0 ${
+                <div
+                  class={`portfolio-card group/card relative bg-[#06020b] rounded-[22px] border border-primary/30 hover:border-accent/80 shadow-[0_12px_30px_rgba(0,0,0,0.65)] hover:shadow-[0_14px_34px_rgba(154,70,242,0.22)] cursor-pointer overflow-hidden transition-all duration-300 hover:-translate-y-1 flex flex-col p-1.5 shrink-0 ${
                     tab.type === 'mobile' ? 'carousel-card-mobile' : 'carousel-card-desktop'
                   }`}
                   data-src={imgObj.src}
                   data-type={tab.type}
                 >
-                  <!-- Ilha / Notch nos cards mobile -->
+                  {/* Ilha / Notch nos cards mobile */}
                   {tab.type === 'mobile' && (
-                    <div class="absolute top-2 left-1/2 -translate-x-1/2 w-7 h-1 bg-purple-dark/80 rounded-full z-20 pointer-events-none group-hover/card:bg-accent transition-colors"></div>
+                    <div class="absolute top-2.5 left-1/2 -translate-x-1/2 w-8 h-1 bg-[#1b0c2e] border border-primary/25 rounded-full z-20 pointer-events-none group-hover/card:border-accent/60 transition-colors"></div>
+                  )}
+
+                  {/* Barra minimalista de navegador nos cards desktop */}
+                  {tab.type === 'desktop' && (
+                    <div class="w-full h-4 px-2.5 flex items-center gap-1.5 bg-[#120720] rounded-t-2xl border-b border-primary/20 shrink-0">
+                      <span class="w-1.5 h-1.5 rounded-full bg-accent/60"></span>
+                      <span class="w-1.5 h-1.5 rounded-full bg-primary/50"></span>
+                      <span class="w-1.5 h-1.5 rounded-full bg-primary/30"></span>
+                    </div>
                   )}
 
                   <!-- Container da Imagem -->
-                  <div class="w-full h-full rounded-xl overflow-hidden bg-black/50 relative flex items-start justify-center">
-                    <img 
-                      src={imgObj.src} 
-                      alt={`${tab.name} - Projeto ${itemIdx + 1}`} 
+                  <div
+                    class={`w-full flex-1 overflow-hidden bg-bg-dark relative flex items-start justify-center ${
+                      tab.type === 'desktop' ? 'rounded-b-2xl' : 'rounded-2xl'
+                    }`}
+                  >
+                    <img
+                      src={imgObj.src}
+                      alt={`${tab.name} - Projeto ${itemIdx + 1}`}
                       loading="lazy"
                       class="w-full h-auto min-h-full block object-cover object-top opacity-90 group-hover/card:opacity-100 group-hover/card:scale-102 transition-all duration-500 select-none pointer-events-none"
                     />
 
                     <!-- Overlay hover discreto -->
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover/card:opacity-100 transition-opacity flex items-center justify-center p-2 backdrop-blur-[1px]">
-                      <span class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-accent text-white shadow-md shadow-accent/40">
+                    <div class="absolute inset-0 bg-[#07020c]/55 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex items-center justify-center p-2 backdrop-blur-[1px]">
+                      <span class="font-body inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] px-3.5 py-1.5 rounded-full bg-[#120620]/90 border border-accent/60 text-white shadow-lg">
+                        <svg class="w-3 h-3 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                        </svg>
                         Abrir Projeto
                       </span>
                     </div>
@@ -144,61 +154,56 @@ const tabs = [
             </div>
           </div>
         ) : (
-          <div class="text-center py-12 px-4 bg-white/2 border border-purple-dark/40 rounded-2xl max-w-xs mx-auto">
-            <h3 class="text-sm font-heading font-semibold text-white">Novos Projetos em Breve</h3>
-            <p class="text-xs text-gray-light/60 mt-1">Estamos finalizando novos cases para esta categoria.</p>
+          <div class="text-center py-12 px-6 bg-[#0b0412]/80 backdrop-blur-xl border border-primary/25 rounded-3xl max-w-xs mx-auto">
+            <h3 class="font-heading text-xl font-semibold text-white">Novos Projetos em Breve</h3>
+            <p class="font-body text-xs text-purple-light/70 mt-1.5">Estamos finalizando novos cases para esta categoria.</p>
           </div>
         )}
-      </section>
+      </div>
     ))}
   </div>
 
   <!-- Modal Lightbox com Scroll Vertical -->
   <div id="project-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-3 sm:p-5">
-    <button 
-      type="button" 
-      id="modal-close" 
-      class="absolute top-4 right-4 sm:top-6 sm:right-6 text-gray-light hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full z-50 cursor-pointer transition-all border border-white/10"
+    <button
+      type="button"
+      id="modal-close"
+      class="absolute top-4 right-4 sm:top-6 sm:right-6 text-purple-light/85 hover:text-white bg-[#120620]/85 hover:bg-primary/40 border border-primary/40 hover:border-accent p-2.5 rounded-full z-50 cursor-pointer transition-all backdrop-blur-md shadow-lg"
       aria-label="Fechar"
     >
-      <svg class="w-6 h-6" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-5 h-5" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
 
-    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 text-[11px] font-semibold uppercase tracking-wider text-purple-light bg-purple-dark/90 px-3.5 py-1.5 rounded-full border border-accent/40 shadow-lg pointer-events-none z-50 flex items-center gap-1.5 whitespace-nowrap">
+    <div class="font-body absolute bottom-4 left-1/2 -translate-x-1/2 text-[10px] font-medium uppercase tracking-[0.18em] text-purple-light/85 bg-[#120620]/85 px-3.5 py-1.5 rounded-full border border-primary/35 backdrop-blur-md shadow-lg pointer-events-none z-50 flex items-center gap-1.5 whitespace-nowrap">
       ↕ Role para ver o site completo
     </div>
 
-    <div 
-      id="modal-wrapper" 
-      class="w-full max-w-sm h-[84vh] max-h-215 bg-[#07030a] rounded-3xl border-2 border-purple-dark/80 shadow-2xl overflow-y-auto scrollbar-thin relative flex flex-col transition-all duration-300"
+    <div
+      id="modal-wrapper"
+      class="w-full max-w-sm h-[84vh] max-h-215 bg-[#090410] rounded-3xl border border-primary/40 shadow-[0_20px_60px_rgba(58,1,112,0.5)] overflow-y-auto scroller-thin relative flex flex-col transition-all duration-300"
     >
       <img id="modal-image" src="" alt="Projeto ampliado" class="w-full h-auto block select-none" />
     </div>
   </div>
 
-</div>
+</section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  const initProjectsGallery = () => {
     // 1. Alternador de Abas
     const triggers = document.querySelectorAll<HTMLButtonElement>('.tab-trigger');
     const panels = document.querySelectorAll<HTMLElement>('.tab-panel');
 
-    triggers.forEach(button => {
+    triggers.forEach((button) => {
       button.addEventListener('click', () => {
         const targetId = button.getAttribute('data-tab-target');
 
-        triggers.forEach(btn => {
-          btn.classList.remove('active-tab', 'text-white', 'bg-accent', 'shadow-md', 'shadow-accent/25', 'border-purple-light/20');
-          btn.classList.add('text-gray-light/60', 'border-transparent');
-        });
+        triggers.forEach((btn) => btn.setAttribute('data-active', 'false'));
+        button.setAttribute('data-active', 'true');
 
-        button.classList.add('active-tab', 'text-white', 'bg-accent', 'shadow-md', 'shadow-accent/25', 'border-purple-light/20');
-        button.classList.remove('text-gray-light/60', 'border-transparent');
-
-        panels.forEach(panel => {
+        panels.forEach((panel) => {
           if (panel.id === `tab-panel-${targetId}`) {
             panel.classList.remove('hidden');
             panel.classList.add('block');
@@ -213,13 +218,13 @@ const tabs = [
     // 2. Lightbox
     const modal = document.getElementById('project-modal');
     const modalWrapper = document.getElementById('modal-wrapper');
-    const modalImg = document.getElementById('modal-image') as HTMLImageElement;
+    const modalImg = document.getElementById('modal-image') as HTMLImageElement | null;
     const modalClose = document.getElementById('modal-close');
     const cards = document.querySelectorAll<HTMLElement>('.portfolio-card');
 
     if (!modal || !modalWrapper || !modalImg) return;
 
-    cards.forEach(card => {
+    cards.forEach((card) => {
       card.addEventListener('click', () => {
         const src = card.getAttribute('data-src');
         const type = card.getAttribute('data-type');
@@ -229,9 +234,9 @@ const tabs = [
 
           if (type === 'desktop') {
             modalWrapper.classList.remove('max-w-sm', 'rounded-3xl');
-            modalWrapper.classList.add('max-w-3xl', 'rounded-xl');
+            modalWrapper.classList.add('max-w-3xl', 'rounded-2xl');
           } else {
-            modalWrapper.classList.remove('max-w-3xl', 'rounded-xl');
+            modalWrapper.classList.remove('max-w-3xl', 'rounded-2xl');
             modalWrapper.classList.add('max-w-sm', 'rounded-3xl');
           }
 
@@ -257,11 +262,16 @@ const tabs = [
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
     });
-  });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProjectsGallery);
+  } else {
+    initProjectsGallery();
+  }
 </script>
 
 <style>
-  /* ANIMAÇÃO DE DESLIZE INFINITO */
   @keyframes smoothScroll {
     0% {
       transform: translateX(0);
@@ -274,16 +284,14 @@ const tabs = [
   .carousel-track {
     display: flex;
     width: max-content;
-    animation: smoothScroll 35s linear infinite; /* Altere para 45s ou 50s para ficar ainda mais lento */
+    animation: smoothScroll 35s linear infinite;
     will-change: transform;
   }
 
-  /* Pausa automática quando o usuário passa o mouse por cima de qualquer parte do carrossel */
   .carousel-container:hover .carousel-track {
     animation-play-state: paused;
   }
 
-  /* DIMENSÕES FIXAS DOS CARDS (Necessárias para não colapsar em flex-row) */
   .carousel-card-mobile {
     width: 170px;
     height: 280px;
@@ -296,31 +304,16 @@ const tabs = [
   }
 
   .carousel-card-desktop {
-  width: 320px;
-  height: 300px; /* Aumente para 260px ou 280px se quiser ainda mais alto no mobile */
-}
+    width: 320px;
+    height: 300px;
+  }
+  @media (min-width: 640px) {
+    .carousel-card-desktop {
+      width: 440px;
+      height: 320px;
+    }
+  }
 
-@media (min-width: 640px) {
-  .carousel-card-desktop {
-    width: 440px;
-    height: 320px; /* Altura para computador */
-  }
-}
-
-  /* SCROLLBARS */
-  .scrollbar-thin::-webkit-scrollbar {
-    width: 6px;
-  }
-  .scrollbar-thin::-webkit-scrollbar-track {
-    background: #000000;
-  }
-  .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: #3a0170;
-    border-radius: 9999px;
-  }
-  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background: #9a46f2;
-  }
   .scrollbar-none::-webkit-scrollbar {
     display: none;
   }

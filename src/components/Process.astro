@@ -20,59 +20,66 @@ const steps = [
   {
     number: "04",
     title: "Ajustes Finais & Publicação",
-    description: "Com a aprovação final, realizamos os últimos ajustes técnicos e publico o site. Seu novo canal digital estará pronto para atrair e converter clientes."
+    description: "Com a aprovação final, realizamos os últimos ajustes técnicos e publicamos o site. Seu novo canal digital estará pronto para atrair e converter clientes."
   }
 ];
 ---
 
-<section id="processo" class="py-20 relative bg-bg-dark overflow-hidden">
+<section id="processo" class="py-16 md:py-24 relative bg-bg-dark overflow-hidden font-body">
   <!-- Efeito de iluminação suave de fundo -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-purple-dark/20 blur-[150px] rounded-full -z-10 pointer-events-none"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-purple-dark/30 blur-[150px] rounded-full -z-10 pointer-events-none"></div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- CABEÇALHO DA SEÇÃO -->
-    <div class="text-center max-w-3xl mx-auto mb-16">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-accent/40 bg-purple-dark/30 text-purple-light text-xs font-heading font-semibold uppercase tracking-wider mb-4">
-        <svg class="w-3.5 h-3.5 text-accent" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-        </svg>
+    <div class="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
+      <div class="font-body inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/35 bg-primary/15 backdrop-blur-md text-purple-light text-[11px] font-medium uppercase tracking-[0.2em]">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
         Metodologia
       </div>
 
-      <h2 class="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl text-white mb-4">
-        Como é o processo?
+      <h2 class="font-heading font-semibold text-3xl sm:text-4xl lg:text-5xl text-white mt-5 mb-4 leading-[1.08] tracking-tight">
+        Como é o{" "}
+        <span class="italic text-transparent bg-clip-text bg-linear-to-r from-purple-light via-accent to-primary pr-1">
+          processo?
+        </span>
       </h2>
 
-      <p class="font-body text-gray-light text-base sm:text-lg">
-        Criamos soluções sob medida para cada negócio
+      <!-- Divisória Gradiente Minimalista -->
+      <div class="h-px w-36 bg-linear-to-r from-transparent via-accent/55 to-transparent mx-auto my-4"></div>
+
+      <p class="font-body text-purple-light/75 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+        Criamos soluções sob medida para cada negócio, com etapas claras do início à publicação.
       </p>
     </div>
 
     <!-- GRID DAS ETAPAS (TIMELINE) -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
       {steps.map((step) => (
-        <div class="bg-[#0a0a0a] border border-purple-dark/40 rounded-2xl p-6 sm:p-8 flex flex-col justify-between hover:border-accent/60 transition-all duration-300 hover:-translate-y-1 group relative">
+        <div class="bg-[#0b0412]/85 backdrop-blur-xl border border-primary/25 hover:border-accent/55 hover:bg-[#120720]/90 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-xl shadow-purple-dark/15 transition-all duration-300 hover:-translate-y-1 group relative">
           <div>
-            <!-- NÚMERO DA ETAPA -->
-            <div class="flex items-center justify-between mb-6">
-              <span class="font-heading font-extrabold text-4xl text-transparent bg-clip-text bg-linear-to-r from-accent to-primary">
+            <!-- NÚMERO DA ETAPA + ÍCONE -->
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-heading lining-nums font-semibold text-4xl sm:text-[42px] leading-none text-transparent bg-clip-text bg-linear-to-r from-purple-light via-accent to-primary pr-1">
                 {step.number}
               </span>
-              <div class="w-8 h-8 rounded-full bg-purple-dark/40 border border-purple-dark flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-colors">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-9 h-9 rounded-xl bg-white/4 border border-primary/25 flex items-center justify-center text-accent group-hover:bg-accent/15 group-hover:border-accent/50 group-hover:text-white transition-all duration-300">
+                <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                 </svg>
               </div>
             </div>
 
-            <!-- TÍTULO DA ETAPA -->
-            <h3 class="font-heading font-bold text-xl text-white mb-3 group-hover:text-purple-light transition-colors">
+            <!-- Divisória Sutil -->
+            <div class="h-px w-full bg-linear-to-r from-primary/35 via-primary/15 to-transparent mb-4"></div>
+
+            <!-- TÍTULO DA ETAPA (Cormorant Garamond legível igual aos cards de Serviços) -->
+            <h3 class="font-heading font-semibold text-[22px] sm:text-2xl text-white mb-3 leading-snug tracking-wide group-hover:text-purple-light transition-colors">
               {step.title}
             </h3>
 
             <!-- DESCRIÇÃO -->
-            <p class="font-body text-gray-light text-sm leading-relaxed">
+            <p class="font-body text-purple-light/70 text-xs sm:text-[13px] leading-relaxed">
               {step.description}
             </p>
           </div>
@@ -81,13 +88,13 @@ const steps = [
     </div>
 
     <!-- BOTÃO CTA AO FINAL DO PROCESSO -->
-    <div class="mt-16 text-center">
+    <div class="mt-14 text-center">
       <a
         href="/contato"
-        class="inline-flex items-center gap-3 bg-linear-to-r from-primary to-accent hover:opacity-90 text-white font-heading font-bold text-base px-8 py-4 rounded-xl shadow-lg shadow-primary/25 hover:shadow-accent/40 transition-all duration-300"
+        class="font-body inline-flex items-center gap-3 bg-linear-to-r from-primary to-accent hover:brightness-110 text-white font-semibold text-xs sm:text-[13px] uppercase tracking-[0.16em] px-8 py-4 rounded-2xl shadow-[0_8px_28px_rgba(131,67,195,0.35)] hover:shadow-[0_12px_32px_rgba(154,70,242,0.5)] hover:-translate-y-0.5 transition-all duration-300 group"
       >
-        Iniciar Meu Projeto Agora
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <span>Iniciar Meu Projeto Agora</span>
+        <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
         </svg>
       </a>
