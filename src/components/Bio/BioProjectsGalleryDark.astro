@@ -13,7 +13,7 @@ export interface Props {
 
 const {
   title = "Projetos em Destaque",
-  subtitle = "// Portfólio & Cases",
+  subtitle = "Portfólio & Cases",
   description,
   desktopImages = [],
   mobileImages = [],
@@ -28,7 +28,7 @@ let linha2: ImageMetadata[] = mobileImages;
 if (linha1.length === 0) {
   const desktopFiles = import.meta.glob<{ default: ImageMetadata }>('../../assets/projetos/desktop/*.{jpeg,jpg,png,webp}', { eager: true });
   linha1 = Object.values(desktopFiles).map((mod) => mod.default);
-  
+
   if (linha1.length === 0) {
     const allFiles = import.meta.glob<{ default: ImageMetadata }>('../../assets/projetos/*.{jpeg,jpg,png,webp}', { eager: true });
     const allImages = Object.values(allFiles).map((mod) => mod.default);
@@ -50,85 +50,104 @@ const desktopSizeClasses = {
   lg: 'w-72 sm:w-80 h-56'
 }[cardSize];
 
-// 2. Minisites (Mobile) - TAMANHOS AMPLIADOS para melhor visualização no celular
+// 2. Minisites (Mobile)
 const mobileSizeClasses = {
   sm: 'w-36 h-64 sm:w-40 sm:h-72',
   md: 'w-40 h-72 sm:w-44 sm:h-80',
   lg: 'w-44 h-80 sm:w-48 sm:h-88'
 }[cardSize];
+
+const hasMobile = linha2.length > 0;
+const hasDesktop = linha1.length > 0;
+const defaultTab = hasMobile ? 'mobile' : 'desktop';
 ---
 
-<section class="w-full max-w-md mx-auto px-4 py-3 text-gray-light overflow-hidden">
-  
-  <!-- Container Principal estilo Card Dark Glassmorphism -->
-  <div class="bg-[#120a1c]/60 backdrop-blur-md border border-purple-dark/40 rounded-2xl py-5 shadow-lg relative overflow-hidden">
+<section class="w-full max-w-md mx-auto px-1 my-5 text-gray-light font-body">
+  <!-- Container Principal Dark Glassmorphism -->
+  <div class="bg-[#0b0412]/85 backdrop-blur-xl border border-primary/30 rounded-3xl py-6 shadow-2xl shadow-purple-dark/25 relative overflow-hidden">
     
-    <!-- Glow de fundo discreto -->
-    <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-48 bg-accent/15 rounded-full blur-2xl pointer-events-none"></div>
+    <!-- Brilho ambiente discreto -->
+    <div class="absolute -top-14 left-1/2 -translate-x-1/2 w-56 h-48 bg-purple-dark/45 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -top-8 left-1/2 -translate-x-1/2 w-32 h-32 bg-accent/10 rounded-full blur-2xl pointer-events-none"></div>
 
     <!-- Cabeçalho da Galeria -->
-    <div class="text-center px-4 mb-4 relative z-10">
+    <div class="text-center px-5 mb-5 relative z-10">
       {subtitle && (
-        <span class="text-[10px] font-heading font-semibold uppercase tracking-[0.2em] text-accent block mb-1">
-          {subtitle}
-        </span>
+        <div class="inline-flex items-center justify-center gap-2 mb-1.5">
+          <span class="w-3.5 h-[1.5px] bg-accent rounded-full"></span>
+          <span class="font-body text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.22em] text-purple-light/85">
+            {subtitle}
+          </span>
+          <span class="w-3.5 h-[1.5px] bg-accent rounded-full"></span>
+        </div>
       )}
-      <h2 class="text-lg font-heading font-bold text-white tracking-wide">
+
+      <h2 class="font-heading text-2xl sm:text-[26px] font-semibold text-white tracking-wide leading-tight">
         {title}
       </h2>
-      <div class="w-10 h-0.5 bg-accent mx-auto mt-1.5 rounded-full shadow-xs shadow-accent/50"></div>
-      
+
+      <!-- Divisória Gradiente Minimalista -->
+      <div class="h-px w-32 bg-linear-to-r from-transparent via-accent/55 to-transparent mx-auto mt-2.5"></div>
+
       {description && (
-        <p class="text-xs text-gray-light/70 mt-2 font-light leading-relaxed max-w-xs mx-auto">
+        <p class="font-body text-xs text-purple-light/70 mt-3 font-normal leading-relaxed max-w-xs mx-auto">
           {description}
         </p>
       )}
 
-      <!-- BOTOES DE ABAS (TABS) -->
-      <div class="flex items-center justify-center gap-2 mt-4 p-1 bg-[#09050d]/80 rounded-full border border-purple-dark/50 max-w-70 mx-auto">
-        <button 
-          type="button"
-          data-tab="mobile"
-          class="tab-btn active-tab flex-1 py-1.5 px-3 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer text-white bg-accent/80 shadow-md shadow-accent/20"
-        >
-          Minisites
-        </button>
-        <button 
-          type="button"
-          data-tab="desktop"
-          class="tab-btn flex-1 py-1.5 px-3 rounded-full text-xs font-semibold transition-all duration-300 cursor-pointer text-gray-light/60 hover:text-white hover:bg-white/5"
-        >
-          Sites & Lojas
-        </button>
-      </div>
+      <!-- Botões de Abas (Tabs) -->
+      {hasMobile && hasDesktop && (
+        <div class="grid grid-cols-2 items-center gap-1 mt-4 p-1 bg-white/3 backdrop-blur-md rounded-full border border-primary/25 max-w-65 mx-auto">
+          <button
+            type="button"
+            data-tab="mobile"
+            data-active="true"
+            class="tab-btn py-1.5 px-3 rounded-full text-xs font-medium tracking-wide transition-all duration-300 cursor-pointer text-purple-light/65 hover:text-white data-[active=true]:bg-linear-to-r data-[active=true]:from-primary data-[active=true]:to-accent data-[active=true]:text-white data-[active=true]:shadow-[0_4px_16px_rgba(131,67,195,0.4)]"
+          >
+            Minisites
+          </button>
+          <button
+            type="button"
+            data-tab="desktop"
+            data-active="false"
+            class="tab-btn py-1.5 px-3 rounded-full text-xs font-medium tracking-wide transition-all duration-300 cursor-pointer text-purple-light/65 hover:text-white data-[active=true]:bg-linear-to-r data-[active=true]:from-primary data-[active=true]:to-accent data-[active=true]:text-white data-[active=true]:shadow-[0_4px_16px_rgba(131,67,195,0.4)]"
+          >
+            Sites & Lojas
+          </button>
+        </div>
+      )}
     </div>
 
-    <!-- Wrapper dos Carrosséis -->
-    <div class="marquee-wrapper flex flex-col w-full overflow-hidden group relative z-10 min-h-72 justify-center py-2">
+    <!-- Wrapper dos Carrosséis com Fade Suave nas Laterais -->
+    <div class="marquee-wrapper marquee-fade-x flex flex-col w-full overflow-hidden group relative z-10 min-h-72 justify-center py-2">
       
       <!-- ABA 1: Minisites (Mobile) -->
-      {linha2.length > 0 && (
-        <div id="tab-content-mobile" class="tab-content block">
-          <div 
+      {hasMobile && (
+        <div id="tab-content-mobile" class={`tab-content ${defaultTab === 'mobile' ? 'block' : 'hidden'}`}>
+          <div
             class="marquee-track track-2 flex gap-4 w-max items-center"
             style={`--speed: ${speedSeconds}s;`}
           >
             {linha2.concat(linha2).map((imgObj, index) => (
-              <div 
-                class={`photo-card ${mobileSizeClasses} shrink-0 overflow-hidden rounded-2xl shadow-xl border-2 border-purple-dark/80 bg-[#060309] cursor-pointer transition-all duration-300 hover:scale-105 hover:border-accent hover:shadow-accent/20 relative flex flex-col p-1.5`} 
+              <div
+                class={`photo-card group/card ${mobileSizeClasses} shrink-0 overflow-hidden rounded-[22px] shadow-[0_10px_28px_rgba(0,0,0,0.65)] border border-primary/35 bg-[#06020b] cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:border-accent/80 hover:shadow-[0_12px_30px_rgba(154,70,242,0.22)] relative flex flex-col p-1.5`}
                 data-fullsrc={imgObj.src}
                 data-type="mobile"
               >
-                <!-- Detalhe estilo Câmera/Ilha -->
-                <div class="absolute top-2 left-1/2 -translate-x-1/2 w-10 h-1.5 bg-purple-dark/80 rounded-full z-20 pointer-events-none"></div>
+                <!-- Detalhe estilo Câmera / Ilha Dinâmica -->
+                <div class="absolute top-2.5 left-1/2 -translate-x-1/2 w-9 h-1 bg-[#1b0c2e] border border-primary/25 rounded-full z-20 pointer-events-none"></div>
 
-                <div class="w-full h-full overflow-hidden rounded-xl relative bg-black flex items-start justify-center">
-                  <img 
-                    src={imgObj.src} 
-                    alt={`${title} Minisite ${index + 1}`} 
+                <div class="w-full h-full overflow-hidden rounded-2xl relative bg-bg-dark flex items-start justify-center">
+                  <img
+                    src={imgObj.src}
+                    alt={`${title} Minisite ${index + 1}`}
                     loading="lazy"
-                    class="w-full h-auto block object-cover object-top opacity-95 hover:opacity-100 transition-opacity"
+                    class="w-full h-auto block object-cover object-top opacity-90 group-hover/card:opacity-100 transition-opacity duration-300"
                   />
+                  <!-- Indicador sutil de ampliar no hover -->
+                  <div class="absolute bottom-2 right-2 w-6 h-6 rounded-full bg-[#0b0412]/80 border border-accent/40 text-purple-light flex items-center justify-center opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <i class="fa-solid fa-expand text-[9px]"></i>
+                  </div>
                 </div>
               </div>
             ))}
@@ -137,24 +156,37 @@ const mobileSizeClasses = {
       )}
 
       <!-- ABA 2: Sites & Lojas (Desktop) -->
-      {linha1.length > 0 && (
-        <div id="tab-content-desktop" class="tab-content hidden">
-          <div 
+      {hasDesktop && (
+        <div id="tab-content-desktop" class={`tab-content ${defaultTab === 'desktop' ? 'block' : 'hidden'}`}>
+          <div
             class="marquee-track track-2 flex gap-4 w-max items-center"
             style={`--speed: ${speedSeconds}s;`}
           >
             {linha1.concat(linha1).map((imgObj, index) => (
-              <div 
-                class={`photo-card ${desktopSizeClasses} shrink-0 overflow-hidden rounded-xl shadow-md border border-purple-dark/60 bg-[#09050d] cursor-pointer transition-all duration-300 hover:scale-105 hover:border-accent hover:shadow-accent/20 relative flex items-start justify-center p-1`} 
+              <div
+                class={`photo-card group/card ${desktopSizeClasses} shrink-0 overflow-hidden rounded-2xl shadow-[0_10px_28px_rgba(0,0,0,0.6)] border border-primary/35 bg-[#06020b] cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:border-accent/80 hover:shadow-[0_12px_30px_rgba(154,70,242,0.22)] relative flex flex-col p-1.5`}
                 data-fullsrc={imgObj.src}
                 data-type="desktop"
               >
-                <img 
-                  src={imgObj.src} 
-                  alt={`${title} Desktop ${index + 1}`} 
-                  loading="lazy"
-                  class="w-full h-full object-cover object-top rounded-lg opacity-90 hover:opacity-100 transition-opacity"
-                />
+                <!-- Barra minimalista estilo navegador -->
+                <div class="w-full h-3.5 px-2 flex items-center gap-1 bg-[#120720] rounded-t-xl border-b border-primary/20 shrink-0">
+                  <span class="w-1 h-1 rounded-full bg-accent/60"></span>
+                  <span class="w-1 h-1 rounded-full bg-primary/50"></span>
+                  <span class="w-1 h-1 rounded-full bg-primary/30"></span>
+                </div>
+
+                <div class="w-full flex-1 overflow-hidden rounded-b-xl relative bg-bg-dark">
+                  <img
+                    src={imgObj.src}
+                    alt={`${title} Desktop ${index + 1}`}
+                    loading="lazy"
+                    class="w-full h-full object-cover object-top opacity-90 group-hover/card:opacity-100 transition-opacity duration-300"
+                  />
+                  <!-- Indicador sutil de ampliar no hover -->
+                  <div class="absolute bottom-2 right-2 w-6 h-6 rounded-full bg-[#0b0412]/80 border border-accent/40 text-purple-light flex items-center justify-center opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <i class="fa-solid fa-expand text-[9px]"></i>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -168,56 +200,50 @@ const mobileSizeClasses = {
   <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-3 sm:p-4">
     
     <!-- Botão Fechar -->
-    <button 
-      type="button" 
-      class="lightbox-close absolute top-3 right-4 sm:top-5 sm:right-6 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full backdrop-blur-sm z-50 cursor-pointer transition-all flex items-center justify-center leading-none"
+    <button
+      type="button"
+      class="lightbox-close absolute top-3 right-4 sm:top-5 sm:right-6 text-purple-light/85 hover:text-white bg-[#120620]/85 hover:bg-primary/40 border border-primary/40 hover:border-accent p-2.5 rounded-full backdrop-blur-md z-50 cursor-pointer transition-all flex items-center justify-center leading-none shadow-lg"
       aria-label="Fechar modal"
     >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
 
     <!-- Instrução sutil de Scroll -->
-    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] uppercase tracking-wider text-white/60 bg-black/60 px-3 py-1 rounded-full border border-white/10 pointer-events-none z-50">
+    <div class="font-body absolute bottom-3 left-1/2 -translate-x-1/2 text-[10px] font-medium uppercase tracking-[0.18em] text-purple-light/80 bg-[#120620]/85 px-3.5 py-1.5 rounded-full border border-primary/35 backdrop-blur-md pointer-events-none z-50 whitespace-nowrap shadow-lg">
       ↕ Role para ver o projeto completo
     </div>
 
     <!-- Moldura de Dispositivo / Visualizador com Scroll Interno -->
-    <div 
-      id="lightbox-container" 
-      class="w-full max-w-sm h-[82vh] max-h-205 bg-[#0d0714] rounded-3xl border-2 border-purple-dark/80 shadow-2xl overflow-y-auto scrollbar-thin relative flex flex-col transition-all"
+    <div
+      id="lightbox-container"
+      class="w-full max-w-sm h-[82vh] max-h-205 bg-[#090410] rounded-3xl border border-primary/40 shadow-[0_20px_60px_rgba(58,1,112,0.5)] overflow-y-auto scroller-thin relative flex flex-col transition-all"
     >
-      <img 
-        class="w-full h-auto block select-none" 
-        id="lightbox-img" 
-        alt="Projeto completo" 
+      <img
+        class="w-full h-auto block select-none"
+        id="lightbox-img"
+        alt="Projeto completo"
       />
     </div>
   </div>
-
 </section>
 
 <!-- Script para Alternância de Abas e Modal Lightbox -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  const initPortfolioMarquee = () => {
     // 1. Lógica das Abas (Tabs)
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
 
-    tabBtns.forEach(btn => {
+    tabBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
         const targetTab = btn.getAttribute('data-tab');
 
-        tabBtns.forEach(b => {
-          b.classList.remove('text-white', 'bg-accent/80', 'shadow-md', 'shadow-accent/20');
-          b.classList.add('text-gray-light/60', 'hover:text-white');
-        });
+        tabBtns.forEach((b) => b.setAttribute('data-active', 'false'));
+        btn.setAttribute('data-active', 'true');
 
-        btn.classList.remove('text-gray-light/60', 'hover:text-white');
-        btn.classList.add('text-white', 'bg-accent/80', 'shadow-md', 'shadow-accent/20');
-
-        tabContents.forEach(content => {
+        tabContents.forEach((content) => {
           if (content.id === `tab-content-${targetTab}`) {
             content.classList.remove('hidden');
             content.classList.add('block');
@@ -232,7 +258,7 @@ const mobileSizeClasses = {
     // 2. Lógica do Modal com Scroll e Adaptação Desktop/Mobile
     const modal = document.getElementById('lightbox-modal');
     const modalContainer = document.getElementById('lightbox-container');
-    const modalImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const modalImg = document.getElementById('lightbox-img') as HTMLImageElement | null;
     const closeBtn = document.querySelector('.lightbox-close');
     const photoCards = document.querySelectorAll('.photo-card');
 
@@ -245,22 +271,20 @@ const mobileSizeClasses = {
 
         if (fullSrc) {
           modalImg.src = fullSrc;
-          
-          // Se for desktop, expande a largura da moldura; se for mobile, foca no formato smartphone
+
           if (type === 'desktop') {
             modalContainer.classList.remove('max-w-sm', 'rounded-3xl');
-            modalContainer.classList.add('max-w-2xl', 'rounded-xl');
+            modalContainer.classList.add('max-w-2xl', 'rounded-2xl');
           } else {
-            modalContainer.classList.remove('max-w-2xl', 'rounded-xl');
+            modalContainer.classList.remove('max-w-2xl', 'rounded-2xl');
             modalContainer.classList.add('max-w-sm', 'rounded-3xl');
           }
 
-          // Reseta a rolagem sempre para o topo ao abrir
           modalContainer.scrollTop = 0;
-          
+
           modal.classList.remove('hidden');
           modal.classList.add('flex');
-          document.body.style.overflow = 'hidden'; // Evita rolagem da página ao fundo
+          document.body.style.overflow = 'hidden';
         }
       });
     });
@@ -273,7 +297,6 @@ const mobileSizeClasses = {
 
     closeBtn?.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => {
-      // Fecha ao clicar fora da moldura
       if (e.target === modal) {
         closeModal();
       }
@@ -284,10 +307,22 @@ const mobileSizeClasses = {
         closeModal();
       }
     });
-  });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPortfolioMarquee);
+  } else {
+    initPortfolioMarquee();
+  }
 </script>
 
 <style>
+  /* Fade suave nas laterais do carrossel */
+  .marquee-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  }
+
   /* Animações contínuas via CSS Puro */
   .track-1 {
     animation: scrollLeft var(--speed, 30s) linear infinite;
@@ -311,20 +346,5 @@ const mobileSizeClasses = {
   @keyframes scrollRight {
     0% { transform: translateX(-50%); }
     100% { transform: translateX(0); }
-  }
-
-  /* Estilização da barra de rolagem interna do Modal */
-  .scrollbar-thin::-webkit-scrollbar {
-    width: 5px;
-  }
-  .scrollbar-thin::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.4);
-  }
-  .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: rgba(168, 85, 247, 0.4);
-    border-radius: 9999px;
-  }
-  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background: rgba(168, 85, 247, 0.8);
   }
 </style>

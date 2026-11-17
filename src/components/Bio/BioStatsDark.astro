@@ -12,17 +12,32 @@ export interface Props {
 const { stats = [] } = Astro.props;
 ---
 
-<div class="px-6 my-5">
-  <div class="grid grid-cols-3 gap-2 py-3 border-y border-purple-dark/30 text-center">
-    {stats.map((stat, index) => (
-      <div class={index === 1 ? "border-x border-purple-dark/30" : ""}>
-        <p class={`font-heading font-bold text-lg ${stat.isHighlight ? 'text-accent' : 'text-white'}`}>
-          {stat.value}
-        </p>
-        <p class="text-[10px] uppercase tracking-wider text-purple-light/70">
-          {stat.label}
-        </p>
+{stats.length > 0 && (
+  <section class="max-w-md mx-auto px-1 my-4 font-body">
+    <div class="bg-[#0b0412]/75 backdrop-blur-xl border border-primary/25 rounded-2xl py-4 px-2 shadow-lg shadow-purple-dark/20">
+      <div class={`grid ${stats.length === 2 ? 'grid-cols-2' : 'grid-cols-3'} items-center text-center`}>
+        {stats.map((stat, index) => (
+          <div class="relative px-2">
+            {/* Divisória vertical em gradiente entre os itens */}
+            {index > 0 && (
+              <div class="absolute left-0 top-1/2 -translate-y-1/2 h-8 w-px bg-linear-to-b from-transparent via-primary/35 to-transparent"></div>
+            )}
+
+            <p
+              class={`font-heading lining-nums font-semibold text-2xl sm:text-[26px] leading-none tracking-wide ${
+                stat.isHighlight
+                  ? 'text-accent drop-shadow-[0_0_12px_rgba(154,70,242,0.4)]'
+                  : 'text-white'
+              }`}
+            >
+              {stat.value}
+            </p>
+            <p class="font-body text-[9px] sm:text-[10px] font-medium uppercase tracking-[0.18em] text-purple-light/70 mt-1.5 leading-tight">
+              {stat.label}
+            </p>
+          </div>
+        ))}
       </div>
-    ))}
-  </div>
-</div>
+    </div>
+  </section>
+)}

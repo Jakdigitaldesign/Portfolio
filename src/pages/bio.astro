@@ -65,7 +65,6 @@ const socialLinks = [
   { platform: 'website' as const, url: 'https://jakdigitaldesign.com' },
   { platform: 'whatsapp' as const, url: 'https://wa.me/5541984940848' },
   { platform: 'instagram' as const, url: 'https://www.instagram.com/jak.digitaldesign/' },
-  { platform: 'linkedin' as const, url: 'https://www.linkedin.com/in/jaqueline-souza95/' }
 ];
 ---
 
@@ -80,29 +79,34 @@ const socialLinks = [
       
       <div>
         <!-- Componente 1: Header + Manifesto + Redes -->
-        <BioHeaderDark
-          name="Jak Digital Design"
-          category="Desenvolvimento Web"
-          badgeText="Web Design"
-          avatarImg={avatarImg}
-          logoImg={simboloImg}
-          socialLinks={socialLinks}
-          manifestoText="Design estratégico e soluções digitais sob medida para elevar o posicionamento da sua marca no digital."
-        />
+       <BioHeaderDark
+        name="Jaqueline Souza Vidal"
+        category="Desenvolvimento Web"
+        badgeText="Web Design"
+        avatarImg={avatarImg}
+        logoImg={logo}
+        socialLinks={socialLinks}
+        manifestoText="Design estratégico e soluções digitais sob medida para elevar o posicionamento da sua marca no digital."
+        ctaButton={{
+          label: "Solicitar Orçamento",
+          url: "https://wa.me/seunumero",
+          iconClass: "fa-brands fa-whatsapp"
+        }}
+      />
 
         <!-- Componente 2: Métricas / Estatísticas -->
         <BioStatsDark stats={estatisticas} />
 
         <!-- Componente 3: Soluções / Links -->
         <BioLinksDark 
-          sectionTitle="// SERVIÇOS & SOLUÇÕES DIGITAIS"
+          sectionTitle="SERVIÇOS & SOLUÇÕES DIGITAIS"
           links={minhasSolucoes} 
         />
 
         <!-- Componente 4: Galeria Dupla (Sites & Minisites) -->
         <BioTabbedGallery 
           title="Projetos em Destaque"
-          subtitle="// Portfólio & Cases"
+          subtitle="Portfólio & Cases"
           
           cardSize="sm"
           speedSeconds={30}

@@ -30,70 +30,83 @@ const {
 } = Astro.props;
 ---
 
-<footer class="w-full max-w-md mx-auto px-4 pt-4 pb-8 text-gray-light/70 text-xs font-light">
-  <div class="bg-[#120a1c]/60 backdrop-blur-md border border-purple-dark/40 rounded-2xl p-5 shadow-lg flex flex-col items-center text-center relative overflow-hidden">
+<footer class="w-full max-w-md mx-auto px-1 pt-2 pb-8 text-purple-light/70 font-body">
+  <div class="bg-[#0b0412]/85 backdrop-blur-xl border border-primary/30 rounded-3xl p-6 shadow-2xl shadow-purple-dark/25 flex flex-col items-center text-center relative overflow-hidden">
     
+    <!-- Brilho ambiente discreto no topo -->
+    <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-28 bg-purple-dark/45 rounded-full blur-3xl pointer-events-none"></div>
+
     <!-- Botão Voltar ao Topo -->
     {showBackToTop && (
-      <button 
+      <button
+        type="button"
         onclick="window.scrollTo({ top: 0, behavior: 'smooth' });"
         aria-label="Voltar ao topo"
-        class="mb-4 w-8 h-8 rounded-full bg-purple-dark/50 border border-purple-dark/80 flex items-center justify-center text-accent hover:bg-accent hover:text-white hover:border-accent transition-all cursor-pointer group shadow-sm"
+        class="relative z-10 mb-5 w-9 h-9 rounded-full bg-white/4 hover:bg-linear-to-r hover:from-primary hover:to-accent border border-primary/30 hover:border-accent flex items-center justify-center text-accent hover:text-white transition-all duration-300 cursor-pointer group shadow-[0_4px_16px_rgba(58,1,112,0.3)] hover:shadow-[0_6px_20px_rgba(154,70,242,0.45)] hover:-translate-y-0.5 active:translate-y-0"
       >
         <i class="fa-solid fa-arrow-up text-xs group-hover:-translate-y-0.5 transition-transform"></i>
       </button>
     )}
 
-    <!-- Logo no Footer -->
-    {logoImg && (
-      <div class="mb-4 max-w-30 max-h-12 flex items-center justify-center">
+    <!-- Logo no Footer (ou Nome em Cormorant Garamond caso não passe imagem) -->
+    {logoImg ? (
+      <div class="relative z-10 mb-4 flex items-center justify-center">
         {typeof logoImg === 'string' ? (
-          <img 
-            src={logoImg} 
-            alt={logoAlt} 
-            class="h-auto w-full object-contain filter drop-shadow-md"
+          <img
+            src={logoImg}
+            alt={logoAlt}
+            class="max-h-11 w-auto max-w-36 object-contain opacity-90 hover:opacity-100 transition-opacity drop-shadow-[0_0_16px_rgba(154,70,242,0.3)]"
           />
         ) : (
-          <Image 
-            src={logoImg} 
-            alt={logoAlt} 
-            width={240} 
-            format="webp" 
-            class="h-auto w-full object-contain filter drop-shadow-md" 
+          <Image
+            src={logoImg}
+            alt={logoAlt}
+            width={240}
+            format="webp"
+            class="max-h-11 w-auto max-w-36 object-contain opacity-90 hover:opacity-100 transition-opacity drop-shadow-[0_0_16px_rgba(154,70,242,0.3)]"
           />
         )}
       </div>
+    ) : brandName && (
+      <p class="relative z-10 font-heading text-xl font-semibold tracking-wide text-white mb-3">
+        {brandName}
+      </p>
     )}
 
-    <!-- Links Legais / Auxiliares (Ex: Termos, Privacidade) -->
+    <!-- Links Legais / Auxiliares -->
     {legalLinks.length > 0 && (
-      <nav class="flex items-center gap-3 mb-3 flex-wrap justify-center text-[11px] text-gray-light/70">
+      <nav class="relative z-10 flex items-center gap-3 mb-4 flex-wrap justify-center text-[11px] font-medium tracking-wide text-purple-light/65">
         {legalLinks.map((link, index) => (
           <>
-            <a href={link.url} class="hover:text-accent transition-colors hover:underline">
+            <a href={link.url} class="hover:text-accent transition-colors underline-offset-4 hover:underline">
               {link.label}
             </a>
-            {index < legalLinks.length - 1 && <span class="text-accent/50">•</span>}
+            {index < legalLinks.length - 1 && (
+              <span class="w-1 h-1 rounded-full bg-accent/50"></span>
+            )}
           </>
         ))}
       </nav>
     )}
 
+    <!-- Divisória Gradiente Minimalista -->
+    <div class="relative z-10 h-px w-32 bg-linear-to-r from-transparent via-accent/40 to-transparent mb-4"></div>
+
     <!-- Direitos Autorais -->
-    <p class="text-[11px] text-gray-light/80 font-medium">
-      © {year} {brandName && <span>{brandName}. </span>}Todos os direitos reservados.
+    <p class="relative z-10 text-[11px] text-purple-light/75 font-normal tracking-wide">
+      © {year} {brandName && <span class="font-medium text-white/90">{brandName}. </span>}Todos os direitos reservados.
     </p>
 
     <!-- Crédito do Desenvolvedor -->
     {developerName && (
-      <p class="text-[10px] text-purple-light/50 mt-2">
+      <p class="relative z-10 text-[10px] uppercase tracking-[0.15em] text-purple-light/45 mt-2">
         Desenvolvido por{" "}
         {developerUrl ? (
-          <a 
-            href={developerUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="font-medium text-accent hover:text-purple-light transition-colors underline decoration-accent/40"
+          <a
+            href={developerUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-medium text-purple-light/80 hover:text-accent transition-colors underline decoration-accent/40 underline-offset-4"
           >
             {developerName}
           </a>
