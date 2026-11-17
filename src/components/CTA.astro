@@ -8,65 +8,77 @@ const guarantees = [
 ];
 ---
 
-<section class="py-16 md:py-24 relative overflow-hidden">
+<section class="py-16 md:py-24 relative overflow-hidden font-body">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- CARD PRINCIPAL COM GLOW EXPANDIDO -->
-    <div class="relative rounded-3xl bg-linear-to-b from-purple-dark/90 via-bg-dark to-purple-dark/60 border border-accent/50 p-8 sm:p-14 lg:p-20 text-center overflow-hidden shadow-2xl shadow-accent/10">
+    <div class="relative rounded-3xl bg-linear-to-b from-[#170729]/95 via-[#0b0412]/95 to-[#120620]/90 backdrop-blur-xl border border-accent/45 p-8 sm:p-14 lg:p-20 text-center overflow-hidden shadow-[0_20px_60px_rgba(58,1,112,0.35)]">
       
       <!-- Efeitos de Luz no Fundo -->
-      <div class="absolute -top-32 -left-32 w-96 h-96 bg-accent/25 blur-[120px] rounded-full pointer-events-none"></div>
-      <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-primary/30 blur-[120px] rounded-full pointer-events-none"></div>
+      <div class="absolute -top-32 -left-32 w-96 h-96 bg-accent/20 blur-[130px] rounded-full pointer-events-none"></div>
+      <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-primary/25 blur-[130px] rounded-full pointer-events-none"></div>
 
       <div class="relative z-10 max-w-3xl mx-auto">
         
-        <!-- TAG / BADGE SUPERIOR -->
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/30 text-accent font-heading font-semibold text-xs sm:text-sm mb-6">
-          <span class="w-2 h-2 rounded-full bg-accent animate-ping"></span>
+        <!-- TAG / BADGE SUPERIOR (em Plus Jakarta Sans) -->
+        <div class="font-body inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/15 border border-primary/35 backdrop-blur-md text-purple-light font-medium uppercase tracking-[0.2em] text-[10px] sm:text-[11px] mb-6">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
           Pronto para impulsionar seu negócio?
         </div>
 
-        <!-- TÍTULO -->
-        <h2 class="font-heading font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6 tracking-tight">
+        <!-- TÍTULO (Cormorant Garamond Editorial) -->
+        <h2 class="font-heading font-semibold text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.06] mb-4 tracking-tight">
           Design que encanta, <br class="hidden sm:block" />
-          <span class="text-transparent bg-clip-text bg-linear-to-r from-accent via-purple-light to-primary">
+          <span class="italic text-transparent bg-clip-text bg-linear-to-r from-purple-light via-accent to-primary pr-1">
             estratégia que converte
           </span>
         </h2>
 
+        <!-- Divisória Gradiente Minimalista -->
+        <div class="h-px w-36 bg-linear-to-r from-transparent via-accent/55 to-transparent mx-auto my-5"></div>
+
         <!-- DESCRIÇÃO -->
-        <p class="font-body text-gray-light text-base sm:text-xl mb-10 leading-relaxed max-w-2xl mx-auto">
+        <p class="font-body text-purple-light/75 text-base sm:text-lg mb-10 leading-relaxed max-w-2xl mx-auto font-normal">
           Cada projeto é desenvolvido sob medida com foco em estética moderna, alta velocidade de carregamento e foco total em gerar vendas para você.
         </p>
 
-        <!-- BOTÃO DE AÇÃO AMPLIADO -->
+        <!-- BOTÃO DE AÇÃO (em Plus Jakarta Sans) -->
         <div class="mb-4">
           <a
             href="https://wa.me/5541984940848?text=Olá!%20Gostaria%20de%20fazer%20um%20orçamento%20para%20meu%20projeto."
             target="_blank"
             rel="noopener noreferrer"
-            class="group inline-flex items-center justify-center gap-3 bg-linear-to-r from-primary via-accent to-primary bg-size-[200%_auto] hover:bg-right transition-all duration-500 text-white font-heading font-bold text-lg sm:text-xl px-10 py-5 rounded-2xl shadow-xl shadow-accent/30 hover:shadow-accent/50 hover:scale-[1.02] active:scale-[0.98]"
+            class="font-body group inline-flex items-center justify-center gap-3 bg-linear-to-r from-primary via-accent to-primary bg-size-[200%_auto] hover:bg-right transition-all duration-500 text-white font-semibold text-xs sm:text-sm uppercase tracking-[0.18em] px-9 py-4.5 rounded-2xl shadow-[0_10px_32px_rgba(131,67,195,0.4)] hover:shadow-[0_14px_38px_rgba(154,70,242,0.55)] hover:scale-[1.02] active:scale-[0.98]"
           >
             <!-- Ícone do WhatsApp -->
-            <svg class="w-7 h-7 fill-current group-hover:rotate-12 transition-transform duration-300" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 fill-current group-hover:scale-110 transition-transform duration-300 shrink-0" viewBox="0 0 24 24">
               <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.705 1.754zm6.097-4.437l.432.257c1.52.903 3.267 1.38 5.048 1.381 5.283 0 9.581-4.298 9.584-9.581.002-2.56-.992-4.966-2.802-6.777-1.81-1.81-4.215-2.806-6.776-2.808-5.285 0-9.582 4.299-9.584 9.582-.001 1.867.538 3.69 1.558 5.275l.282.438-1.031 3.766 3.85-1.009z"/>
             </svg>
-            Solicitar Orçamento 
+            <span>Solicitar Orçamento</span>
+            <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
           </a>
         </div>
 
         <!-- MICRO-TEXTO DE URGÊNCIA -->
-        <p class="font-body text-xs text-gray-light/70 mb-10">
-          ⚡ Resposta em até 2 horas • Sem compromisso
+        <p class="font-body inline-flex items-center justify-center gap-1.5 text-xs text-purple-light/65 mb-10 tracking-wide">
+          <svg class="w-3.5 h-3.5 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          <span>Resposta em até 2 horas • Sem compromisso</span>
         </p>
 
+        <!-- Divisória Gradiente antes das Garantias -->
+        <div class="h-px w-full max-w-xl mx-auto bg-linear-to-r from-transparent via-primary/35 to-transparent mb-8"></div>
+
         <!-- LISTA DE GARANTIAS -->
-        <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 pt-8 border-t border-purple-dark/60">
+        <div class="flex flex-wrap items-center justify-center gap-5 sm:gap-9">
           {guarantees.map((item) => (
-            <div class="flex items-center gap-2 text-purple-light font-body text-xs sm:text-sm font-medium">
-              <span class="p-1 rounded-full bg-accent/20 text-accent">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+            <div class="flex items-center gap-2 text-purple-light/85 font-body text-xs sm:text-sm font-medium">
+              <span class="w-4 h-4 rounded-full bg-accent/15 border border-accent/35 flex items-center justify-center text-accent shrink-0">
+                <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
                 </svg>
               </span>
               <span>{item}</span>
