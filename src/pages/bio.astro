@@ -11,7 +11,6 @@ import BioTabbedGallery from '../components/Bio/BioProjectsGalleryDark.astro';
 // Imagens Gerais
 import logo from '../assets/Logo.png';
 import avatarImg from '../assets/jak.png';
-import simboloImg from '../assets/simbolo.png';
 
 // Dados da Sua Bio
 const estatisticas = [
@@ -21,25 +20,39 @@ const estatisticas = [
 ];
 
 const minhasSolucoes = [
-  {
-    label: "Meu Site Principal",
-    subtitle: "Conheça meu portfólio completo e todos os serviços",
-    url: "https://jakdigitaldesign.com",
-    iconClass: "fa-solid fa-globe",
-    variant: "primary" as const,
-    highlight: true,
-  },
+
   {
     label: "Sites & Landing Pages",
     subtitle: "Páginas institucionais e de alta conversão sob medida",
+    description:
+      "Desenvolvimento de sites rápidos, responsivos e com design exclusivo para transmitir autoridade e transformar visitantes em clientes.",
     url: "https://wa.me/5541984940848?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20Site%20ou%20Landing%20Page.",
+    ctaLabel: "Pedir Orçamento",
     iconClass: "fa-solid fa-laptop-code",
     variant: "secondary" as const,
   },
   {
+    label: "Loja Digital em Revista",
+    subtitle: "Catálogo interativo com checkout e pedido pronto no WhatsApp",
+    description:
+      "Apresente seus produtos em um formato editorial envolvente, com navegação visual, carrinho com checkout simples e envio automático do pedido formatado direto no seu WhatsApp.",
+    url: "https://wa.me/5541984940848?text=Olá!%20Quero%20saber%20mais%20sobre%20a%20Loja%20Digital%20em%20formato%20de%20revista.",
+    ctaLabel: "Quero na Minha Loja",
+    secondaryUrl: "https://modelocatalogo.pages.dev/demo/moda/",
+    secondaryLabel: "Ver Demonstração",
+    iconClass: "fa-solid fa-book-open",
+    badgeText: "Lançamento",
+    variant: "accent" as const,
+  },
+  {
     label: "Minisites para Bio",
     subtitle: "Página exclusiva de links e apresentação para redes sociais",
+    description:
+      "Muito além de um agregador comum: uma página com a identidade visual da sua marca, apresentação profissional e botões estratégicos.",
     url: "https://wa.me/5541984940848?text=Olá!%20Quero%20um%20Minisite%20para%20Bio%20personalizado.",
+    ctaLabel: "Quero o Meu",
+    secondaryUrl: "https://minisites-bio.pages.dev/",
+    secondaryLabel: "Ver Exemplos",
     iconClass: "fa-solid fa-mobile-screen-button",
     badgeText: "Popular",
     variant: "secondary" as const,
@@ -47,18 +60,27 @@ const minhasSolucoes = [
   {
     label: "Foxped — Cardápio Digital",
     subtitle: "Sistema de pedidos automatizado direto no WhatsApp",
-    url: "https://foxped.com.br",
+    description:
+      "Cardápio ou catálogo interativo sem taxas por pedido. Seu cliente monta o carrinho e envia o pedido organizado direto para o seu WhatsApp.",
+    url: "https://wa.me/5541984940848?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20Foxped.",
+    ctaLabel: "Falar no WhatsApp",
+    secondaryUrl: "https://foxped.com.br",
+    secondaryLabel: "Conhecer Sistema",
     iconClass: "fa-solid fa-utensils",
     variant: "accent" as const,
   },
   {
     label: "Hospedagem Hostinger (Com Desconto)",
     subtitle: "Garanta a melhor hospedagem para seu site com desconto exclusivo",
+    description:
+      "Contrate sua hospedagem com domínio grátis e certificado SSL usando meu link de indicação oficial para garantir desconto extra na assinatura.",
     url: "https://www.hostinger.com/br?REFERRALCODE=NZOJAQUELFVN",
+    ctaLabel: "Resgatar Desconto",
+    ctaIcon: "fa-solid fa-arrow-up-right-from-square",
     iconClass: "fa-solid fa-server",
     badgeText: "Cupom / Desconto",
     variant: "outline" as const,
-  }
+  },
 ];
 
 const socialLinks = [
@@ -86,7 +108,7 @@ const socialLinks = [
         avatarImg={avatarImg}
         logoImg={logo}
         socialLinks={socialLinks}
-        manifestoText="Design estratégico e soluções digitais sob medida para elevar o posicionamento da sua marca no digital."
+        manifestoText="Sites, lojas e catálogos digitais sob medida para encantar clientes e facilitar cada pedido no dia a dia."
         ctaButton={{
           label: "Solicitar Orçamento",
           url: "https://wa.me/5541984940848",

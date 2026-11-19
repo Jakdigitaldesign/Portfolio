@@ -45,9 +45,9 @@ if (linha2.length === 0 && mobileImages.length === 0) {
 
 // 1. Desktop / Landing Pages
 const desktopSizeClasses = {
-  sm: 'w-52 h-36 sm:w-60 sm:h-44',
-  md: 'w-60 h-44 sm:w-72 sm:h-52',
-  lg: 'w-72 sm:w-80 h-56'
+  sm: 'w-60 h-[195px] sm:w-64 sm:h-[215px]',
+  md: 'w-64 h-[220px] sm:w-72 sm:h-[245px]',
+  lg: 'w-72 h-[245px] sm:w-80 sm:h-[270px]'
 }[cardSize];
 
 // 2. Minisites (Mobile)
@@ -138,12 +138,13 @@ const defaultTab = hasMobile ? 'mobile' : 'desktop';
                 <div class="absolute top-2.5 left-1/2 -translate-x-1/2 w-9 h-1 bg-[#1b0c2e] border border-primary/25 rounded-full z-20 pointer-events-none"></div>
 
                 <div class="w-full h-full overflow-hidden rounded-2xl relative bg-bg-dark flex items-start justify-center">
-                  <img
-                    src={imgObj.src}
-                    alt={`${title} Minisite ${index + 1}`}
-                    loading="lazy"
-                    class="w-full h-auto block object-cover object-top opacity-90 group-hover/card:opacity-100 transition-opacity duration-300"
-                  />
+                 <img
+                  src={imgObj.src}
+                  alt={`${title} Minisite ${index + 1}`}
+                  loading={index < 4 ? "eager" : "lazy"}
+                  decoding="async"
+                  class="w-full h-auto block object-cover object-top opacity-90 group-hover/card:opacity-100 transition-opacity duration-300"
+                />
                   <!-- Indicador sutil de ampliar no hover -->
                   <div class="absolute bottom-2 right-2 w-6 h-6 rounded-full bg-[#0b0412]/80 border border-accent/40 text-purple-light flex items-center justify-center opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none">
                     <i class="fa-solid fa-expand text-[9px]"></i>
@@ -156,42 +157,56 @@ const defaultTab = hasMobile ? 'mobile' : 'desktop';
       )}
 
       <!-- ABA 2: Sites & Lojas (Desktop) -->
-      {hasDesktop && (
-        <div id="tab-content-desktop" class={`tab-content ${defaultTab === 'desktop' ? 'block' : 'hidden'}`}>
-          <div
-            class="marquee-track track-2 flex gap-4 w-max items-center"
-            style={`--speed: ${speedSeconds}s;`}
-          >
-            {linha1.concat(linha1).map((imgObj, index) => (
-              <div
-                class={`photo-card group/card ${desktopSizeClasses} shrink-0 overflow-hidden rounded-2xl shadow-[0_10px_28px_rgba(0,0,0,0.6)] border border-primary/35 bg-[#06020b] cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:border-accent/80 hover:shadow-[0_12px_30px_rgba(154,70,242,0.22)] relative flex flex-col p-1.5`}
-                data-fullsrc={imgObj.src}
-                data-type="desktop"
-              >
-                <!-- Barra minimalista estilo navegador -->
-                <div class="w-full h-3.5 px-2 flex items-center gap-1 bg-[#120720] rounded-t-xl border-b border-primary/20 shrink-0">
-                  <span class="w-1 h-1 rounded-full bg-accent/60"></span>
-                  <span class="w-1 h-1 rounded-full bg-primary/50"></span>
-                  <span class="w-1 h-1 rounded-full bg-primary/30"></span>
-                </div>
+{hasDesktop && (
+  <div id="tab-content-desktop" class={`tab-content ${defaultTab === 'desktop' ? 'block' : 'hidden'}`}>
+    <div
+      class="marquee-track track-2 flex gap-4 w-max items-center py-1"
+      style={`--speed: ${speedSeconds}s;`}
+    >
+      {linha1.concat(linha1).map((imgObj, index) => (
+        <div
+          class={`photo-card group/card ${desktopSizeClasses} shrink-0 overflow-hidden rounded-2xl shadow-[0_12px_30px_rgba(0,0,0,0.65)] border border-primary/35 bg-[#090312] cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/80 hover:shadow-[0_14px_34px_rgba(154,70,242,0.25)] relative flex flex-col p-1.5`}
+          data-fullsrc={imgObj.src}
+          data-type="desktop"
+        >
+       <!-- Barra superior estilo navegador desktop -->
+<div class="w-full h-4.5 px-2.5 flex items-center justify-between gap-2 bg-[#140724] rounded-t-xl border-b border-primary/25 shrink-0">
+  <div class="flex items-center gap-1 shrink-0">
+    <span class="w-1.5 h-1.5 rounded-full bg-accent/80"></span>
+    <span class="w-1.5 h-1.5 rounded-full bg-primary/60"></span>
+    <span class="w-1.5 h-1.5 rounded-full bg-primary/35"></span>
+  </div>
+  <div class="flex-1 max-w-[65%] h-2.5 rounded-full bg-white/5 border border-primary/20 px-2 flex items-center justify-center gap-1">
+    <i class="fa-solid fa-lock text-[6px] text-accent/70"></i>
+    <span class="text-[7px] text-purple-light/60 truncate leading-none">
+      projeto-{String(index + 1).padStart(2, '0')}.com.br
+    </span>
+  </div>
+  <span class="w-3 shrink-0"></span>
+</div>
 
-                <div class="w-full flex-1 overflow-hidden rounded-b-xl relative bg-bg-dark">
-                  <img
-                    src={imgObj.src}
-                    alt={`${title} Desktop ${index + 1}`}
-                    loading="lazy"
-                    class="w-full h-full object-cover object-top opacity-90 group-hover/card:opacity-100 transition-opacity duration-300"
-                  />
-                  <!-- Indicador sutil de ampliar no hover -->
-                  <div class="absolute bottom-2 right-2 w-6 h-6 rounded-full bg-[#0b0412]/80 border border-accent/40 text-purple-light flex items-center justify-center opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    <i class="fa-solid fa-expand text-[9px]"></i>
-                  </div>
-                </div>
-              </div>
-            ))}
+        <!-- Área da captura do site -->
+<div class="w-full flex-1 overflow-hidden rounded-b-xl relative bg-bg-dark">
+  <img
+  src={imgObj.src}
+  alt={`${title || 'Projeto'} Desktop ${index + 1}`}
+  loading={index < 4 ? "eager" : "lazy"}
+  decoding="async"
+  class="w-full h-full object-cover object-top opacity-95 group-hover/card:opacity-100 group-hover/card:scale-[1.02] transition-all duration-300"
+/>
+
+            <!-- Gradiente inferior sutil + badge de ampliar -->
+            <div class="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-linear-to-t from-[#06020b]/90 via-[#06020b]/35 to-transparent"></div>
+
+            <div class="absolute bottom-2 right-2 w-6 h-6 rounded-full bg-[#0b0412]/85 border border-accent/45 text-purple-light flex items-center justify-center opacity-80 group-hover/card:opacity-100 group-hover/card:border-accent transition-all duration-300 pointer-events-none">
+              <i class="fa-solid fa-expand text-[9px]"></i>
+            </div>
           </div>
         </div>
-      )}
+      ))}
+    </div>
+  </div>
+)}
 
     </div>
   </div>

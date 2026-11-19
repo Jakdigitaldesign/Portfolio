@@ -2,6 +2,11 @@
 export interface BioLink {
   label: string;
   url: string;
+  ctaLabel?: string;       // Texto do botão principal dentro da sanfona (ex: "Solicitar Orçamento")
+  ctaIcon?: string;        // Ícone do botão principal (ex: "fa-brands fa-whatsapp")
+  secondaryUrl?: string;   // Link opcional para um 2º botão (ex: "Ver Exemplos")
+  secondaryLabel?: string; // Texto do 2º botão
+  description?: string;    // Texto detalhado que aparece ao abrir a sanfona
   subtitle?: string;
   iconClass?: string;
   badgeText?: string;
@@ -20,13 +25,13 @@ const { sectionTitle, links = [] } = Astro.props;
 // Estilos alinhados ao visual Dark Glass / Luxo Editorial
 const variantClasses: Record<string, string> = {
   primary:
-    'bg-linear-to-r from-primary to-accent hover:brightness-110 text-white border-accent/40 shadow-[0_8px_24px_rgba(131,67,195,0.3)] hover:shadow-[0_10px_28px_rgba(154,70,242,0.45)]',
+    'bg-linear-to-r from-primary to-accent text-white border-accent/40 shadow-[0_8px_24px_rgba(131,67,195,0.3)]',
   secondary:
-    'bg-[#0b0412]/80 backdrop-blur-xl hover:bg-primary/15 text-gray-light hover:text-white border-primary/25 hover:border-accent/55 shadow-lg shadow-purple-dark/15',
+    'bg-[#0b0412]/80 backdrop-blur-xl text-gray-light border-primary/25 hover:border-accent/55 shadow-lg shadow-purple-dark/15',
   accent:
-    'bg-[#140724]/90 backdrop-blur-xl hover:bg-purple-dark/45 text-white border-accent/50 hover:border-accent shadow-[0_6px_24px_rgba(154,70,242,0.18)]',
+    'bg-[#140724]/90 backdrop-blur-xl text-white border-accent/50 hover:border-accent shadow-[0_6px_24px_rgba(154,70,242,0.18)]',
   outline:
-    'bg-white/2 backdrop-blur-md hover:bg-primary/12 text-purple-light hover:text-white border-primary/25 hover:border-accent/55',
+    'bg-white/2 backdrop-blur-md text-purple-light border-primary/25 hover:border-accent/55',
 };
 
 const iconBoxClasses: Record<string, string> = {
@@ -52,7 +57,7 @@ const iconBoxClasses: Record<string, string> = {
     </div>
   )}
 
-  <div class="space-y-3">
+  <div class="space-y-3" data-accordion-group>
     {links.map((link) => {
       const variant = link.variant || 'secondary';
       const currentVariantClass = variantClasses[variant] || variantClasses.secondary;
@@ -60,67 +65,197 @@ const iconBoxClasses: Record<string, string> = {
       const isExternal = link.isExternal ?? true;
       const iconClass = link.iconClass || 'fa-solid fa-link';
       const isSolidPrimary = variant === 'primary';
+      const hasAccordion = Boolean(link.description);
 
       return (
-        <a
-          href={link.url}
-          target={isExternal ? '_blank' : '_self'}
-          rel={isExternal ? 'noopener noreferrer' : undefined}
-          class={`relative group w-full flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 ease-out hover:-translate-y-0.5 active:translate-y-0 ${currentVariantClass} ${
+        <div
+          data-accordion-item
+          class={`relative rounded-2xl border transition-all duration-300 ease-out ${currentVariantClass} ${
             link.highlight
               ? 'border-accent/70 shadow-[0_0_24px_rgba(154,70,242,0.22)]'
               : ''
           }`}
         >
-          {/* Badge Superior Flutuante (mesmo estilo da badge Web Design) */}
+          {/* Badge Superior Flutuante */}
           {link.badgeText && (
-            <span class="font-body absolute -top-2.5 right-4 inline-flex items-center gap-1.5 bg-[#120620] text-purple-light text-[9px] font-medium uppercase tracking-[0.16em] px-2.5 py-0.5 rounded-full shadow-md border border-accent/50">
+            <span class="font-body absolute -top-2.5 right-4 z-10 inline-flex items-center gap-1.5 bg-[#120620] text-purple-light text-[9px] font-medium uppercase tracking-[0.16em] px-2.5 py-0.5 rounded-full shadow-md border border-accent/50">
               <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
               {link.badgeText}
             </span>
           )}
 
-          {/* Container do Ícone (Esquerda) */}
-          <div
-            class={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center shrink-0 mr-3.5 transition-all duration-300 ${currentIconBoxClass}`}
-          >
-            <i class={`${iconClass} text-base sm:text-lg leading-none`}></i>
-          </div>
-
-          {/* Conteúdo (Label e Subtítulo) */}
-          <div class="flex-1 text-left min-w-0 pr-2">
-            <span
-              class={`font-body block text-[13px] sm:text-sm font-semibold tracking-wide transition-colors truncate ${
-                isSolidPrimary
-                  ? 'text-white'
-                  : 'text-white group-hover:text-purple-light'
-              }`}
+          {/* Cabeçalho Clicável (Botão da Sanfona ou Link Direto) */}
+          {hasAccordion ? (
+            <button
+              type="button"
+              data-accordion-trigger
+              aria-expanded="false"
+              class="group w-full flex items-center justify-between p-3.5 sm:p-4 text-left cursor-pointer focus:outline-none"
             >
-              {link.label}
-            </span>
-            {link.subtitle && (
-              <span
-                class={`font-body block text-[11px] font-normal truncate mt-0.5 ${
-                  isSolidPrimary ? 'text-white/80' : 'text-purple-light/65'
+              {/* Ícone Esquerda */}
+              <div
+                class={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center shrink-0 mr-3.5 transition-all duration-300 ${currentIconBoxClass}`}
+              >
+                <i class={`${iconClass} text-base sm:text-lg leading-none`}></i>
+              </div>
+
+              {/* Título e Subtítulo */}
+              <div class="flex-1 text-left min-w-0 pr-2">
+                <span
+                  class={`font-body block text-[13px] sm:text-sm font-semibold tracking-wide transition-colors truncate ${
+                    isSolidPrimary
+                      ? 'text-white'
+                      : 'text-white group-hover:text-purple-light'
+                  }`}
+                >
+                  {link.label}
+                </span>
+                {link.subtitle && (
+                  <span
+                    class={`font-body block text-[11px] font-normal truncate mt-0.5 ${
+                      isSolidPrimary ? 'text-white/80' : 'text-purple-light/65'
+                    }`}
+                  >
+                    {link.subtitle}
+                  </span>
+                )}
+              </div>
+
+              {/* Seta Indicadora (Gira ao abrir) */}
+              <div
+                data-accordion-chevron
+                class={`text-xs transition-transform duration-300 shrink-0 ml-1 ${
+                  isSolidPrimary
+                    ? 'text-white/80 group-hover:text-white'
+                    : 'text-purple-light/55 group-hover:text-accent'
                 }`}
               >
-                {link.subtitle}
-              </span>
-            )}
-          </div>
+                <i class="fa-solid fa-chevron-down text-[11px]" />
+              </div>
+            </button>
+          ) : (
+            <a
+              href={link.url}
+              target={isExternal ? '_blank' : '_self'}
+              rel={isExternal ? 'noopener noreferrer' : undefined}
+              class="group w-full flex items-center justify-between p-3.5 sm:p-4 text-left"
+            >
+              <div
+                class={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center shrink-0 mr-3.5 transition-all duration-300 ${currentIconBoxClass}`}
+              >
+                <i class={`${iconClass} text-base sm:text-lg leading-none`}></i>
+              </div>
+              <div class="flex-1 text-left min-w-0 pr-2">
+                <span class="font-body block text-[13px] sm:text-sm font-semibold tracking-wide text-white group-hover:text-purple-light truncate">
+                  {link.label}
+                </span>
+                {link.subtitle && (
+                  <span class="font-body block text-[11px] font-normal truncate mt-0.5 text-purple-light/65">
+                    {link.subtitle}
+                  </span>
+                )}
+              </div>
+              <div class="text-xs text-purple-light/45 group-hover:text-accent group-hover:translate-x-1 transition-all duration-300 shrink-0 ml-1">
+                <i class="fa-solid fa-arrow-right text-[11px]" />
+              </div>
+            </a>
+          )}
 
-          {/* Ícone Indicador (Seta Direita) */}
-          <div
-            class={`text-xs group-hover:translate-x-1 transition-all duration-300 shrink-0 ml-1 ${
-              isSolidPrimary
-                ? 'text-white/80 group-hover:text-white'
-                : 'text-purple-light/45 group-hover:text-accent'
-            }`}
-          >
-            <i class="fa-solid fa-arrow-right text-[11px]" />
-          </div>
-        </a>
+          {/* Conteúdo Expansível da Sanfona */}
+          {hasAccordion && (
+            <div
+              data-accordion-content
+              class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out"
+            >
+              <div class="overflow-hidden">
+                <div class="px-4 pb-4 pt-1 border-t border-primary/20 space-y-3.5">
+                  <p class="text-xs leading-relaxed text-purple-light/85">
+                    {link.description}
+                  </p>
+
+                  {/* Botões de Ação */}
+                  <div class="flex flex-col sm:flex-col gap-2">
+                    <a
+                      href={link.url}
+                      target={isExternal ? '_blank' : '_self'}
+                      rel={isExternal ? 'noopener noreferrer' : undefined}
+                      class="flex-1 inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl bg-linear-to-r from-primary to-accent hover:brightness-110 text-white text-xs font-semibold tracking-wide shadow-[0_4px_16px_rgba(154,70,242,0.3)] transition-all"
+                    >
+                      <i class={link.ctaIcon || 'fa-brands fa-whatsapp text-sm'}></i>
+                      <span>{link.ctaLabel || 'Solicitar Orçamento'}</span>
+                    </a>
+
+                    {link.secondaryUrl && (
+                      <a
+                        href={link.secondaryUrl}
+                        target={link.secondaryUrl.startsWith('#') ? '_self' : '_blank'}
+                        rel={link.secondaryUrl.startsWith('#') ? undefined : 'noopener noreferrer'}
+                        class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-primary/20 border border-primary/35 hover:border-accent/60 text-purple-light hover:text-white text-xs font-medium transition-all"
+                      >
+                        <i class="fa-solid fa-eye text-[11px]"></i>
+                        <span>{link.secondaryLabel || 'Ver Exemplos'}</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       );
     })}
   </div>
 </section>
+
+<script>
+  function initBioAccordions() {
+    const groups = document.querySelectorAll('[data-accordion-group]');
+
+    groups.forEach((group) => {
+      const items = group.querySelectorAll('[data-accordion-item]');
+
+      items.forEach((item) => {
+        const trigger = item.querySelector('[data-accordion-trigger]');
+        const content = item.querySelector('[data-accordion-content]');
+        const chevron = item.querySelector('[data-accordion-chevron]');
+
+        if (!trigger || !content) return;
+
+        trigger.addEventListener('click', () => {
+          const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+
+          // Fecha outros itens abertos no mesmo grupo
+          items.forEach((otherItem) => {
+            if (otherItem !== item) {
+              const otherTrigger = otherItem.querySelector('[data-accordion-trigger]');
+              const otherContent = otherItem.querySelector('[data-accordion-content]');
+              const otherChevron = otherItem.querySelector('[data-accordion-chevron]');
+
+              otherTrigger?.setAttribute('aria-expanded', 'false');
+              otherContent?.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+              otherChevron?.classList.remove('rotate-180', 'text-accent');
+              otherItem.classList.remove('border-accent/65');
+            }
+          });
+
+          // Alterna o item atual
+          if (isOpen) {
+            trigger.setAttribute('aria-expanded', 'false');
+            content.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
+            chevron?.classList.remove('rotate-180', 'text-accent');
+            item.classList.remove('border-accent/65');
+          } else {
+            trigger.setAttribute('aria-expanded', 'true');
+            content.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
+            chevron?.classList.add('rotate-180', 'text-accent');
+            item.classList.add('border-accent/65');
+          }
+        });
+      });
+    });
+  }
+
+  // Suporte tanto para carregamento normal quanto View Transitions do Astro
+  initBioAccordions();
+  document.addEventListener('astro:after-swap', initBioAccordions);
+</script>
