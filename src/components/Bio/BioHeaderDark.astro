@@ -33,6 +33,7 @@ export interface Props {
   subtitle?: string;
   badgeText?: string;
   statusBadge?: string;
+  availabilityText?: string;
   location?: string;
   locationUrl?: string;
   manifestoText?: string;
@@ -40,6 +41,7 @@ export interface Props {
   avatarImg: ImageMetadata | string;
   logoImg?: ImageMetadata | string;
   coverImg?: ImageMetadata | string;
+  coverImages?: (ImageMetadata | string)[];
   ctaButton?: {
     label: string;
     url: string;
@@ -54,6 +56,7 @@ const {
   subtitle,
   badgeText,
   statusBadge,
+  availabilityText = 'Disponível para projetos',
   location,
   locationUrl,
   manifestoText,
@@ -61,6 +64,7 @@ const {
   avatarImg,
   logoImg,
   coverImg,
+  coverImages,
   ctaButton,
   socialLinks = []
 } = Astro.props;
@@ -71,7 +75,21 @@ const displayBio = manifestoText || bio || '';
 
 const avatarSrc = typeof avatarImg === 'string' ? avatarImg : avatarImg?.src;
 const logoSrc = typeof logoImg === 'string' ? logoImg : logoImg?.src;
-const coverSrc = typeof coverImg === 'string' ? coverImg : coverImg?.src;
+const singleCoverSrc = typeof coverImg === 'string' ? coverImg : coverImg?.src;
+
+// Mockups & Tecnologia (URLs testadas do Unsplash)
+const defaultTechCovers = [
+  'https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1400&q=85',
+  'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=85',
+  'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=85'
+];
+
+const resolvedCovers: string[] =
+  coverImages && coverImages.length > 0
+    ? coverImages.map((img) => (typeof img === 'string' ? img : img.src))
+    : singleCoverSrc
+      ? [singleCoverSrc]
+      : defaultTechCovers;
 
 const socialIcons: Record<string, string> = {
   website: 'fa-solid fa-globe',
@@ -112,48 +130,86 @@ const defaultLabels: Record<string, string> = {
 ---
 
 <header class="w-full relative overflow-hidden pb-6 font-body">
-  <!-- Banner de Capa com Logo Animado no Fundo (Sem linha de corte) -->
-  <div class="h-52 sm:h-60 w-full relative overflow-hidden flex items-center justify-center cover-fade-mask">
-    <!-- Brilho ambiente -->
-    <div class="absolute w-80 h-56 bg-purple-dark/55 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute w-48 h-48 bg-accent/15 rounded-full blur-2xl pointer-events-none"></div>
+  <!-- ==========================================
+       CAPA CINEMATOGRÁFICA COM MOCKUPS/TECH EM FADE
+       ========================================== -->
+  <div class="h-64 sm:h-76 w-full relative overflow-hidden flex flex-col items-center justify-between cover-fade-mask select-none bg-[#120421]">
+    
+    <!-- Camada 1: Slides de Mockups & Tecnologia -->
+    <div id="jak-hero-fader" class="absolute inset-0 z-0 pointer-events-none">
+      {resolvedCovers.map((src, idx) => (
+        <img
+          src={src}
+          alt="Mockups e desenvolvimento web"
+          loading={idx === 0 ? 'eager' : 'lazy'}
+          class={`jak-hero-slide absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000 ease-in-out ${
+            idx === 0 ? 'opacity-75 is-active' : 'opacity-0'
+          }`}
+        />
+      ))}
+    </div>
 
-    {coverSrc ? (
-      <img
-        src={coverSrc}
-        alt="Capa"
-        class="w-full h-full object-cover object-center brightness-90 animate-zoom-slow"
-      />
-    ) : logoSrc ? (
-      <div class="relative w-full h-full flex items-center justify-center overflow-hidden -translate-y-5 translate-x-6 sm:translate-x-8">
+    <!-- Camada 2: Tonalização Roxa Suave (sem apagar a imagem) -->
+    <div
+      class="absolute inset-0 z-1 bg-[#1b0533]/45 pointer-events-none"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Degradê concentrado na base para fundir com o fundo da página -->
+    <div
+      class="absolute inset-0 z-2 bg-linear-to-t from-bg-dark via-bg-dark/45 to-[#07020c]/30 pointer-events-none"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Camada 3: Brilho Ambiente Studio -->
+    <div class="absolute z-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-56 bg-primary/25 rounded-full blur-3xl pointer-events-none"></div>
+
+    <!-- Barra Superior Editorial -->
+    <div class="relative z-10 w-full max-w-md mx-auto px-4 pt-5 flex items-center justify-between gap-2 text-[9px] sm:text-[10px] uppercase tracking-[0.22em] text-purple-light/90">
+      {availabilityText && (
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#0b0412]/75 backdrop-blur-md border border-primary/40 text-purple-light shrink-0">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          {availabilityText}
+        </span>
+      )}
+    </div>
+
+    <!-- Marca d'água do Logo centralizada com respiro -->
+    {logoSrc && (
+      <div class="relative z-10 flex-1 w-full flex items-center justify-center pb-14 pt-2 pointer-events-none">
         <img
           src={logoSrc}
           alt="Símbolo da marca"
-          class="w-40 sm:w-48 h-auto object-contain opacity-30 brightness-110 drop-shadow-[0_0_28px_rgba(154,70,242,0.45)] animate-zoom-slow select-none pointer-events-none"
+          class="w-36 sm:w-44 h-auto object-contain opacity-65 brightness-125 drop-shadow-[0_4px_24px_rgba(11,4,18,0.95)] select-none"
         />
       </div>
-    ) : (
-      <div class="w-full h-full bg-linear-to-r from-purple-dark/40 via-primary/20 to-purple-dark/40"></div>
     )}
   </div>
 
-  <!-- Card Principal Flutuante -->
-  <div class="max-w-md mx-auto px-1 -mt-12 relative z-10">
-    <div class="bg-[#0b0412]/85 backdrop-blur-xl border border-primary/30 rounded-3xl p-5 sm:p-6 shadow-2xl shadow-purple-dark/30 flex flex-col gap-4">
+  <!-- ==========================================
+       CARD PRINCIPAL FLUTUANTE
+       ========================================== -->
+  <div class="max-w-md mx-auto px-1 -mt-16 sm:-mt-20 relative z-10">
+    <div class="relative bg-[#0b0412]/85 backdrop-blur-2xl border border-primary/30 rounded-3xl p-5 sm:p-6 shadow-[0_24px_60px_rgba(15,4,28,0.85)] flex flex-col gap-4">
       
+      <!-- Brilho especular fino no topo do card -->
+      <div
+        class="absolute inset-x-8 top-0 h-px bg-linear-to-r from-transparent via-accent/65 to-transparent pointer-events-none"
+        aria-hidden="true"
+      ></div>
+
       <!-- Topo: Retrato Vertical Sobreposto à Capa + Dados -->
       <div class="flex items-end gap-4 sm:gap-5">
-        <!-- Foto Retrato Vertical (3:4) com Borda Gradiente e Sobreposição -->
+        <!-- Foto Retrato Vertical (3:4) com Borda Gradiente -->
         <div class="relative shrink-0 -mt-16 sm:-mt-20">
-          <div class="w-25 sm:w-28 aspect-3/4 rounded-2xl p-[1.5px] bg-linear-to-b from-accent/80 via-primary/40 to-primary/10 shadow-[0_12px_32px_rgba(58,1,112,0.6)]">
-            <div class="w-full h-full rounded-[14px] overflow-hidden bg-bg-dark relative">
+          <div class="w-25 sm:w-28 aspect-3/4 rounded-2xl p-[1.5px] bg-linear-to-b from-accent/85 via-primary/45 to-primary/15 shadow-[0_14px_34px_rgba(58,1,112,0.65)]">
+            <div class="w-full h-full rounded-[14px] overflow-hidden bg-bg-dark relative ring-1 ring-white/5">
               <img
                 src={avatarSrc}
                 alt={name}
                 class="w-full h-full object-cover object-[center_12%]"
               />
-              <!-- Vinheta sutil na base da foto para fundir com o card -->
-              <div class="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-[#0b0412]/75 via-[#0b0412]/20 to-transparent pointer-events-none"></div>
+              <div class="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-[#0b0412]/80 via-[#0b0412]/25 to-transparent pointer-events-none"></div>
             </div>
           </div>
         </div>
@@ -167,12 +223,10 @@ const defaultLabels: Record<string, string> = {
             </span>
           )}
 
-          <!-- Nome em Cormorant Garamond (Luxo Editorial) -->
-          <h1 class="font-heading text-[22px] sm:text-[26px] font-semibold tracking-wide text-white leading-[1.12]">
+          <h1 class="font-heading text-[23px] sm:text-[27px] font-semibold tracking-wide text-white leading-[1.08] drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]">
             {name}
           </h1>
 
-          <!-- Categoria com traço accent -->
           {displaySubtitle && (
             <div class="flex items-center gap-2 mt-2">
               <span class="w-4 h-[1.5px] bg-accent rounded-full shrink-0"></span>
@@ -220,7 +274,7 @@ const defaultLabels: Record<string, string> = {
         </div>
       )}
 
-      <!-- Divisória Gradiente Minimalista (Opção 3) -->
+      <!-- Divisória Gradiente Minimalista -->
       <div class="my-0.5">
         <div class="h-px w-full bg-linear-to-r from-transparent via-accent/45 to-transparent"></div>
       </div>
@@ -235,17 +289,17 @@ const defaultLabels: Record<string, string> = {
         </div>
       )}
 
-      <!-- Botão CTA Principal (Opcional) -->
+      <!-- Botão CTA Principal -->
       {ctaButton && (
         <a
           href={ctaButton.url}
           target="_blank"
           rel="noopener noreferrer"
-          class="font-body w-full bg-linear-to-r from-primary to-accent hover:brightness-110 text-white font-semibold tracking-[0.18em] uppercase text-[11px] py-3.5 px-4 rounded-2xl shadow-[0_8px_24px_rgba(131,67,195,0.35)] hover:shadow-[0_10px_28px_rgba(154,70,242,0.5)] flex items-center justify-center gap-2 transition-all hover:scale-[1.01] active:scale-[0.99] group mt-0.5"
+          class="font-body w-full bg-linear-to-r from-primary to-accent hover:brightness-110 text-white font-semibold tracking-[0.18em] uppercase text-[11px] py-3.5 px-4 rounded-2xl shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_8px_24px_rgba(131,67,195,0.38)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_12px_30px_rgba(154,70,242,0.52)] flex items-center justify-center gap-2 transition-all hover:scale-[1.01] active:scale-[0.99] group mt-0.5"
         >
           {ctaButton.iconClass && <i class={`${ctaButton.iconClass} text-sm`}></i>}
           <span>{ctaButton.label}</span>
-          <i class="fa-solid fa-arrow-right text-[11px] opacity-80 group-hover:translate-x-0.5 transition-transform"></i>
+          <i class="fa-solid fa-arrow-right text-[11px] opacity-80 group-hover:translate-x-1 transition-transform"></i>
         </a>
       )}
 
@@ -255,24 +309,39 @@ const defaultLabels: Record<string, string> = {
 
 <style>
   .cover-fade-mask {
-    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 68%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 68%, transparent 100%);
   }
 
-  @keyframes slowZoom {
+  @keyframes slowPanZoom {
     0% {
       transform: scale(1);
     }
-    50% {
-      transform: scale(1.2);
-    }
     100% {
-      transform: scale(1);
+      transform: scale(1.07);
     }
   }
 
-  .animate-zoom-slow {
-    animation: slowZoom 14s ease-in-out infinite;
-    transform-origin: center center;
+  .jak-hero-slide.is-active {
+    animation: slowPanZoom 6.5s ease-out forwards;
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll<HTMLImageElement>('.jak-hero-slide');
+    let current = 0;
+
+    if (slides.length > 1) {
+      setInterval(() => {
+        slides[current].classList.remove('opacity-75', 'is-active');
+        slides[current].classList.add('opacity-0');
+
+        current = (current + 1) % slides.length;
+
+        slides[current].classList.remove('opacity-0');
+        slides[current].classList.add('opacity-75', 'is-active');
+      }, 5000);
+    }
+  });
+</script>
