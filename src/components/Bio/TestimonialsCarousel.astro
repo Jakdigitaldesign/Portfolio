@@ -1,0 +1,314 @@
+---
+import type { ImageMetadata } from 'astro';
+
+export interface TestimonialItem {
+  id?: string;
+  quote: string;
+  authorName: string;
+  authorRole?: string;
+  projectType?: string;
+  rating?: number; // 1 a 5 (padrão: 5)
+  avatarImg?: ImageMetadata | string;
+}
+
+export interface Props {
+  sectionTag?: string;
+  title?: string;
+  subtitle?: string;
+  testimonials: TestimonialItem[];
+  autoplay?: boolean;
+  autoplayIntervalMs?: number;
+}
+
+const {
+  sectionTag = 'Depoimentos',
+  title = 'Quem já confiou no projeto',
+  subtitle,
+  testimonials = [],
+  autoplay = false,
+  autoplayIntervalMs = 6000
+} = Astro.props;
+
+const resolveAvatar = (img?: ImageMetadata | string) => {
+  if (!img) return null;
+  return typeof img === 'string' ? img : img.src;
+};
+
+const getInitials = (name: string) => {
+  return name
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? '')
+    .join('');
+};
+
+const uid = `jak-t-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+{testimonials.length > 0 && (
+  <section
+    id={uid}
+    aria-label={title}
+    data-autoplay={autoplay ? 'true' : 'false'}
+    data-interval={autoplayIntervalMs}
+    class="w-full max-w-md mx-auto px-1 py-4 font-body relative select-none"
+  >
+    <!-- Brilho ambiente sutil atrás do card -->
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-44 bg-primary/20 rounded-full blur-3xl pointer-events-none -z-10"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Cabeçalho editorial discreto (mesmo vocabulário do Hero) -->
+    <div class="px-1 mb-3 flex items-end justify-between gap-3">
+      <div>
+        {sectionTag && (
+          <span class="inline-flex items-center gap-1.5 text-[10px] font-medium tracking-[0.18em] uppercase bg-primary/15 text-purple-light px-2.5 py-0.5 rounded-full border border-primary/30 mb-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+            {sectionTag}
+          </span>
+        )}
+        <h2 class="font-heading text-xl sm:text-2xl font-semibold tracking-wide text-white leading-tight">
+          {title}
+        </h2>
+        {subtitle && (
+          <p class="text-xs text-purple-light/75 mt-0.5 leading-snug">
+            {subtitle}
+          </p>
+        )}
+      </div>
+
+      <!-- Controles Anterior / Próximo -->
+      {testimonials.length > 1 && (
+        <div class="flex items-center gap-1.5 shrink-0">
+          <button
+            type="button"
+            data-prev
+            aria-label="Depoimento anterior"
+            class="w-8 h-8 rounded-xl bg-white/3 hover:bg-primary/20 border border-primary/25 hover:border-accent/60 text-purple-light hover:text-white flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95"
+          >
+            <i class="fa-solid fa-chevron-left text-[11px]"></i>
+          </button>
+          <button
+            type="button"
+            data-next
+            aria-label="Próximo depoimento"
+            class="w-8 h-8 rounded-xl bg-white/3 hover:bg-primary/20 border border-primary/25 hover:border-accent/60 text-purple-light hover:text-white flex items-center justify-center transition-all duration-200 cursor-pointer active:scale-95"
+          >
+            <i class="fa-solid fa-chevron-right text-[11px]"></i>
+          </button>
+        </div>
+      )}
+    </div>
+
+    <!-- Card Principal (mesmo estilo glass + borda gradiente + linha especular do Hero) -->
+    <div class="relative bg-[#0b0412]/85 backdrop-blur-2xl border border-primary/30 rounded-3xl p-5 sm:p-6 shadow-[0_24px_60px_rgba(15,4,28,0.85)] overflow-hidden">
+      <!-- Brilho especular fino no topo -->
+      <div
+        class="absolute inset-x-8 top-0 h-px bg-linear-to-r from-transparent via-accent/65 to-transparent pointer-events-none"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Trilho horizontal de slides -->
+      <div
+        data-track
+        class="flex transition-transform duration-500 ease-out touch-pan-y"
+        style="transform: translate3d(0%, 0, 0);"
+      >
+        {testimonials.map((item) => {
+          const avatarSrc = resolveAvatar(item.avatarImg);
+          const stars = Math.min(5, Math.max(1, item.rating ?? 5));
+
+          return (
+            <article
+              data-slide
+              class="w-full shrink-0 flex flex-col gap-4 pr-0.5"
+            >
+              <!-- Linha superior do slide: estrelas + tag do projeto/nicho -->
+              <div class="flex items-center justify-between gap-2 flex-wrap">
+                <div
+                  class="flex items-center gap-1 text-amber-300/95 text-xs"
+                  aria-label={`Avaliação ${stars} de 5 estrelas`}
+                >
+                  {Array.from({ length: stars }).map(() => (
+                    <i class="fa-solid fa-star"></i>
+                  ))}
+                </div>
+
+                {item.projectType && (
+                  <span class="text-[10px] font-medium uppercase tracking-[0.16em] text-purple-light/85 bg-primary/15 border border-primary/25 px-2.5 py-0.5 rounded-full">
+                    {item.projectType}
+                  </span>
+                )}
+              </div>
+
+              <!-- Citação no estilo manifesto/bio do Hero -->
+              <div class="relative pl-4 pr-3 py-3.5 border border-primary/15 border-l-2 border-l-accent bg-white/2 rounded-xl flex items-start gap-2.5">
+                <i class="fa-solid fa-quote-left text-accent/65 text-xs mt-1 shrink-0"></i>
+                <p class="font-heading italic text-base sm:text-[17px] text-purple-light/95 leading-snug font-normal">
+                  "{item.quote}"
+                </p>
+              </div>
+
+              <!-- Divisória gradiente minimalista -->
+              <div class="h-px w-full bg-linear-to-r from-transparent via-accent/40 to-transparent"></div>
+
+              <!-- Autor (foto ou iniciais com borda gradiente) -->
+              <div class="flex items-center gap-3 pt-0.5">
+                <div class="w-10 h-10 rounded-xl p-[1.5px] bg-linear-to-b from-accent/80 via-primary/45 to-primary/15 shrink-0">
+                  <div class="w-full h-full rounded-[10px] overflow-hidden bg-bg-dark flex items-center justify-center">
+                    {avatarSrc ? (
+                      <img
+                        src={avatarSrc}
+                        alt={item.authorName}
+                        loading="lazy"
+                        class="w-full h-full object-cover object-top"
+                      />
+                    ) : (
+                      <span class="text-xs font-semibold tracking-wider text-purple-light">
+                        {getInitials(item.authorName)}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div class="min-w-0 flex-1">
+                  <p class="text-sm font-semibold text-white truncate leading-tight">
+                    {item.authorName}
+                  </p>
+                  {item.authorRole && (
+                    <p class="text-[11px] text-purple-light/70 truncate mt-0.5">
+                      {item.authorRole}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <!-- Indicadores (dots) na base do card -->
+      {testimonials.length > 1 && (
+        <div class="mt-5 flex items-center justify-center gap-2" role="tablist" aria-label="Selecionar depoimento">
+          {testimonials.map((item, idx) => (
+            <button
+              type="button"
+              data-dot={idx}
+              role="tab"
+              aria-selected={idx === 0 ? 'true' : 'false'}
+              aria-label={`Ir para depoimento de ${item.authorName}`}
+              class:list={[
+                'h-1.5 rounded-full transition-all duration-300 cursor-pointer',
+                idx === 0 ? 'w-6 bg-accent' : 'w-1.5 bg-primary/35 hover:bg-primary/65'
+              ]}
+            ></button>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+)}
+
+<script>
+  function initTestimonialCarousels() {
+    document.querySelectorAll<HTMLElement>('section[id^="jak-t-"]').forEach((section) => {
+      if (section.dataset.initialized === 'true') return;
+      section.dataset.initialized = 'true';
+
+      const track = section.querySelector<HTMLElement>('[data-track]');
+      const slides = section.querySelectorAll<HTMLElement>('[data-slide]');
+      const prevBtn = section.querySelector<HTMLButtonElement>('[data-prev]');
+      const nextBtn = section.querySelector<HTMLButtonElement>('[data-next]');
+      const dots = section.querySelectorAll<HTMLButtonElement>('[data-dot]');
+
+      const total = slides.length;
+      if (!track || total <= 1) return;
+
+      let current = 0;
+      let timer: number | undefined;
+      const autoplay = section.dataset.autoplay === 'true';
+      const intervalMs = Number(section.dataset.interval) || 6000;
+
+      const updateSlide = (index: number) => {
+        current = ((index % total) + total) % total;
+        track.style.transform = `translate3d(-${current * 100}%, 0, 0)`;
+
+        dots.forEach((dot, idx) => {
+          const active = idx === current;
+          dot.setAttribute('aria-selected', active ? 'true' : 'false');
+          dot.classList.toggle('w-6', active);
+          dot.classList.toggle('bg-accent', active);
+          dot.classList.toggle('w-1.5', !active);
+          dot.classList.toggle('bg-primary/35', !active);
+        });
+      };
+
+      const startAutoplay = () => {
+        stopAutoplay();
+        if (autoplay) {
+          timer = window.setInterval(() => updateSlide(current + 1), intervalMs);
+        }
+      };
+
+      const stopAutoplay = () => {
+        if (timer) window.clearInterval(timer);
+      };
+
+      prevBtn?.addEventListener('click', () => {
+        updateSlide(current - 1);
+        startAutoplay();
+      });
+
+      nextBtn?.addEventListener('click', () => {
+        updateSlide(current + 1);
+        startAutoplay();
+      });
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const idx = Number(dot.dataset.dot);
+          if (!Number.isNaN(idx)) {
+            updateSlide(idx);
+            startAutoplay();
+          }
+        });
+      });
+
+      // Suporte a deslizar no celular (swipe)
+      let startX = 0;
+      let deltaX = 0;
+
+      track.addEventListener(
+        'touchstart',
+        (e) => {
+          startX = e.touches[0].clientX;
+          deltaX = 0;
+          stopAutoplay();
+        },
+        { passive: true }
+      );
+
+      track.addEventListener(
+        'touchmove',
+        (e) => {
+          deltaX = e.touches[0].clientX - startX;
+        },
+        { passive: true }
+      );
+
+      track.addEventListener('touchend', () => {
+        if (Math.abs(deltaX) > 45) {
+          updateSlide(deltaX < 0 ? current + 1 : current - 1);
+        }
+        startAutoplay();
+      });
+
+      startAutoplay();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initTestimonialCarousels);
+  document.addEventListener('astro:page-load', initTestimonialCarousels);
+</script>

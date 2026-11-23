@@ -1,0 +1,115 @@
+---
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface Props {
+  sectionTag?: string;
+  title?: string;
+  subtitle?: string;
+  items?: FaqItem[];
+}
+
+const defaultFaqs: FaqItem[] = [
+  {
+    question: 'Qual a diferença entre um Mini Site e um Site Completo?',
+    answer:
+      'O Mini Site é uma página única e objetiva, ideal para colocar na bio do Instagram e reunir seus principais links, serviços e contatos. Já o Site Completo possui estrutura mais robusta, com múltiplas seções ou páginas para apresentar sua marca, portfólio e detalhes do seu trabalho com maior profundidade.'
+  },
+  {
+    question: 'Em quanto tempo meu projeto fica pronto?',
+    answer:
+      'Os prazos começam a contar após o envio de todo o material (textos, fotos e informações): Mini Sites ficam prontos em 2 dias úteis; Sites e Catálogos Revista levam de 2 a 5 dias úteis; e Lojas Virtuais completas têm prazo de 7 a 15 dias úteis.'
+  },
+  {
+    question: 'Preciso pagar mensalidade para manter o site no ar?',
+    answer:
+      'Não! O pagamento do desenvolvimento é único. Depois da entrega, você só investe se precisar de atualizações pontuais (como troca de fotos, links ou novos produtos) e na renovação anual do domínio próprio, caso opte por contratar um.'
+  },
+  {
+    question: 'O site funciona bem no celular e no Instagram?',
+    answer:
+      'Sim, 100%. Todos os projetos são desenvolvidos com foco total em dispositivos móveis (mobile-first), carregam rápido mesmo no 4G e são pensados para converter visitantes vindos da bio ou de anúncios do Instagram.'
+  },
+  {
+    question: 'Como funciona o envio das informações para começar?',
+    answer:
+      'É bem simples e guiado: após fecharmos o projeto, você preenche um formulário rápido com suas informações, links, fotos e preferências de cores. Depois disso, eu cuido de toda a parte técnica e visual para você.'
+  }
+];
+
+const {
+  sectionTag = 'Dúvidas Frequentes',
+  title = 'Perguntas antes de começar',
+  subtitle,
+  items = defaultFaqs
+} = Astro.props;
+
+// Garante o limite máximo de 5 perguntas
+const visibleItems = items.slice(0, 5);
+---
+
+{visibleItems.length > 0 && (
+  <section
+    aria-label={title}
+    class="w-full max-w-md mx-auto px-1 py-4 font-body relative"
+  >
+    <!-- Brilho ambiente sutil atrás do card -->
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-48 bg-primary/20 rounded-full blur-3xl pointer-events-none -z-10"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Cabeçalho editorial discreto -->
+    <div class="px-1 mb-3">
+      {sectionTag && (
+        <span class="inline-flex items-center gap-1.5 text-[10px] font-medium tracking-[0.18em] uppercase bg-primary/15 text-purple-light px-2.5 py-0.5 rounded-full border border-primary/30 mb-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+          {sectionTag}
+        </span>
+      )}
+      <h2 class="font-heading text-xl sm:text-2xl font-semibold tracking-wide text-white leading-tight">
+        {title}
+      </h2>
+      {subtitle && (
+        <p class="text-xs text-purple-light/75 mt-0.5 leading-snug">
+          {subtitle}
+        </p>
+      )}
+    </div>
+
+    <!-- Card Principal (mesma linguagem visual do Hero) -->
+    <div class="relative bg-[#0b0412]/85 backdrop-blur-2xl border border-primary/30 rounded-3xl p-4 sm:p-5 shadow-[0_24px_60px_rgba(15,4,28,0.85)] flex flex-col gap-2.5">
+      <!-- Brilho especular fino no topo -->
+      <div
+        class="absolute inset-x-8 top-0 h-px bg-linear-to-r from-transparent via-accent/65 to-transparent pointer-events-none"
+        aria-hidden="true"
+      ></div>
+
+      {visibleItems.map((item, idx) => (
+        <details
+          open={idx === 0}
+          class="group rounded-2xl border border-primary/20 open:border-accent/45 bg-white/2 open:bg-primary/8 transition-colors duration-200 overflow-hidden"
+        >
+          <summary class="list-none cursor-pointer px-4 py-3.5 flex items-center justify-between gap-3 text-left select-none [&::-webkit-details-marker]:hidden">
+            <span class="text-xs sm:text-[13px] font-medium text-white/95 group-open:text-white leading-snug">
+              {item.question}
+            </span>
+
+            <span class="w-6 h-6 rounded-lg bg-primary/15 border border-primary/30 group-open:bg-accent/20 group-open:border-accent/50 text-accent flex items-center justify-center shrink-0 transition-transform duration-300 group-open:rotate-180">
+              <i class="fa-solid fa-chevron-down text-[10px]"></i>
+            </span>
+          </summary>
+
+          <div class="px-4 pb-3.5 pt-0.5">
+            <div class="h-px w-full bg-linear-to-r from-accent/35 via-primary/20 to-transparent mb-2.5"></div>
+            <p class="text-xs text-purple-light/85 leading-relaxed">
+              {item.answer}
+            </p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+)}

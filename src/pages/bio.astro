@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import BioHeaderDark from '../components/Bio/BioHeaderDark.astro';
 import BioStatsDark from '../components/Bio/BioStatsDark.astro';
 import BioLinksDark from '../components/Bio/BioLinksDark.astro';
+import TestimonialsCarousel, { type TestimonialItem } from '../components/Bio/TestimonialsCarousel.astro';
+import FaqSection from '../components/Bio/FaqSection.astro';
 import BioFooterDark from '../components/Bio/BioFooterDark.astro';
 
 // 1. IMPORTAÇÃO DO NOVO COMPONENTE DE GALERIA
@@ -12,6 +14,36 @@ import BioTabbedGallery from '../components/Bio/BioProjectsGalleryDark.astro';
 import logo from '../assets/Logo.png';
 import avatarImg from '../assets/jak.png';
 
+const testimonials: TestimonialItem[] = [
+  {
+    quote: 'Profissional excelente! Muito atenciosa, ágil e totalmente dedicada ao projeto. Fiquei extremamente satisfeito com o resultado final.',
+    authorName: 'Rafael Mendes',
+    authorRole: 'Projeto sob medida',
+    projectType: 'Site / Landing',
+    rating: 5
+  },
+  {
+    quote: 'Ah, maravilha, Jaque! Ficou ótimo, amei o resultado ☺️',
+    authorName: 'Camila Rocha',
+    authorRole: 'Atendimento integrativo',
+    projectType: 'Minisite',
+    rating: 5
+  },
+  {
+    quote: 'Gostei muito, ficou ótimo o meu mini site! Super prático e bonito. Recomendo demais o trabalho da Jaqueline.',
+    authorName: 'Mariana Costa',
+    authorRole: 'Profissional autônoma',
+    projectType: 'Minisite',
+    rating: 5
+  },
+  {
+    quote: 'Minha loja ficou com um visual muito profissional! Gostei bastante do serviço e a entrega foi bem rápida.',
+    authorName: 'Lucas Martins',
+    authorRole: 'Varejo online',
+    projectType: 'Catálogo / Loja',
+    rating: 5
+  }
+];
 // Dados da Sua Bio
 const estatisticas = [
   { value: "50+", label: "Projetos" },
@@ -134,7 +166,13 @@ const socialLinks = [
           speedSeconds={30}
         />
       </div>
-
+            <TestimonialsCarousel
+        sectionTag="Avaliações"
+        title="O que dizem sobre o trabalho"
+        testimonials={testimonials}
+      />
+      <FaqSection
+      />
       <!-- Footer -->
       <BioFooterDark 
         logoImg={logo}
