@@ -14,6 +14,9 @@
   --color-gray-light: #f2f4f8;
   --color-purple-light: #f2e9ff;
 }
+html {
+    scroll-behavior: smooth;
+  }
 
 body {
     font-family: var(--font-body);
