@@ -1,6 +1,7 @@
 ---
 import type { ImageMetadata } from 'astro';
-
+import img1 from "../../assets/biohero.webp";
+import img2 from "../../assets/biohero2.webp";
 export interface SocialLink {
   platform:
     | 'website'
@@ -78,10 +79,9 @@ const logoSrc = typeof logoImg === 'string' ? logoImg : logoImg?.src;
 const singleCoverSrc = typeof coverImg === 'string' ? coverImg : coverImg?.src;
 
 // Mockups & Tecnologia (URLs testadas do Unsplash)
-const defaultTechCovers = [
-  'https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=1400&q=85',
-  'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=85',
-  'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=85'
+const defaultTechCovers: string[] = [
+  img1.src,
+  img2.src,
 ];
 
 const resolvedCovers: string[] =
@@ -281,10 +281,10 @@ const defaultLabels: Record<string, string> = {
 
       <!-- Manifesto / Bio em Cormorant Garamond Itálico -->
       {displayBio && (
-        <div class="relative pl-4 pr-3 py-3 border border-primary/15 border-l-2 border-l-accent bg-white/2 rounded-xl flex items-start gap-2.5">
+        <div class="relative pl-4 pr-3 py-3 border border-primary/15 border-l-2 border-l-accent bg-white/2 rounded-xl flex items-start gap-2">
           <i class="fa-solid fa-quote-left text-accent/60 text-xs mt-1 shrink-0"></i>
           <p class="font-heading italic text-base sm:text-[17px] text-purple-light/90 leading-snug font-normal">
-            "{displayBio}"
+            {displayBio}
           </p>
         </div>
       )}
